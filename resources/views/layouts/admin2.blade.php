@@ -262,24 +262,13 @@
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">View Invoices</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div class="menu-item">
-                                                <a class="menu-link" href="apps/invoices/view/invoice-1.html">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="apps/invoices/view/invoice-1.html">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Invoice List</span>
-                                                </a>
-                                            </div>
-                                        </div>
+                                            <span class="menu-title">Invoice List</span>
+                                        </a>
                                     </div>
                                     <div class="menu-item">
                                         <a class="menu-link" href="apps/invoices/create.html">
@@ -291,6 +280,27 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="bi bi-credit-card fs-3"></i>
+                                    </span>
+                                    <span class="menu-title">Payments</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('admin.payments') }}">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Make Payment</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="menu-item">
                                 <div class="menu-content pt-8 pb-2">
                                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Additional Pages</span>

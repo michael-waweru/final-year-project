@@ -16,10 +16,10 @@ class Allocation extends Model
         return $this->belongsTo(Property::class);
     }
 
-    // public function tenant()
-    // {
-    //     return $this->belongsTo(Tenant::class);
-    // }
+    public function allocation()
+    {
+        return $this->belongsTo(Allocation::class);
+    }
 
     public function location()
     {
@@ -31,12 +31,12 @@ class Allocation extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public static function isExpired($id)
+    public static function isExpired($id): bool
     {
         $allocation = self::find($id);
         $start = $allocation->created_at;
         $end = $start->addMonths($allocation->period-1);
-        return now()->diffInDays($end,false) < 1 ? true:false;
+        return now()->diffInDays($end,false) < 1;
     }
 
     public static function getValid()

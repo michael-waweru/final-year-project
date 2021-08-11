@@ -1,0 +1,398 @@
+@extends('layouts.admin2')
+
+@section('content')
+    <div class="col-12">
+        <div class="section-block">
+            <h3 class="section-title">Payments</h3>
+        </div>
+        <div class="simple-card">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link border-left-0 active show" id="" data-toggle="tab" href="#list" role="tab"
+                       aria-controls="list" aria-selected="true">Payment List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="" data-toggle="tab" href="#refund_list" role="tab" aria-controls="pay"
+                       aria-selected="false">Refund List</a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="" data-toggle="tab" href="#pay" role="tab" aria-controls="pay"
+                           aria-selected="false">Payment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="" data-toggle="tab" href="#refund" role="tab" aria-controls="refund"
+                           aria-selected="false">Refund</a>
+                    </li>
+            </ul>
+            <div class="tab-content">
+                {{-- List of payments  --}}
+                <div class="tab-pane fade active show" id="list" role="tabpanel" aria-labelledby="home-tab-simple">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive ">
+                                <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Tenant</th>
+                                        <th scope="col">Property</th>
+                                        <th scope="col">Payment</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Transaction No</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($payments as $payment)
+                                        <tr>
+                                            <td>{{ $payment->id }}</td>
+                                            <td>{{ $payment->created_at->format('d-m-y') }}</td>
+                                            <td>
+                                                <a class="badge badge-light"
+                                                   href="{{ route('tent.show', $payment->agreement->tenant->id ) }}"
+                                                   target="_blank">{{ $payment->agreement->tenant->fname." ".$payment->agreement->tenant->lname }}</a>
+                                            </td>
+                                            <td>{{ $payment->agreement->property->name }}</td>
+                                            <td>{{ $payment->type }}</td>
+                                            <td class="text-success">{{ $payment->amount }}</td>
+                                            <td>{{ $payment->method }}</td>
+                                            <td>{{ $payment->tnxid }}</td>
+
+                                            <td class="text-right">
+                                                <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+
+                                                {{-- <a href="{{ route('payment.edit', $payment->id)}}"
+                                                class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a> --}}
+
+                                                {{-- <a href="#" data-toggle="modal" data-target="#details"
+                                                    class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a> --}}
+
+                                                {{-- <form class="d-inline" action="{{route('payment.destroy', $payment->id)}}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                                </form> --}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Payment --}}
+                <div class="tab-pane fade" id="pay" role="tabpanel" aria-labelledby="pay">
+                    <div class="card-body">
+                        <form action="{{ route('admin.payment.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                {{-- serial no--}}
+                                <div class="form-group col-md">
+                                    <label class="col-form-label">Serial No. </label>
+                                    <input type="number" name="serial" value="{{ $id = App\Models\Payments::nextId() }}" class="form-control" {{ $id ? 'disabled':'' }}>
+                                </div>
+                                {{-- Allocation--}}
+                                <div class="col-md form-group">
+                                    <label class="col-form-label">Allocation</label>
+                                    <select class="form-select" name="allocation_id" id="allocations" required>
+                                        <option value="">Select</option>
+                                        @foreach ($allocations as $allocation)
+                                            <option value="{{ $allocation->id }}">{{ $allocation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{-- Agreement information--}}
+                            <div class="row" id="allocation-info">
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Type</label>
+                                    <input id="type" type="text" class="form-control" disabled>
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Property</label>
+                                    <input id="property" type="text" class="form-control" disabled>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Tenant</label>
+                                    <input id="tenant" type="text" class="form-control" disabled>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Rent</label>
+                                    <input id="rent" type="text" class="form-control" disabled>
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label class="col-form-label"> Increment Rate</label>
+                                    <input id="penalty" type="text" class="form-control" disabled>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Period</label>
+                                    <input id="duration" type="text" class="form-control" disabled>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Started</label>
+                                    <input id="start" type="text" class="form-control" disabled>
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Period Left</label>
+                                    <input id="left" type="text" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-danger text-danger" id="incr-alert">
+                                This Agreement period almost over, The rent will be increase <span id="incr2"></span>% when this period is over.
+                            </div>
+
+                            <div class="row">
+                                {{-- Pay for--}}
+                                <div class="col-md form-group" id="pay-for">
+                                    <label class="col-form-label">Payment For</label>
+                                    <select class="form-select" name="type" id="pay-type" required>
+                                        <option value="">Select</option>
+                                        <option value="rent">Rent</option>
+                                        <option value="bill">Utility Bills</option>
+                                        <option value="modification">Room Modification, damages or paint</option>
+                                        <option value="water">Water Bill</option>
+                                        <option value="deposit">Security Deposit</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{-- montly payment--}}
+                            <div class="row" id="rent-row">
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label">Year</label>
+                                    <select name="year" class="form-select">
+                                        @foreach (range(2019, strftime("%Y", time())+5) as $year)
+                                            <option value="{{ $year }}">{{ $year }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{-- month list--}}
+                                <div class="form-group col-md">
+                                    <label class="col-form-label">Month</label>
+                                    <ul class="ks-cboxtags">
+                                        <li><input name="month[]" type="checkbox" id="jan" value="1">
+                                            <label for="jan">January</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="feb" value="2">
+                                            <label for="feb">February</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="mar" value="3">
+                                            <label for="mar">March</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="apr" value="4">
+                                            <label for="apr">April</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="may" value="5">
+                                            <label for="may">May</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="jun" value="6">
+                                            <label for="jun">June</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="jul" value="7">
+                                            <label for="jul">July</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="aug" value="8">
+                                            <label for="aug">Aug</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="sep" value="9">
+                                            <label for="sep">September</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="oct" value="10">
+                                            <label for="oct">October</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="nov" value="11">
+                                            <label for="nov">November</label>
+                                        </li>
+                                        <li><input name="month[]" type="checkbox" id="dec" value="12">
+                                            <label for="dec">December</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {{-- Amount row --}}
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label class="col-form-label">Amount</label>
+                                    <input name="amount" type="number" class="form-control" onkeyup="word.innerHTML=toWord(this.value)" autocomplete required>
+                                    <div class="border-bottom bg-light p-2">In Word: <span class="text-danger" id="word"></span></div>
+                                </div>
+                            </div>
+
+                            {{-- Payment Method--}}
+                            <div class="row" id="payment-info">
+                                <div class="col-md-4 form-group">
+                                    <label class="col-form-label">Payment Method</label>
+                                    <select class="form-select" name="means" id="means" required>
+                                        <option value="cash">Cash</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="m-pesa">M-Pesa</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-4" id="m-pesa">
+                                    <label class="col-form-label">M-PESA Transaction Code</label>
+                                    <input id="m-pesa" name="transaction_code" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            {{-- Bank Row--}}
+                            <div id="bank-row">
+                                <div class="row">
+                                    <div class="form-group col-md">
+                                        <label class="col-form-label">Bank Name</label>
+                                        <input name="bank" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md">
+                                        <label class="col-form-label">Bank A/C</label>
+                                        <input name="account" type="number" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md">
+                                        <label class="col-form-label">Branch</label>
+                                        <input name="branch" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md">
+                                        <label class="col-form-label">Cheque No</label>
+                                        <input name="cheque" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md">
+                                        <label class="col-form-label">Cheque scan copy</label>
+                                        <input name="attachment" type="file" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md form-group">
+                                    <label class="col-form-label">Description</label>
+                                    <textarea name="description" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md form-group">
+                                    <label class="col-form-label">Payment Date</label>
+                                    <input id="created_at" name="created_at" type="date" value="{{ date('Y-m-d') }}"
+                                           class="form-control">
+                                </div>
+
+                                <div class="form-group col-md">
+                                    <label class="col-form-label">Landlord</label>
+                                    <select class="form-select" name="landlord_id" id="landlord_id" required>
+                                        <option value="">Select Landlord</option>
+                                        @foreach($landlords as $landlord)
+                                            <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md form-group">
+                                    <label class="col-form-label">Entry by</label>
+                                    <input value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            {{-- Submit--}}
+                            <div class="form-group text-right mt-4">
+                                <button type="submit" class="btn btn-primary">Pay Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#allocation-info').slideUp();
+            $('#pay-for').slideUp();
+            $('#rent-row').slideUp();
+            $('#bank-row').fadeOut();
+            $('#m-pesa').fadeOut();
+
+            $('#incr-alert').fadeOut();
+            // Refund
+            $('#bank-row2').fadeOut();
+        })
+
+        // Get and show agreement information - payment
+        $('#allocations').on('change', function() {
+            var id = $(this).val();
+            var url = '{{ url('api/allocation-info') }}?allocation=' + id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (data,status) {
+                    $('#pay-for').slideDown();
+                    $('#allocation-info').slideDown();
+
+                    $('#type').val(data.type);
+                    $('#property').val(data.property);
+                    $('#tenant').val(data.tenant);
+                    $('#rent').val(data.rent);
+                    $('#amount').val(data.rent);
+
+                    $('#penalty').val(data.penalty +'%');
+                    $('#incr2').html(data.incr);
+                    $('#start').val(data.start);
+                    $('#duration').val(data.duration +' months');
+                    $('#left').val(data.left === 0 ? 'Some days':data.left  +' months');
+
+                    if (data.left < 3) {
+                        $('#incr-alert').fadeIn();
+                    }
+                }
+            });
+        });
+
+        // type for rent show month list
+        $('#pay-type').on('change', function() {
+            var type = $(this).val();
+            if ( type == 'rent' || type == 'bill' ) {
+                $('#rent-row').slideDown();
+            }else{
+                $('#rent-row').slideUp();
+            }
+        });
+
+        // show related field by payment means
+        $('#means').on('change', function() {
+            var means = $(this).val();
+
+            if (means == 'bank') {
+                $('#bank-row').fadeIn();
+            }else{
+                $('#bank-row').fadeOut();
+            }
+
+            if (means == 'm-pesa') {
+                $('#m-pesa').fadeIn();
+            }
+            else {
+                $('#m-pesa').fadeOut();
+            }
+        });
+    </script>
+@endsection

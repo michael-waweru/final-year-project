@@ -1,6 +1,7 @@
 <?php
 
 // use App\Http\Controllers\DestroyController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Web\BlogComponent;
 use App\Http\Livewire\Web\HomeComponent;
@@ -55,7 +56,7 @@ Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\La
 
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('dashboard', DashboardComponent::class)->name('admin.dashboard');
-    Route::get('member/add', AddNewMemberComponent::class)->name('admin.member.add');   
+    Route::get('member/add', AddNewMemberComponent::class)->name('admin.member.add');
     Route::get('properties', \App\Http\Livewire\Admin\PropertyComponent::class)->name('admin.properties');
     Route::get('property/add', AddPropertyComponent::class)->name('admin.property.add');
     Route::get('property/edit/{property_slug}', EditPropertyComponent::class)->name('admin.property.edit');
@@ -70,13 +71,16 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     // Route::get('tenant/show/{id}', ShowTenantComponent::class)->name('admin.tenant.show');
     Route::get('landlords', LandlordComponent::class)->name('admin.landlords');
     Route::get('landlord/add', AddLandlordComponent::class)->name('admin.landlord.add');
-    Route::get('landlord/view/{id}', ShowLandlordComponent::class)->name('admin.landlord.show');
+    Route::get('landlord/view/{id}', [App\Http\Controllers\Admin\AgreementController::class,'show'])->name('admin.landlord.show');
     Route::get('allocate', AllocationComponent::class)->name('admin.allocation');
     Route::get('allocation/add', AddAllocationComponent::class)->name('admin.allocation.add');
+    Route::get('allocation/{allocation}', [App\Http\Controllers\Admin\ShowAllocationController::class,'show'])->name('admin.allocation.show');
     // Route::get('allocations', [App\Http\Controllers\Admin\AgreementController::class,'index'])->name('admin.agreements');
     Route::post('allocations', [App\Http\Controllers\Admin\AgreementController::class,'store'])->name('admin.agreement.store');
     Route::get('allocation/show/{tenant}',[App\Http\Controllers\Admin\AgreementController::class,'show'])->name('admin.tenant.show');
     Route::post('allocation/{id}',[App\Http\Controllers\Admin\AgreementController::class,'update'])->name('admin.agreement.update');
+    Route::get('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'index'])->name('admin.payments');
+    Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
 });
 
 Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {

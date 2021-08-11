@@ -71,7 +71,7 @@
                                                 <td>{{ $allocation->property->name ?? 'Deleted'}}</td>
                                                 <td>{{ $allocation->rent ?? 'Deleted' }}</td>
                                                 <td>
-                                                    <a class="badge badge-light" href="#" target="_blank">{{ $allocation->user->fname." ".$allocation->user->lname }}<i class="fas fa-eye"></i></a>
+                                                    <a class="badge badge-light" href="{{ route('admin.tenant.show', ['tenant'=> $allocation->user->id]) }}" target="_blank">{{ $allocation->user->fname." ".$allocation->user->lname }}<i class="fas fa-eye"></i></a>
                                                 </td>
                                                 <td>
                                                     <form class="d-inline" action="#" method="POST">
@@ -92,9 +92,9 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <button class="btn badge badge-secondary"
-                                                        onclick="window.open('#', '_blank')"><i
-                                                            class="fas fa-eye"></i> View</button>
+                                                    <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.allocation.show',$allocation->id)}}', '_blank')">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </button>
 
                                                 </td>
                                                 <td class="text-right">
