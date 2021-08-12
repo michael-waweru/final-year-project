@@ -50,7 +50,7 @@ Route::post('/property/delete/{id}', [App\Http\Controllers\DestroyController::cl
 Route::post('/location/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteLocation']);
 Route::post('/allocation/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteAllocation']);
 Route::post('/', [\App\Http\Controllers\ConsultationController::class, 'storeConsultation'])->name('consultation');
-Route::post('/about', [\App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
+Route::post('/add-subscriber', [\App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
 Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
 
 //Admin Routes
@@ -80,6 +80,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'index'])->name('admin.payments');
     Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
     Route::get('payment/show/{payment}',[App\Http\Controllers\Admin\MakePaymentController::class,'show'])->name('admin.payment.show');
+    Route::post('payment/refund', [App\Http\Controllers\Admin\RefundController::class, 'store'])->name('admin.refund.store');
 });
 
 //Landlord Routes
@@ -94,7 +95,13 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('all-locations', \App\Http\Livewire\Landlord\LandlordLocationComponent::class)->name('landlord.locations');
     Route::get('location/add', \App\Http\Livewire\Landlord\LandlordAddLocationComponent::class)->name('landlord.location.add');
     Route::get('my-leases', \App\Http\Livewire\Landlord\LandlordLeasesComponent::class)->name('landlord.myleases');
-    Route::get('lease/add', \App\Http\Livewire\Landlord\LandlordAddLeaseComponent::class)->name('landlord.lease.add');
+    Route::get('lease/add', [App\Http\Controllers\Landlord\AllocationController::class, 'index'])->name('landlord.lease.add');
+    Route::post('lease/save', [App\Http\Controllers\Landlord\AllocationController::class, 'store'])->name('landlord.lease.save');
+    Route::get('lease/show/{id}', [App\Http\Controllers\Landlord\AllocationController::class, 'show'])->name('landlord.lease.show');
+    Route::get('lease/edit/{lease}', [App\Http\Controllers\Landlord\AllocationController::class,'edit'])->name('landlord.lease.edit');
+    Route::post('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'update'])->name('landlord.lease.update');
+    Route::delete('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'destroy'])->name('landlord.lease.destroy');
+
 });
 
 //Tenant Routes
@@ -102,6 +109,4 @@ Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('dashboard', TenantDashboardComponent::class)->name('tenant.dashboard');
 });
 
-//    Route::get('allocate', AllocationComponent::class)->name('admin.allocation');
-//    Route::get('allocation/add', AddAllocationComponent::class)->name('admin.allocation.add');
-// Route::get('allocations', [App\Http\Controllers\Admin\AgreementController::class,'index'])->name('admin.agreements');
+//    Route::get('lease/add', \App\Http\Livewire\Landlord\LandlordAddLeaseComponent::class)->name('landlord.lease.add');

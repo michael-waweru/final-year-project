@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Landlord;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
@@ -37,7 +38,7 @@ class AddTenantComponent extends Component
             'password' => 'required | confirmed | min:6',
             'identification_number' => 'required | numeric',
             'identification_doc' => 'required',
-            'address' => 'required',            
+            'address' => 'required',
             'contact' => 'required | numeric',
             'guarantor_fname' => 'required',
             'guarantor_lname' => 'required',
@@ -52,7 +53,7 @@ class AddTenantComponent extends Component
             'password' => 'required | confirmed | min:6',
             'identification_number' => 'required | numeric',
             'identification_doc' => 'required',
-            'address' => 'required',            
+            'address' => 'required',
             'contact' => 'required | numeric',
             'guarantor_fname' => 'required',
             'guarantor_lname' => 'required',
@@ -89,12 +90,13 @@ class AddTenantComponent extends Component
         $tenant->guarantor_id_no = $this->guarantor_id_no;
         $tenant->guarantor_contact = $this->guarantor_contact;
         $tenant->guarantor_address = $this->guarantor_address;
-        $tenant->save();       
+        $tenant->entry_id = Auth::id();
+        $tenant->save();
 
         session()->flash('success', 'Tenant Added Successfully.');
         return redirect()->route('landlord.tenants');
     }
-    
+
     public function render()
     {
         return view('livewire.landlord.add-tenant-component')->layout('layouts.landlord');

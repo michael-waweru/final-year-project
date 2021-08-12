@@ -8,7 +8,7 @@
                 <li class="nav-item">
                     <a class="nav-link border-left-0 active show" id="" data-toggle="tab" href="#list" role="tab"
                         aria-controls="list" aria-selected="true">List</a>
-                </li>               
+                </li>
                 <a href="{{ route('landlord.tenant.add') }}">
                     <button type="button" class="btn btn-primary">
                         <!--begin::Svg Icon | path: icons/duotone/Navigation/Plus.svg-->
@@ -33,7 +33,6 @@
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Property</th>
                                     <th scope="col">Contact</th>
-                                    <th scope="col">Details</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -42,14 +41,10 @@
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td> {{ $tenant->id }} </td>
-                                    <td> {{ $tenant->user->fname.' '.$tenant->user->lname }} </td>
+                                    <td> {{ $tenant->tenant->fname.' '.$tenant->tenant->lname }} </td>
                                     <td> {{ $tenant->property->name }} </td>
-                                    <td> {{ $tenant->user->contact }} </td>
+                                    <td> {{ $tenant->tenant->contact }} </td>
                                     <td>
-                                        <button class="btn badge badge-secondary" onclick="window.open('{{ route('landlord.tenant.show',$tenant->id) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
-                                    </td>
-
-                                    <td class="text-right">
                                         <button class="btn btn-sm btn-danger" onclick="confirm('Are you sure you want to delete this user? This action cannot be undone') || event.stopImmediatePropagation()"wire:click.prevent="deleteUser({{ $tenant->id }})"><i class="fas fa-trash-alt"></i>
                                     </td>
                                 </tr>

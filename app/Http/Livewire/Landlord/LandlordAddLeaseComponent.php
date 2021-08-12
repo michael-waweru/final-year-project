@@ -22,19 +22,20 @@ class LandlordAddLeaseComponent extends Component
     public $rent;
     public $period;
     public $deposit;
-    public $penalty;
+    public $increment;
     public $agreement;
-    public $created;
+    public $increment_at;
+    public $created_at;
 
     public function __construct()
     {
-        //check and penalty when allocation period is over
-        Allocation::whereNull('created')->each(function ($allocation) {
-            if(Allocation::isExpired($allocation->id)) {
-                $allocation->created = today();
-                $allocation->status = false;
-                $allocation->rent += ($allocation->rent * $allocation->penalty)/100;
-                $allocation->save();
+        //check and increment when allocation period is over
+        Allocation::whereNull('increment_at')->each(function ($lease) {
+            if(Allocation::isExpired($lease->id)) {
+                $lease->increment_at = today();
+                $lease->status = false;
+                $lease->rent += ($lease->rent * $lease->increment)/100;
+                $lease->save();
             }
         });
     }
@@ -64,14 +65,14 @@ class LandlordAddLeaseComponent extends Component
             'agreement' => 'required'
         ]);
 
-        $allocation = new Allocation();
+        $lease = new Allocation();
 
 
         if($request->agreement)
         {
             $agreementName = Carbon::now()->timestamp. '.' . $this->agreement->extension();
             $url = $request->agreement->storeAs('allocation', $agreementName);
-            $allocation->agreement = $url;
+            $lease->agreement = $url;
         }
 
         // if(isset($request->agreement))
@@ -80,17 +81,18 @@ class LandlordAddLeaseComponent extends Component
         //     $agreement->agreement = $url;
         // }
 
-        $allocation->property_id = $this->property_id;
-        $allocation->user_id = $this->user_id;
-        $allocation->entry_id = Auth::id();
-        $allocation->name = $this->name;
-        $allocation->rent = $this->rent;
-        $allocation->agreement = $this->agreement;
-        $allocation->period = $this->period;
-        $allocation->deposit = $this->deposit;
-        $allocation->penalty = $this->penalty;
-        $allocation->created = $this->created;
-        $allocation->save();
+        $lease->property_id = $this->property_id;
+        $lease->user_id = $this->user_id;
+        $lease->entry_id = Auth::id();
+        $lease->name = $this->name;
+        $lease->rent = $this->rent;
+        $lease->agreement = $this->agreement;
+        $lease->period = $this->period;
+        $lease->deposit = $this->deposit;
+        $lease->increment = $this->increment;
+        $lease->increment_at = $this->increment_at;
+        $lease->created_at = $request->created_at;
+        $lease->save();
 
         session()->flash('success', 'Success! Lease Created successfully.');
         return redirect()->route('landlord.myleases');
@@ -99,14 +101,14 @@ class LandlordAddLeaseComponent extends Component
 
     public function render()
     {
-        $tenants = User::where('entry_id', '=', auth()->user()->id)->get();        
+        $tenants = User::where('entry_id', '=', auth()->user()->id)->get();
         $types = PropertyType::all();
 
         return view('livewire.landlord.landlord-add-lease-component',
         [
             'tenants' => $tenants,
             'types' => $types
-            
+
         ])->layout('layouts.landlord');
     }
 }

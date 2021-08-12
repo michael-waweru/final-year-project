@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Allocation;
+use App\Models\PaymentRefund;
 use App\Models\Payments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,11 +16,13 @@ class MakePaymentController extends Controller
     public function index()
     {
         $payments = Payments::all();
+        $refunds = PaymentRefund::all();
 //        $landlords = User::where('role', '=', 3)->get();
         $landlords = DB::select('select * from users where role = 2');
         $allocations = Allocation::where('status',1)->get();
 
-        return view('livewire.admin.payments', compact('payments','allocations', 'landlords'));
+        return view('livewire.admin.payments', compact('payments','allocations',
+            'landlords', 'refunds'));
     }
 
     public function store(Request $request)
@@ -41,9 +44,10 @@ class MakePaymentController extends Controller
         $payment->description = $request->description;
         $payment->transaction_id = uniqid();
 
-        if ($request->type == 'rent' || $request->type == 'bill') {
+        if ($request->type == 'Rent') {
             $this->rentPayment($request, $payment);
         }
+
 
         // PAYMENT METHODS
         if ($request->payment_means == 'cash') {

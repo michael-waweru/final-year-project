@@ -9,11 +9,11 @@ class LandlordLeasesComponent extends Component
 {
     public function render()
     {
-        $allocations = Allocation::where('entry_id', auth()->user()->id)->get();
+        $leases = Allocation::where('entry_id', auth()->user()->id)->get();
 
         return view('livewire.landlord.landlord-leases-component',
         [
-            'allocations' => $allocations
+            'leases' => $leases
         ])->layout('layouts.landlord');
     }
 }

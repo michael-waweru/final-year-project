@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('properties', [\App\Http\Controllers\Api\ApiController::class,'properties']);
 Route::get('allocation-info', [\App\Http\Controllers\Api\ApiController::class,'allocationInfo']);
 Route::get('payment-status', [\App\Http\Controllers\Api\ApiController::class,'paymentMonthStatus']);
+Route::get('payment-info', [\App\Http\Controllers\Api\ApiController::class,'paymentInfo']);

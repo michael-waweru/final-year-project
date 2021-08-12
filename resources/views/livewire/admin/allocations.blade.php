@@ -64,7 +64,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <form class="d-inline" action="{{ route('admin.allocation.update', ['allocation' => $allocation->id]) }}" method="POST">
+                                                <form class="d-inline" action="{{ route('admin.allocation.update', ['lease' => $allocation->id]) }}" method="POST">
                                                     @csrf
                                                     @if ($allocation->increment_at)
                                                         <p class="btn badge badge-danger">Expired</p>
