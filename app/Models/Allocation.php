@@ -16,17 +16,12 @@ class Allocation extends Model
         return $this->belongsTo(Property::class);
     }
 
-    public function allocation()
-    {
-        return $this->belongsTo(Allocation::class);
-    }
-
     public function location()
     {
         return $this->belongsTo(Location::class,'location_id');
     }
 
-    public function user()
+    public function tenant()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -35,17 +30,17 @@ class Allocation extends Model
     {
         $allocation = self::find($id);
         $start = $allocation->created_at;
-        $end = $start->addMonths($allocation->period-1);
+        $end = $start->addMonths($allocation->period - 1);
         return now()->diffInDays($end,false) < 1;
     }
 
     public static function getValid()
     {
-        return self::whereNull('created')->get();
+        return self::whereNull('increment_at')->get();
     }
 
     public static function getExpired()
     {
-        return self::whereNotNull('created')->get();
+        return self::whereNotNull('increment_at')->get();
     }
 }

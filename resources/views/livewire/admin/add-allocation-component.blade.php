@@ -5,13 +5,10 @@
         <div class="container">
             <div class="card col-12">
                 <div class="section-block p-10">
-                    <h3 class="section-title text-capitalize">Allocation Property
+                    <h3 class="section-title text-capitalize">Allocate a Property
                         <a href="{{ route('admin.allocation') }}" class="btn btn-sm btn-success float-end">All Allocations</a>
                     </h3>
                 </div>
-                {{-- <span class="p-10">
-                    <a href="{{ route('admin.tenants') }}" class="btn btn-sm btn-success float-end">All Tenants</a>
-                </span> --}}
                 <!--begin::Body-->
                 <div class="card-body p-lg-10 pt-0 col-12">
                     <!--begin::Layout-->
@@ -21,7 +18,7 @@
                             <div class="row">
 
                                 <div class="form-group col-md">
-                                    <label class="col-form-label">agreement Name</label>
+                                    <label class="col-form-label">Agreement Name</label>
                                     <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" wire:model="name">
                                     @error('name') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
@@ -65,7 +62,7 @@
 
                                 <div class="col-md-4 form-group">
                                     <label class="col-form-label">Increment (%)</label>
-                                    <input name="penalty" type="number" class="form-control" max="99" wire:model="penalty">
+                                    <input name="increment" type="number" class="form-control" max="99" wire:model="increment">
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -110,7 +107,7 @@
                                 </div>
                                 <div class="col-md form-group">
                                     <label class="col-form-label">Start Date</label>
-                                    <input name="created" type="date" value="{{ date('Y-m-d') }}" class="form-control" wire:model="created">
+                                    <input name="increment_at" type="date" value="{{ date('Y-m-d') }}" class="form-control" wire:model="increment_at">
                                 </div>
 
                                 <div class="col-md form-group">
@@ -125,36 +122,33 @@
                                 </div>
                                 <div class="col-md">
                                     <div class="custom-control custom-checkbox was-validated"
-                                        style="padding-left: 20px; margin-left: 20px;">
-                                        <input type="checkbox" class="custom-control-input is-invalid"
-                                            id="customControlValidation2" required>
+                                         style="padding-left: 20px; margin-left: 20px;">
+                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation2" required>
                                         <label class="custom-control-label" for="customControlValidation2">
-                                            Any Modification or damage (without notification) or paint Tent has to repair o fix to its revise
-                                            status it before leave the Property or deduced from him.
+                                            Any Modification or damage done (without notification), the tenant has to repair or fix to its revise
+                                            status it before vacating the Property or the damage fee shall be deduced from him/her.
                                         </label>
                                     </div>
                                     <div class="custom-control custom-checkbox was-validated"
-                                        style="padding-left: 20px; margin-left: 20px;">
-                                        <input type="checkbox" class="custom-control-input is-invalid"
-                                            id="customControlValidation3" required>
+                                         style="padding-left: 20px; margin-left: 20px;">
+                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation3" required>
                                         <label class="custom-control-label" for="customControlValidation3">
-                                            Tent has to pay any utility bills against his period before leave the Property or deduced from him.
+                                            Tenant has to pay any utility bills against him/her period before vacating the Property or it shall be
+                                            deduced from him/her.
                                         </label>
                                     </div>
                                     <div class="custom-control custom-checkbox was-validated"
-                                        style="padding-left: 20px; margin-left: 20px;">
-                                        <input type="checkbox" class="custom-control-input is-invalid"
-                                            id="customControlValidation4" required>
+                                         style="padding-left: 20px; margin-left: 20px;">
+                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation4" required>
                                         <label class="custom-control-label" for="customControlValidation4">
-                                            Tent has to pay any rent dues against his period before leave the Property or deduced from him.
+                                            Tenant has to pay any rent dues against him/her during the vacating period or they shall incur penalties.
                                         </label>
                                     </div>
                                     <div class="custom-control custom-checkbox was-validated"
-                                        style="padding-left: 20px; margin-left: 20px;">
-                                        <input type="checkbox" class="custom-control-input is-invalid"
-                                            id="customControlValidation5" required>
+                                         style="padding-left: 20px; margin-left: 20px;">
+                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation5" required>
                                         <label class="custom-control-label" for="customControlValidation5">
-                                            Tent agreed that if any clause upper mentioned I allow the owner to redeem from Security Deposit.
+                                            Tenant agrees that if any clause mentioned above is not adhered to, they therefore allow the owner to redeem from Security Deposit.
                                         </label>
                                     </div>
                                 </div>

@@ -20,13 +20,12 @@ class CreateAllocationsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('entry_id');
-            // $table->integer('rent');
             $table->integer('deposit');
             $table->string('agreement');
-            $table->integer('penalty');
+            $table->integer('increment');
             $table->string('period');
-            $table->string('status')->default(1);
-            $table->dateTime('created')->nullable();
+            $table->string('status')->default(0);
+            $table->dateTime('increment_at')->nullable();
             $table->timestamps();
         });
     }

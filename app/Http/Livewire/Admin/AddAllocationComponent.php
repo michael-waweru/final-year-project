@@ -25,16 +25,16 @@ class AddAllocationComponent extends Component
     public $deposit;
     public $penalty;
     public $agreement;
-    public $created;
+    public $increment_at;
 
     public function __construct()
     {
-        //check and penalty when allocation period is over
-        Allocation::whereNull('created')->each(function ($allocation) {
+        //check and increment when allocation period is over
+        Allocation::whereNull('increment_at')->each(function ($allocation) {
             if(Allocation::isExpired($allocation->id)) {
-                $allocation->created = today();
+                $allocation->increment_at = today();
                 $allocation->status = false;
-                $allocation->rent += ($allocation->rent * $allocation->penalty)/100;
+                $allocation->rent += ($allocation->rent * $allocation->increment)/100;
                 $allocation->save();
             }
         });
@@ -89,8 +89,8 @@ class AddAllocationComponent extends Component
         $allocation->agreement = $this->agreement;
         $allocation->period = $this->period;
         $allocation->deposit = $this->deposit;
-        $allocation->penalty = $this->penalty;
-        $allocation->created = $this->created;
+        $allocation->increment = $this->increment;
+        $allocation->increment_at = $this->increment_at;
         $allocation->save();
 
         session()->flash('success', 'Success! Allocation has been successful.');

@@ -45,41 +45,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($payments as $payment)
-                                        <tr>
-                                            <td>{{ $payment->id }}</td>
-                                            <td>{{ $payment->created_at->format('d-m-y') }}</td>
-                                            <td>
-                                                <a class="badge badge-light"
-                                                   href="{{ route('tent.show', $payment->agreement->tenant->id ) }}"
-                                                   target="_blank">{{ $payment->agreement->tenant->fname." ".$payment->agreement->tenant->lname }}</a>
-                                            </td>
-                                            <td>{{ $payment->agreement->property->name }}</td>
-                                            <td>{{ $payment->type }}</td>
-                                            <td class="text-success">{{ $payment->amount }}</td>
-                                            <td>{{ $payment->method }}</td>
-                                            <td>{{ $payment->tnxid }}</td>
+                                        @foreach ($payments as $payment)
+                                            <tr>
+                                                <td>{{ $payment->id }}</td>
+                                                <td>{{ $payment->created_at->format('d-m-y') }}</td>
+                                                <td>
+                                                    <a class="badge badge-light"
+                                                       href="#" target="_blank">{{ $payment->allocation->user->fname." ".$payment->allocation->user->lname }}</a>
+                                                </td>
+                                                <td>{{ $payment->allocation->property->name }}</td>
+                                                <td>{{ $payment->type }}</td>
+                                                <td class="text-success">{{ $payment->amount }}</td>
+                                                <td>{{ $payment->means }}</td>
+                                                <td>{{ $payment->transaction_id }}</td>
 
-                                            <td class="text-right">
-                                                <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
-
-                                                {{-- <a href="{{ route('payment.edit', $payment->id)}}"
-                                                class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a> --}}
-
-                                                {{-- <a href="#" data-toggle="modal" data-target="#details"
-                                                    class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a> --}}
-
-                                                {{-- <form class="d-inline" action="{{route('payment.destroy', $payment->id)}}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"><i
-                                                        class="fas fa-trash-alt"></i></button>
-                                                </form> --}}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
+                                                <td class="text-right">
+                                                    <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -132,7 +116,7 @@
 
                                 <div class="form-group col-3">
                                     <label class="col-form-label"> Increment Rate</label>
-                                    <input id="penalty" type="text" class="form-control" disabled>
+                                    <input id="increment" type="text" class="form-control" disabled>
                                 </div>
                                 <div class="form-group col-3">
                                     <label class="col-form-label">Period</label>
@@ -236,7 +220,7 @@
                             <div class="row" id="payment-info">
                                 <div class="col-md-4 form-group">
                                     <label class="col-form-label">Payment Method</label>
-                                    <select class="form-select" name="means" id="means" required>
+                                    <select class="form-select" name="payment_means" id="payment_means" required>
                                         <option value="cash">Cash</option>
                                         <option value="bank">Bank</option>
                                         <option value="m-pesa">M-Pesa</option>
@@ -336,7 +320,7 @@
             $('#bank-row2').fadeOut();
         })
 
-        // Get and show agreement information - payment
+        // Get and show allocation information - payment
         $('#allocations').on('change', function() {
             var id = $(this).val();
             var url = '{{ url('api/allocation-info') }}?allocation=' + id;
@@ -354,7 +338,7 @@
                     $('#rent').val(data.rent);
                     $('#amount').val(data.rent);
 
-                    $('#penalty').val(data.penalty +'%');
+                    $('#increment').val(data.increment +'%');
                     $('#incr2').html(data.incr);
                     $('#start').val(data.start);
                     $('#duration').val(data.duration +' months');
@@ -378,16 +362,16 @@
         });
 
         // show related field by payment means
-        $('#means').on('change', function() {
-            var means = $(this).val();
+        $('#payment_means').on('change', function() {
+            var payment_means = $(this).val();
 
-            if (means == 'bank') {
+            if (payment_means == 'bank') {
                 $('#bank-row').fadeIn();
             }else{
                 $('#bank-row').fadeOut();
             }
 
-            if (means == 'm-pesa') {
+            if (payment_means == 'm-pesa') {
                 $('#m-pesa').fadeIn();
             }
             else {

@@ -77,14 +77,14 @@
                                                     <form class="d-inline" action="#" method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        @if ($allocation->created)
+                                                        @if ($allocation->increment_at)
                                                                 <p class="btn badge badge-danger">Expired</p>
                                                             @elseif($allocation->status)
                                                                 <input type="hidden" name="status" value="0">
                                                                 <button type="submit" class="btn badge badge-success">Active</button>
                                                             @elseif($allocation->status)
                                                                 <input type="hidden" name="status" value="1">
-                                                                <button type="submit"class="btn badge badge-warning">Inactive</button>
+                                                                <button type="submit" class="btn badge badge-warning">Inactive</button>
 
                                                             @else
                                                             {{ $allocation->status ? 'Active':'Inactive'}}

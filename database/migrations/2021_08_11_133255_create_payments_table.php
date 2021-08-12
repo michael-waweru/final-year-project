@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->string('state');
             $table->integer('year')->nullable();
             $table->json('month')->nullable();
-            $table->string('method');
+            $table->string('payment_means');
             $table->integer('amount');
             $table->string('transaction_id')->nullable();
             $table->string('bank');

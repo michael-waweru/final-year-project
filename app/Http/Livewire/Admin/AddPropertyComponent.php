@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\Location;
 use App\Models\Property;
@@ -116,7 +117,8 @@ class AddPropertyComponent extends Component
     {
         $locations = Location::all();
         $types = PropertyType::all();
-        $landlords = User::where('role', '=', 2)->get();
+        //$landlords = User::where('role', '=', 2)->get();
+        $landlords = DB::select('select * from users where role = 2');
 
         return view('livewire.admin.add-property-component',
         [

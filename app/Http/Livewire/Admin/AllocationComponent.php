@@ -11,11 +11,11 @@ class AllocationComponent extends Component
     public function __construct()
     {
         //check and impose a penalty when allocation period is over
-        Allocation::whereNull('created')->each(function ($allocation) {
+        Allocation::whereNull('increment_at')->each(function ($allocation) {
             if(Allocation::isExpired($allocation->id)) {
-                $allocation->created = today();
+                $allocation->increment_at = today();
                 $allocation->status = false;
-                $allocation->rent += ($allocation->rent * $allocation->penalty)/100;
+                $allocation->rent += ($allocation->rent * $allocation->increment)/100;
                 $allocation->save();
             }
         });

@@ -24,15 +24,13 @@
 
                             @foreach (App\Models\Allocation::getExpired() as $allocation)
                             <div class="alert alert-danger">
-                                <span class="text-danger"> Action : </span><a
-                                    href="#"
-                                    target="_blank">#{{ $allocation->id }}</a> allocation's period has been over and rent
-                                incremented to <span class="text-danger">{{ $allocation->penalty }}%</span> .
+                                <span class="text-danger"> Action : </span>
+                                <a href="{{ route('admin.allocation.show', $allocation->id) }}" target="_blank">#{{ $allocation->id }}</a> Allocation's period has been over and rent
+                                incremented to <span class="text-danger">{{ $allocation->increment }}%</span>.
                                 <a href="#" onclick="form{{ $allocation->id }}.submit()" class="text-success">Renew Now!</a>
 
-                                <form id="form{{ $allocation->id }}" action="#" method="POST">
+                                <form id="form{{ $allocation->id }}" action="{{ route('admin.allocation.update', $allocation->id) }}" method="POST">
                                     @csrf
-                                    @method('PUT')
                                     <input type="hidden" name="expired" value="true">
                                 </form>
 
@@ -45,7 +43,6 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Allocation</th>
-                                            {{-- <th scope="col">Type</th> --}}
                                             <th scope="col">Property</th>
                                             <th scope="col">Rent</th>
                                             <th scope="col">Tenant</th>
@@ -59,19 +56,17 @@
                                         <tr>
                                             <td>{{ $allocation->id }}</td>
                                             <td>{{ $allocation->name }}</td>
-                                            {{-- <td>{{ $allocation->property->type->name ?? 'Deleted' }}</td> --}}
                                             <td>{{ $allocation->property->name ?? 'Deleted'}}</td>
                                             <td>{{ $allocation->rent ?? 'Deleted' }}</td>
                                             <td>
-                                                <a class="badge badge-light" href="{{ route('admin.tenant.show', $allocation->user->id) }}" target="_blank">{{ $allocation->user->fname." ".$allocation->user->lname }}
+                                                <a class="badge badge-light" href="#" target="_blank">{{ $allocation->tenant->fname." ".$allocation->tenant->lname }}
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <form class="d-inline" action="{{ route('admin.agreement.update', $allocation->id) }}" method="POST">
+                                                <form class="d-inline" action="{{ route('admin.allocation.update', ['allocation' => $allocation->id]) }}" method="POST">
                                                     @csrf
-                                                    {{ method_field('PUT') }}
-                                                    @if ($allocation->created)
+                                                    @if ($allocation->increment_at)
                                                         <p class="btn badge badge-danger">Expired</p>
                                                         @else
                                                             @if ($allocation->status)
@@ -86,20 +81,21 @@
                                             </td>
                                             <td>
                                                 <button class="btn badge badge-secondary"
-                                                    onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                                    onclick="window.open('{{ route('admin.allocation.show', $allocation->id) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
                                             </td>
                                             <td class="text-right">
-                                                @if (!$allocation->created)
-                                                <a href="#"
-                                                    class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                                @if (!$allocation->increment_at)
+                                                    <a href="{{ route('admin.allocation.edit', $allocation->id) }}" class="btn btn-sm btn-warning">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                 @endif
 
-                                                <form class="d-inline"
-                                                    action="#" method="POST">
+                                                <form class="d-inline" action="{{ route('admin.allocation.destroy', $allocation->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"><i
-                                                            class="fas fa-trash-alt"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -114,7 +110,7 @@
 
                 <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add">
                     <div class="card-body">
-                        <form action="{{ route('admin.agreement.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.allocation.add') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md">
@@ -151,7 +147,7 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label class="col-form-label">Increment (%)</label>
-                                    <input name="penalty" type="number" class="form-control" max="99" >
+                                    <input name="increment" type="number" class="form-control" max="99" >
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="col-form-label">Deposit Amount</label>
@@ -239,7 +235,7 @@
                             </div>
 
                             <div class="form-group text-right mt-4">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Allocate</button>
                             </div>
 
                         </form>

@@ -15,7 +15,6 @@ use App\Http\Livewire\Admin\LocationComponent;
 use App\Http\Livewire\Admin\AddTenantComponent;
 use App\Http\Livewire\Admin\DashboardComponent;
 use App\Http\Livewire\Admin\AllocationComponent;
-use App\Http\Livewire\Admin\ShowTenantComponent;
 use App\Http\Livewire\Admin\AddLandlordComponent;
 use App\Http\Livewire\Admin\AddLocationComponent;
 use App\Http\Livewire\Admin\AddPropertyComponent;
@@ -54,6 +53,7 @@ Route::post('/', [\App\Http\Controllers\ConsultationController::class, 'storeCon
 Route::post('/about', [\App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
 Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
 
+//Admin Routes
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('dashboard', DashboardComponent::class)->name('admin.dashboard');
     Route::get('member/add', AddNewMemberComponent::class)->name('admin.member.add');
@@ -68,21 +68,20 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('location/edit/{location_slug}', EditLocationComponent::class)->name('admin.location.edit');
     Route::get('tenants', TenantComponent::class)->name('admin.tenants');
     Route::get('tenant/add', AddTenantComponent::class)->name('admin.tenant.add');
-    // Route::get('tenant/show/{id}', ShowTenantComponent::class)->name('admin.tenant.show');
     Route::get('landlords', LandlordComponent::class)->name('admin.landlords');
     Route::get('landlord/add', AddLandlordComponent::class)->name('admin.landlord.add');
     Route::get('landlord/view/{id}', [App\Http\Controllers\Admin\AgreementController::class,'show'])->name('admin.landlord.show');
-    Route::get('allocate', AllocationComponent::class)->name('admin.allocation');
-    Route::get('allocation/add', AddAllocationComponent::class)->name('admin.allocation.add');
-    Route::get('allocation/{allocation}', [App\Http\Controllers\Admin\ShowAllocationController::class,'show'])->name('admin.allocation.show');
-    // Route::get('allocations', [App\Http\Controllers\Admin\AgreementController::class,'index'])->name('admin.agreements');
-    Route::post('allocations', [App\Http\Controllers\Admin\AgreementController::class,'store'])->name('admin.agreement.store');
-    Route::get('allocation/show/{tenant}',[App\Http\Controllers\Admin\AgreementController::class,'show'])->name('admin.tenant.show');
-    Route::post('allocation/{id}',[App\Http\Controllers\Admin\AgreementController::class,'update'])->name('admin.agreement.update');
+    Route::get('allocate', [App\Http\Controllers\Admin\AllocationController::class, 'index'])->name('admin.allocation');
+    Route::post('allocation/add', [App\Http\Controllers\Admin\AllocationController::class, 'store'])->name('admin.allocation.add');
+    Route::post('allocation/{allocation}', [App\Http\Controllers\Admin\AllocationController::class, 'update'])->name('admin.allocation.update');
+    Route::get('allocation/edit/{allocation}', [App\Http\Controllers\Admin\AllocationController::class,'edit'])->name('admin.allocation.edit');
+    Route::delete('allocation/{allocation}', [App\Http\Controllers\Admin\AllocationController::class, 'destroy'])->name('admin.allocation.destroy');
+    Route::get('allocation/show/{id}',[App\Http\Controllers\Admin\AllocationController::class,'show'])->name('admin.allocation.show');
     Route::get('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'index'])->name('admin.payments');
     Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
 });
 
+//Landlord Routes
 Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('dashboard', LandlordDashboardComponent::class)->name('landlord.dashboard');
     Route::get('all-tenants', LandlordTenantComponent::class)->name('landlord.tenants');
@@ -97,6 +96,11 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('lease/add', \App\Http\Livewire\Landlord\LandlordAddLeaseComponent::class)->name('landlord.lease.add');
 });
 
+//Tenant Routes
 Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('dashboard', TenantDashboardComponent::class)->name('tenant.dashboard');
 });
+
+//    Route::get('allocate', AllocationComponent::class)->name('admin.allocation');
+//    Route::get('allocation/add', AddAllocationComponent::class)->name('admin.allocation.add');
+// Route::get('allocations', [App\Http\Controllers\Admin\AgreementController::class,'index'])->name('admin.agreements');

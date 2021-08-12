@@ -12,24 +12,24 @@
                         <table>
                             <tr>
                                 <td>Status</td>
-                                <td>:                                
+                                <td>:
                                     <form class="d-inline" action="#" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        @if ($allocation->created)
-                                                <p class="btn badge badge-danger">Expired</p>
-                                            @else
+                                        @if ($allocation->increment_at)
+                                            <p class="btn badge badge-danger">Expired</p>
+                                        @else
                                             @if ($allocation->status)
-                                                    <input type="hidden" name="status" value="0">
-                                                    <button type="submit" class="btn badge badge-success">Actived</button>
-                                                @elseif($allocation->status)
-                                                    <input type="hidden" name="status" value="1">
-                                                    <button type="submit"  class="btn badge badge-secondary">Inactived</button>
-                                                @else
-                                                    {{ $allocation->status ? 'Active':'Inactive'}} 
+                                                <input type="hidden" name="status" value="0">
+                                                <button type="submit" class="btn badge badge-success">Actived</button>
+                                            @elseif($allocation->status)
+                                                <input type="hidden" name="status" value="1">
+                                                <button type="submit"  class="btn badge badge-secondary">Inactived</button>
+                                            @else
+                                                {{ $allocation->status ? 'Active':'Inactive'}}
                                             @endif
                                         @endif
-                                    </form>                                                       
+                                    </form>
                                 </td>
                             </tr>
                             <tr>
@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td>Tenant Name</td>
-                                {{--  <td>: 
+                                {{--  <td>:
                                     <a class="badge badge-light" href="{{ route('admin.tenant.show', $allocation->tenant->id ) }}" target="_blank">
                                         {{ $allocation->tenant->fname." ".$allocation->tenant->lname }}
                                     </a>
@@ -63,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td>Increment %</td>
-                                <td>: {{ $allocation->penalty }}</td>
+                                <td>: {{ $allocation->increment }}</td>
                             </tr>
                             <tr>
                                 <td>Attachement</td>

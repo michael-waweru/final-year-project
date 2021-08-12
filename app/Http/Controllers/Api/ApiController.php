@@ -31,9 +31,9 @@ class ApiController extends Controller
             $data = [];
             $data['type'] = $allocation->property->property_type->name ?? 'Deleted';
             $data['property'] = $allocation->property->name;
-            $data['tenant'] = $allocation->user->fname.' '.$allocation->user->lname;
+            $data['tenant'] = $allocation->tenant->fname.' '.$allocation->tenant->lname;
             $data['rent'] = $allocation->rent;
-            $data['penalty'] = $allocation->penalty;
+            $data['increment'] = $allocation->increment;
             $data['start'] = $allocation->created_at->diffForHumans();
 
             $data['duration'] = $allocation->period;
