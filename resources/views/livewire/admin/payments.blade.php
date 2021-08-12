@@ -50,17 +50,18 @@
                                                 <td>{{ $payment->id }}</td>
                                                 <td>{{ $payment->created_at->format('d-m-y') }}</td>
                                                 <td>
-                                                    <a class="badge badge-light"
-                                                       href="#" target="_blank">{{ $payment->allocation->user->fname." ".$payment->allocation->user->lname }}</a>
+                                                    <a class="badge badge-light" href="{{ route('admin.tenant.show', $payment->id) }}" target="_blank">
+                                                        <i class="fas fa-eye mr-2"></i>{{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }}
+                                                    </a>
                                                 </td>
                                                 <td>{{ $payment->allocation->property->name }}</td>
                                                 <td>{{ $payment->type }}</td>
-                                                <td class="text-success">{{ $payment->amount }}</td>
-                                                <td>{{ $payment->means }}</td>
+                                                <td class="text-success"><strong>{{ $payment->amount }}</strong> </td>
+                                                <td>{{ $payment->payment_means }}</td>
                                                 <td>{{ $payment->transaction_id }}</td>
 
-                                                <td class="text-right">
-                                                    <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                                <td>
+                                                    <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.payment.show',$payment->id)}}', '_blank')"><i class="fas fa-eye"></i> View</button>
                                                 </td>
                                             </tr>
                                         @endforeach

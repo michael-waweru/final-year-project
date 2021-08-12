@@ -78,6 +78,11 @@ class MakePaymentController extends Controller
         ]);
     }
 
+    public function cashPayment()
+    {
+        //
+    }
+
     public function mpesaPayment($request, $payment)
     {
         $payment->transaction_code = $request->transaction_code;
@@ -92,5 +97,10 @@ class MakePaymentController extends Controller
         if ($request->file('attachment')) {
             $payment->attachment = $request->attachment->store('/cheque');
         }
+    }
+
+    public function show(Payments $payment)
+    {
+        return view('livewire.admin.show-payment',compact('payment'));
     }
 }

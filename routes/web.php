@@ -68,9 +68,9 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('location/edit/{location_slug}', EditLocationComponent::class)->name('admin.location.edit');
     Route::get('tenants', TenantComponent::class)->name('admin.tenants');
     Route::get('tenant/add', AddTenantComponent::class)->name('admin.tenant.add');
+    Route::get('tenant/show/{payment}',[App\Http\Controllers\Admin\ShowTenantController::class,'show'])->name('admin.tenant.show');
     Route::get('landlords', LandlordComponent::class)->name('admin.landlords');
     Route::get('landlord/add', AddLandlordComponent::class)->name('admin.landlord.add');
-    Route::get('landlord/view/{id}', [App\Http\Controllers\Admin\AgreementController::class,'show'])->name('admin.landlord.show');
     Route::get('allocate', [App\Http\Controllers\Admin\AllocationController::class, 'index'])->name('admin.allocation');
     Route::post('allocation/add', [App\Http\Controllers\Admin\AllocationController::class, 'store'])->name('admin.allocation.add');
     Route::post('allocation/{allocation}', [App\Http\Controllers\Admin\AllocationController::class, 'update'])->name('admin.allocation.update');
@@ -79,6 +79,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('allocation/show/{id}',[App\Http\Controllers\Admin\AllocationController::class,'show'])->name('admin.allocation.show');
     Route::get('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'index'])->name('admin.payments');
     Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
+    Route::get('payment/show/{payment}',[App\Http\Controllers\Admin\MakePaymentController::class,'show'])->name('admin.payment.show');
 });
 
 //Landlord Routes

@@ -25,12 +25,12 @@ class CreatePaymentsTable extends Migration
             $table->string('payment_means');
             $table->integer('amount');
             $table->string('transaction_id')->nullable();
-            $table->string('bank');
-            $table->integer('account');
-            $table->string('branch');
-            $table->string('cheque');
-            $table->string('attachment');
-            $table->text('description');
+            $table->string('bank')->nullable();
+            $table->integer('account')->nullable();
+            $table->string('branch')->nullable();
+            $table->string('cheque')->nullable();
+            $table->string('attachment')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -187,7 +187,7 @@
 
                             <div class="row">
                                 <div class="col-md form-group">
-                                    <label class="col-form-label">Start Date</label>
+                                    <label class="col-form-label">Allocation Date</label>
                                     <input id="created_at" name="created_at" type="date" value="" class="form-control">
                                 </div>
                                 <div class="col-md form-group">

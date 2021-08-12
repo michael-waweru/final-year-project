@@ -134,7 +134,7 @@
                                 <thead>
                                     <tr class="fw-bolder text-muted">
                                         <th class="min-w-140px">Name</th>
-                                        <th class="min-w-100px">Contact</th>                                        
+                                        <th class="min-w-100px">Contact</th>
                                         <th class="min-w-110px text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -152,9 +152,9 @@
                                             </td>
                                             <td>
                                                 <span class="text-dark fw-bolder text-hover-primary d-block fs-6">{{ $member->contact }}</span>
-                                            </td>                                            
+                                            </td>
                                             <td class="text-center">
-                                                <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.tenant.show',$member->id) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                                <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
                                             </td>
                                         </tr>
                                     @endforeach

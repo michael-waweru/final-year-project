@@ -50,7 +50,7 @@
                                     <td> {{ $tenant->identification_number }} </td>
                                     <td> {{ $tenant->contact }} </td>
                                     <td>
-                                        <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.tenant.show',$tenant->id) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                        <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
                                     </td>
 
                                     <td class="text-right">

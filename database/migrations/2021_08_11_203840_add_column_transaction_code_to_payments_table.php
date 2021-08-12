@@ -14,7 +14,7 @@ class AddColumnTransactionCodeToPaymentsTable extends Migration
     public function up()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->string('transaction_code');
+            $table->string('transaction_code')->nullable();
         });
     }
 
