@@ -156,16 +156,16 @@
                                     <input id="increment" type="text" class="form-control" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Period</label>
+                                    <label class="col-form-label">Period to Increment</label>
                                     <input id="duration" type="text" class="form-control" disabled>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Started</label>
+                                    <label class="col-form-label">Allocation Time</label>
                                     <input id="start" type="text" class="form-control" disabled>
                                 </div>
 
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Period Left</label>
+                                    <label class="col-form-label">Allocated Period Left</label>
                                     <input id="left" type="text" class="form-control" disabled>
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
 
                                 <div class="form-group col-md">
                                     <label class="col-form-label">Landlord</label>
-                                    <select class="form-select" name="landlord_id" id="landlord_id" required>
+                                    <select class="form-select" name="entry_id" id="entry_id" required>
                                         <option value="">Select Landlord</option>
                                         @foreach($landlords as $landlord)
                                             <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
@@ -324,10 +324,10 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md form-group">
-                                    <label class="col-form-label">Entry by</label>
-                                    <input value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" class="form-control" disabled>
-                                </div>
+{{--                                <div class="col-md form-group">--}}
+{{--                                    <label class="col-form-label">Entry by</label>--}}
+{{--                                    <input value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" class="form-control" disabled>--}}
+{{--                                </div>--}}
                             </div>
                             <div class="form-group text-right mt-4">
                                 <button type="submit" class="btn btn-primary">Make Payment Now</button>

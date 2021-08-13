@@ -29,7 +29,7 @@
                                 incremented to <span class="text-danger">{{ $allocation->increment }}%</span>.
                                 <a href="#" onclick="form{{ $allocation->id }}.submit()" class="text-success">Renew Now!</a>
 
-                                <form id="form{{ $allocation->id }}" action="{{ route('admin.allocation.update', $allocation->id) }}" method="POST">
+                                <form id="form{{ $allocation->id }}" action="{{ route('admin.allocation.update', ['allocation'=>$allocation->id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="expired" value="true">
                                 </form>
@@ -64,7 +64,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <form class="d-inline" action="{{ route('admin.allocation.update', ['lease' => $allocation->id]) }}" method="POST">
+                                                <form class="d-inline" action="{{ route('admin.allocation.update', ['allocation' => $allocation->id]) }}" method="POST">
                                                     @csrf
                                                     @if ($allocation->increment_at)
                                                         <p class="btn badge badge-danger">Expired</p>
@@ -190,9 +190,15 @@
                                     <label class="col-form-label">Allocation Date</label>
                                     <input id="created_at" name="created_at" type="date" value="" class="form-control">
                                 </div>
-                                <div class="col-md form-group">
-                                    <label class="col-form-label">Entry by</label>
-                                    <input value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" class="form-control" disabled>
+
+                                <div class="form-group col-6">
+                                    <label class="col-form-label">Entry By</label>
+                                    <select class="form-select" name="entry_id">
+                                        <option value="">Select a Landlord</option>
+                                        @foreach ($landlords as $landlord)
+                                            <option value="{{ $landlord->id}}">{{ $landlord->fname.' '.$landlord->lname }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -307,8 +313,8 @@
                 } else {
                         e.dismiss;
                     }
-
-            }, function (dismiss) {
+            },
+                function (dismiss) {
                 return false;
             })
         }

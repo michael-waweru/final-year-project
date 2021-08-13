@@ -7,7 +7,6 @@
         <div class="card-body">
             <form action="{{ route('admin.allocation.update', $allocation->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="row">
                     <div class="form-group col-md">
                         <label class="col-form-label">Allocation Name</label>
@@ -15,7 +14,7 @@
                     </div>
                     <div class="col-md form-group">
                         <label class="col-form-label">Property Type</label>
-                        <select id="types" class="form-control" required>
+                        <select id="types" class="form-select" required>
                             <option>Select type</option>
                             @foreach (App\Models\PropertyType::getProperties() as $type)
                                 <option value="{{ $type->id }}" {{ $allocation->type_id = $type->id ? 'selected':'' }}>
@@ -26,16 +25,16 @@
 
                     <div class="col-md form-group">
                         <label class="col-form-label">Property Name</label>
-                        <select id="properties" class="form-control" name="property_id" required>
+                        <select id="properties" class="form-select" name="property_id" required>
 
                         </select>
                     </div>
                     <div class="col-md form-group">
-                        <label class="col-form-label">Tent</label>
-                        <select class="form-control" name="tent_id" required>
+                        <label class="col-form-label">Tenant</label>
+                        <select class="form-select" name="user_id" required>
                             <option value="">Select Tenant</option>
                             @foreach ($tenants as $tenant)
-                                <option value="{{ $tenant->id }}" {{ $tenant->id == $allocation->user->id ? 'selected':'' }}>
+                                <option value="{{ $tenant->id }}" {{ $tenant->id == $allocation->tenant->id ? 'selected':'' }}>
                                     {{ $tenant->fname.' '.$tenant->lname }}</option>
                             @endforeach
                         </select>
@@ -64,7 +63,7 @@
 
                     <div class="col-md form-group">
                         <label class="col-form-label">Period</label>
-                        <select name="period" id="" class="form-control">
+                        <select name="period" id="" class="form-select">
                             <option value="6">6 Months</option>
                             <option value="12">1 Year</option>
                             <option value="24">2 Years</option>
@@ -76,7 +75,7 @@
                     </div>
                     <div class="col-md form-group">
                         <label class="col-form-label">Increment (%)</label>
-                        <input name="increment" type="number" class="form-control" value="{{$allocation->incr}}" required>
+                        <input name="increment" type="number" class="form-control" value="{{$allocation->increment}}" required>
                     </div>
                     <div class="col-md form-group">
                         <label class="col-form-label">Attachment</label>
@@ -86,15 +85,25 @@
 
                 <div class="row">
                     <div class="col-md form-group">
-                        <label class="col-form-label">Start Date</label>
+                        <label class="col-form-label">Allocation Start Date</label>
                         <input id="created_at" name="created_at" type="date"
                                value="{{ $allocation->created_at->format("Y-m-d") }}" class="form-control" required>
                     </div>
 
-                    <div class="col-md form-group">
-                        <label class="col-form-label">Entry by</label>
-                        <input value="{{ Auth::user()->name }}" class="form-control" disabled>
+                    <div class="form-group col-md">
+                        <label class="col-form-label">Landlord</label>
+                        <select class="form-select" name="entry_id" id="entry_id" required>
+                            <option value="{{$allocation->entry_id}}">Select Landlord</option>
+                            @foreach($landlords as $landlord)
+                                <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+{{--                    <div class="col-md form-group">--}}
+{{--                        <label class="col-form-label">Entry by</label>--}}
+{{--                        <input value="{{ Auth::user()->name }}" class="form-control" disabled>--}}
+{{--                    </div>--}}
                 </div>
 
                 <div class="form-group text-right mt-4">

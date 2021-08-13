@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('user_id');
             $table->integer('entry_id');
             $table->integer('landlord_id')->nullable();
-            $table->string('type')->default('rent');
+            $table->string('type')->default('Rent');
             $table->integer('amount');
             $table->integer('payment_amount');
             $table->text('description')->nullable();

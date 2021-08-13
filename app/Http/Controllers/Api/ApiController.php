@@ -16,10 +16,10 @@ class ApiController extends Controller
     {
         if ($request)
         {
-//            $properties = Property::where('property_type_id', $request->type)->get();
-            $properties = DB::table('properties')
-                                    ->where('landlord', '=', auth()->user()->id)
-                                    ->where('property_type_id', $request->type)->get();
+            $properties = Property::where('property_type_id', $request->type)->get();
+//            $properties = DB::table('properties')
+//                                    ->where('landlord', '=', auth()->user()->id)
+//                                    ->where('property_type_id', $request->type)->get();
             if ($properties)
             {
                 return response()->json($properties);

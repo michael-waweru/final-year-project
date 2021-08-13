@@ -85,7 +85,7 @@
                                 </div>
                             </div>
 
-                            <h2 class="mt-5 mb-0">Guarantor information</h2>
+                            <h2 class="mt-5 mb-0">Emergency Contact information</h2>
 
                             <div class="row mt-4">
                                 <div class="form-group col-6">
@@ -120,10 +120,15 @@
                                         wire:model="guarantor_contact">
                                         @error('guarantor_contact') <p class="text-danger">{{ $message }}</p>@enderror
                                     </div>
-
                                     <div class="form-group col-6">
-                                        <label class="col-form-label">Entry By</label>
-                                        <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
+                                        <label class="col-form-label">Belongs to Landlord</label>
+                                        <select class="form-select @error('entry_id') is-invalid @enderror" wire:model="entry_id" >
+                                            <option value="">Select a Landlord</option>
+                                            @foreach ($landlords as $landlord)
+                                                <option value="{{ $landlord->id}}">{{ $landlord->fname.' '.$landlord->lname }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('entry_id')<p class="text-danger">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                             </div>

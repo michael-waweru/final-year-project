@@ -33,7 +33,7 @@ class MakePaymentController extends Controller
         $payment->id = $request->serial;
         $payment->allocation_id = $request->allocation_id;
         $payment->landlord_id = $request->landlord_id;
-        $payment->entry_id = Auth::id();
+        $payment->entry_id = $request->entry_id;
         $payment->type = $request->type;
         $payment->state = 'payment';
         $payment->amount = $request->amount;

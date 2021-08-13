@@ -10,7 +10,6 @@
 		<link rel="shortcut icon" href="{{ asset('fontend/images/favicon.ico') }}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="{{ asset('backend/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -19,6 +18,16 @@
 		<link href="{{ asset('backend/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('backend/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="{{ asset('backend/plugins/icons/bootstrap-icons.css') }}">
+
+        <link href="{{ asset('backend/vendor/fonts/fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/datatables/css/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/select.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+
+        <link href="{{ asset('backend/plugins/toastr.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/plugins/sweetalerts.min.css') }}" rel="stylesheet" type="text/css">
+
 		<!--end::Global Stylesheets Bundle-->
         @livewireStyles
 	</head>
@@ -968,6 +977,21 @@
 		<!--end::Main-->
 
         <!--begin::Javascript-->
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/jszip.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.rowGroup.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.select.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.fixedHeader.min.js') }}"></script>
+
+        <script src="{{ asset('backend/plugins/sweetalert2.all.min.js') }}"></script>
+
+
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('backend/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('backend/plugins/icons/bootstrap-icons.js') }}"></script>

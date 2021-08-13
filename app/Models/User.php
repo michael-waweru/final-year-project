@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Allocation::class);
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

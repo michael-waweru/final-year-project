@@ -16,6 +16,11 @@ class Allocation extends Model
         return $this->belongsTo(Property::class);
     }
 
+    public function payment()
+    {
+        return $this->hasOne(Payments::class);
+    }
+
     public function location()
     {
         return $this->belongsTo(Location::class,'location_id');

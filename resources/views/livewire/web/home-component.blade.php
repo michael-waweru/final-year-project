@@ -151,7 +151,7 @@
             <div class="col-md-12">
                 <div class="section-title v1">
                     <p>Find rental properties anywhere</p>
-                    <h2>Discover Popular Properties</h2>
+                    <h2>Discover Our Properties</h2>
                 </div>
             </div>
         </div>
@@ -161,594 +161,64 @@
                     <li class="nav-item active">
                         <a data-toggle="tab" href="#all_property">All Property</a>
                     </li>
-                    <li class="nav-item ">
-                        <a data-toggle="tab" href="#for_sale">For Sale</a>
-                    </li>
-                    <li class="nav-item">
-                        <a data-toggle="tab" href="#for_rent">For Rent</a>
-                    </li>
                 </ul>
             </div>
             <div class="col-md-12">
                 <div class="tab-content mt-30">
                     <div class="tab-pane fade show active" id="all_property">
                         <div class="row">
-                            <div class="col-xl-4 col-md-6 col-sm-12">
+                            @foreach($randomProperties as $randonP)
+                                <div class="col-xl-4 col-md-6 col-sm-12">
                                 <div class="single-property-box">
                                     <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_1.jpg') }}" alt="#">
+                                        <a class="property-img" href="{{ route('property.detail', ['slug' => $randonP->slug]) }}">
+                                            <img src="{{ asset('files/assets/real') }}/{{ $randonP->image }}" alt="{{ $randonP->name }}">
                                         </a>
                                         <ul class="feature_text">
                                             <li class="feature_cb"><span> Featured</span></li>
-                                            <li class="feature_or"><span>For Sale</span></li>
+                                            <li class="feature_or"><span>For {{ $randonP->status }}</span></li>
                                         </ul>
                                         <div class="property-author-wrap">
                                             <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agent_min_1.jpg') }}" alt="...">
-                                                <span>Tony Stark</span>
+                                                <img src="{{ asset('files/assets/real') }}/{{ $randonP->image }}" alt="{{ $randonP->name }}">
+                                                <span>Admin</span>
                                             </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="Photos"><a href=".html" class="btn-gallery"><i class="lnr lnr-camera"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                            <div class="hidden photo-gallery">
-                                                <a href="images/single-listing/property_view_1.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_2.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_3.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_4.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_5.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_6.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_7.jpg') }}"></a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Villa on Hartford</a></h4>
+                                        <h4><a href="{{ route('property.detail', ['slug' => $randonP->slug]) }}">{{ $randonP->name }}</a></h4>
                                         <div class="property-location">
                                             <i class="fa fa-map-marker-alt"></i>
-                                            <p>2854 Meadow View Drive, Hartford, USA</p>
+                                            <p>{{ $randonP->location->name }}</p>
                                         </div>
                                         <ul class="property-feature">
                                             <li> <i class="fas fa-bed"></i>
-                                                <span>4 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>3 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>2142 sq ft</span>
+                                                <span>{{ $randonP->bedrooms }} Bedrooms</span>
                                             </li>
                                             <li> <i class="fas fa-car"></i>
-                                                <span>2 Garage</span>
+                                                <span> Garage {{ $randonP->garage }}</span>
                                             </li>
                                         </ul>
                                         <div class="trending-bottom">
                                             <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
+                                                <i class="lnr lnr-calendar-full"></i> {{ $randonP->created_at->diffForHumans() }}</i>
                                             </div>
                                             <a class="trend-right float-right">
                                                 <div class="trend-open">
-                                                    <p><span class="per_sale">starts from</span>$25000</p>
+                                                    <p>Ksh. {{ $randonP->price }}</p>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_3.jpg') }}" alt="#"></a>
-                                        <ul class="feature_text">
-                                            <li class="feature_or"><span>For Rent</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agency_2.jpg') }}" alt="...">
-                                                <span>Zilion Properties</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Family home in Glasgow</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>60 High St, Glasgow, London</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>3 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>3 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>1982 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>1 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p>$7500<span class="per_month">month</span> </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_6.jpg') }}" alt="#"></a>
-                                        <ul class="feature_text">
-                                            <li class="feature_cb"><span> New</span></li>
-                                            <li class="feature_or"><span>For Sale</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agent_min_2.jpg') }}" alt="...">
-                                                <span>Bob Haris</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="Video"><a href="https://www.youtube.com/watch?v=v_ATnE02qFs" class="property-yt"><i class="fas fa-play"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Apartment in Cecil Lake</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>131 midlas , Cecil Lake, BC</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>3 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>2 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>1600 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>1 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p><span class="per_sale">starts from</span>$9000</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="for_sale">
-                        <div class="row">
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_4.jpg') }}" alt="#"></a>
-                                        <ul class="feature_text">
-                                            <li class="feature_cb"><span> Featured</span></li>
-                                            <li class="feature_or"><span>For Sale</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agency_4.jpg') }}" alt="...">
-                                                <span>Hexa Properties</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Office Space in Thatcham</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>Colthrop Lane, Thatcham, London</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-home"></i>
-                                                <span>6 Rooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>2 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>1400 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>1 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p><span class="per_sale">starts from</span>$12000</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_5.jpg') }}" alt="#">
-                                        </a>
-                                        <ul class="feature_text">
-                                            <li class="feature_or"><span>For Sale</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agency_3.jpg') }}" alt="...">
-                                                <span>Seaside Properties</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="Photos"><a href=".html" class="btn-gallery"><i class="lnr lnr-camera"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                            <div class="hidden photo-gallery">
-                                                <a href="images/single-listing/property_view_1.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_2.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_3.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_4.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_5.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_6.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_7.jpg') }}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Luxury Villa in Birmingham</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>159 Dudley Rd, Birmingham, UK</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>5 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>4 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>3000 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>2 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p><span class="per_sale">starts from</span>$21000</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_1.jpg') }}" alt="#"></a>
-                                        <ul class="feature_text">
-                                            <li class="feature_cb"><span> Featured</span></li>
-                                            <li class="feature_or"><span>For Sale</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agent_min_1.jpg') }}" alt="...">
-                                                <span>Tony Stark</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="Photos"><a href=".html" class="btn-gallery"><i class="lnr lnr-camera"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                            <div class="hidden photo-gallery">
-                                                <a href="images/single-listing/property_view_1.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_2.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_3.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_4.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_5.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_6.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_7.jpg') }}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Villa on Hartford</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>2854 Meadow View Drive, Hartford, USA</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>4 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>3 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>2142 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>2 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p><span class="per_sale">starts from</span>$25000</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="for_rent">
-                        <div class="row">
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_7.jpg') }}" alt="#"> </a>
-                                        <ul class="feature_text">
-                                            <li class="feature_cb"><span> Featured</span></li>
-                                            <li class="feature_or"><span>For Rent</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agency_1.jpg') }}" alt="...">
-                                                <span>Carmen Properties</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Villa on Sunbury</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>39 Casey Ave, Sunbury, VIC 3429</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>5 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>4 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>2048 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>2 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p>$9200<span class="per_month">month</span> </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_8.jpg') }}" alt="#"> </a>
-                                        <ul class="feature_text">
-                                            <li class="feature_cb"><span> Featured</span></li>
-                                            <li class="feature_or"><span>For Rent</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agent_min_1.jpg') }}" alt="...">
-                                                <span>Tony Stark</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="Photos"><a href=".html" class="btn-gallery"><i class="lnr lnr-camera"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                            <div class="hidden photo-gallery">
-                                                <a href="images/single-listing/property_view_1.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_2.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_3.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_4.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_5.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_6.jpg') }}"></a>
-                                                <a href="images/single-listing/property_view_7.jpg') }}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Comfortable Family Apartment</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>4210 Khale Street, Florence, USA</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>2 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>2 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>1500 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>1 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p>$7500<span class="per_month">month</span> </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="single-property-box">
-                                    <div class="property-item">
-                                        <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property/property_3.jpg') }}" alt="#"> </a>
-                                        <ul class="feature_text">
-                                            <li class="feature_or"><span>For Rent</span></li>
-                                        </ul>
-                                        <div class="property-author-wrap">
-                                            <a href="#" class="property-author">
-                                                <img src="{{ asset('frontend/images/agents/agency_2.jpg') }}" alt="...">
-                                                <span>Zilion Properties</span>
-                                            </a>
-                                            <ul class="save-btn">
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Bookmark"><a href="#"><i class="lnr lnr-heart"></i></a></li>
-                                                <li data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Compare"><a href="#"><i class="fas fa-arrows-alt-h"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="property-title-box">
-                                        <h4><a href="single-listing-one.html">Family home in Glasgow</a></h4>
-                                        <div class="property-location">
-                                            <i class="fa fa-map-marker-alt"></i>
-                                            <p>60 High St, Glasgow, London</p>
-                                        </div>
-                                        <ul class="property-feature">
-                                            <li> <i class="fas fa-bed"></i>
-                                                <span>3 Bedrooms</span>
-                                            </li>
-                                            <li> <i class="fas fa-bath"></i>
-                                                <span>3 Bath</span>
-                                            </li>
-                                            <li> <i class="fas fa-arrows-alt"></i>
-                                                <span>1982 sq ft</span>
-                                            </li>
-                                            <li> <i class="fas fa-car"></i>
-                                                <span>1 Garage</span>
-                                            </li>
-                                        </ul>
-                                        <div class="trending-bottom">
-                                            <div class="trend-left float-left">
-                                                <ul class="product-rating">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                    <li><i class="fas fa-star-half-alt"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a class="trend-right float-right">
-                                                <div class="trend-open">
-                                                    <p>$7500<span class="per_month">month</span> </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 text-center mt-1">
-                <a href="tab-fullwidth.html" class="btn v9">Browse More</a>
+                <a href="{{ route('property') }}" class="btn v9">Browse More</a>
             </div>
         </div>
     </div>
@@ -791,35 +261,43 @@
             <div class="col-xl-5 col-lg-12">
                 <div class="promo-desc">
                     <div class="section-title v2">
-                        <p>Lorem ipsum dolor sit.</p>
+                        <p>Sit Back and Relax</p>
                         <h2>Why choose us</h2>
                     </div>
                     <div class="promo-text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod libero amet, laborum qui nulla quae alias tempora. Placeat voluptatem eum numquam quas distinctio obcaecati quaerat, repudiandae qui! Quia, omnis, doloribus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod libero amet, laborum qui nulla quae alias tempora. </p>
+                        <p>
+                            We are a leader in the field. We implore modern technology to our processes to ensure that all aspects
+                            of management done via our system are at their optimum best. Our processes employ a modern end-to-end security.
+                            Our team of developers ensure that our clients data is always secure and unreachable by unauthorized personnel.
+                        </p>
+
+                        <p class="mt-2">
+                            Not only do we guarantee safety and reliability, our system sees to it that clients yield the bes results and have
+                            an easier time in management as opposed t older methods.
+                        </p>
                     </div>
                     <div class="row pt-5">
-                        <div class="col-sm-4 col-12">
+                        <div class="col-sm-4 col-6">
                             <div class="counter-text v2">
                                 <i class="lnr lnr-apartment"></i>
-                                <h6 class="counter-value" data-from="0" data-to="10" data-speed="1500">
-                                </h6>
+                                <h6 class="counter-value" data-from="0" data-to="4" data-speed="2500"></h6>
                                 <p>Years of experience</p>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-12">
+                        <div class="col-sm-4 col-6">
                             <div class="counter-text v2">
                                 <i class="lnr lnr-thumbs-up"></i>
-                                <h6 class="counter-value" data-from="0" data-to="585" data-speed="1000">
+                                <h6 class="counter-value" data-from="0" data-to="82" data-speed="2000">
                                 </h6>
                                 <p> Happy Customers</p>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-12">
+                        <div class="col-sm-4 col-6">
                             <div class="counter-text v2">
                                 <i class="lnr lnr-user"></i>
-                                <h6 class="counter-value" data-from="0" data-to="100" data-speed="1500">
+                                <h6 class="counter-value" data-from="0" data-to="56" data-speed="2500">
                                 </h6>
-                                <p>Real estate Agent</p>
+                                <p>Registered Real Estate Agents</p>
                             </div>
                         </div>
                     </div>
@@ -830,24 +308,24 @@
                     <div class="col-md-12">
                         <div class="promo-content-wrap">
                             <div class="promo-content">
-                                <img src="{{ asset('frontend/images/category/pin.png') }}" alt="...">
+                                <img src="{{ asset('frontend/images/category/pin.png') }}" alt="service">
                                 <h4>Personalized Service.</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia aliquid cumque</p>
+                                <p>We offer tailor made customized services based on user needs and user specifications.</p>
                             </div>
                             <div class="promo-content">
-                                <img src="{{ asset('frontend/images/category/rent.png') }}" alt="...">
+                                <img src="{{ asset('frontend/images/category/rent.png') }}" alt="financing">
                                 <h4>Financing made easy.</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia aliquid cumque.</p>
+                                <p>Strain no more. No more middlemen and conmen. Get the right property with trust.</p>
                             </div>
                             <div class="promo-content">
-                                <img src="{{ asset('frontend/images/category/customer_support.png') }}" alt="...">
+                                <img src="{{ asset('frontend/images/category/customer_support.png') }}" alt="support">
                                 <h4>24/7 support.</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia aliquid cumque.</p>
+                                <p>We are here to listen and support you. Do not hesitate to <a href="{{ route('contact') }}">reach out</a>.</p>
                             </div>
                             <div class="promo-content">
-                                <img src="{{ asset('frontend/images/category/deal.png') }}" alt="...">
-                                <h4>Trusted by thousands.</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia aliquid cumque.</p>
+                                <img src="{{ asset('frontend/images/category/deal.png') }}" alt="trust">
+                                <h4>Trusted by many.</h4>
+                                <p>We keep our word. Our clients are satisfied and trust our system to serve them at all times with no failure.</p>
                             </div>
                         </div>
                     </div>
@@ -857,6 +335,7 @@
     </div>
 </div>
 <!--Promo Section ends-->
+
 <!--Call to action starts-->
 <div class="call-to-action bg-fixed bg-h mt-4 consult-form v1" style="background-image: url(/frontend/images/bg/call-to-action-bg.jpg)">
     <div class="overlay op-7"></div>

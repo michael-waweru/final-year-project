@@ -1,7 +1,9 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.0/sweetalert2.min.js"
 integrity="sha512-+dw5OaugLkFBeUC/lnMnX3HRt/xLOMfL5FkdGu0mzvEP18npZHwTgtdVc9WCuSdKYgikRXFhgD5MqliMq8ufrA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>--}}
+
+<script src="{{ asset('backend/plugins/sweetalert2.all.min.js') }}"></script>
 
 <script>
     $(function(){

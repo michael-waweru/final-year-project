@@ -29,10 +29,11 @@ class AllocationController extends Controller
     public function index()
     {
         $allocations = Allocation::all();
-        //$tenants = User::where('role', 3)->get();
-//        $tenants = DB::table('users')->where('role', '=', 3);
         $tenants = DB::select('select * from users where role = 3');
-        return view('livewire.admin.allocations', compact('allocations','tenants'));
+        $landlords = DB::select('select * from users where role = 2');
+
+        return view('livewire.admin.allocations',
+            compact('allocations','tenants', 'landlords'));
     }
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
@@ -44,6 +45,7 @@ class AllocationController extends Controller
             'deposit' => 'required|integer',
             'rent' => 'required|integer',
             'period' => 'required|integer',
+            'entry_id' => 'required'
         ]);
 
         $allocation = new Allocation();
@@ -57,7 +59,7 @@ class AllocationController extends Controller
 
         $allocation->property_id = $request->property_id;
         $allocation->user_id = $request->user_id;
-        $allocation->entry_id = Auth::id();
+        $allocation->entry_id = $request->entry_id;
         $allocation->name = $request->name;
         $allocation->rent = $request->rent;
         $allocation->period = $request->period;
@@ -97,7 +99,7 @@ class AllocationController extends Controller
 
         $allocation->property_id = $request->property_id;
         $allocation->user_id = $request->user_id;
-        $allocation->entry_id = Auth::id();
+        $allocation->entry_id = $request->entry_id;
         $allocation->name = $request->name;
         $allocation->rent = $request->rent;
         $allocation->period = $request->period;
@@ -121,8 +123,10 @@ class AllocationController extends Controller
     public function edit(Allocation $allocation)
     {
         $tenants = DB::select('select * from users where role = 3');
+        $landlords = DB::select('select * from users where role = 2');
 
-        return view('livewire.admin.edit-allocation', compact('allocation', 'tenants'));
+        return view('livewire.admin.edit-allocation',
+            compact('allocation', 'tenants', 'landlords'));
     }
 
     public function show(Allocation $allocation)

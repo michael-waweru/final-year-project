@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin;
 // use App\Models\Tenant;
 use App\Models\User;
 use App\Models\Tenant;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
@@ -30,6 +32,7 @@ class AddTenantComponent extends Component
     public $guarantor_contact;
     public $guarantor_address;
     public $guarantor_id_no;
+    public $entry_id;
 
     public function updated($fields)
     {
@@ -44,7 +47,8 @@ class AddTenantComponent extends Component
             'contact' => 'required | numeric',
             'guarantor_fname' => 'required',
             'guarantor_lname' => 'required',
-            'guarantor_contact' => 'required'
+            'guarantor_contact' => 'required',
+            'entry_id' => 'required'
         ]);
     }
     public function storeTenant(Request $request)
@@ -60,7 +64,8 @@ class AddTenantComponent extends Component
             'contact' => 'required | numeric',
             'guarantor_fname' => 'required',
             'guarantor_lname' => 'required',
-            'guarantor_contact' => 'required | numeric'
+            'guarantor_contact' => 'required | numeric',
+            'entry_id' => 'required'
         ]);
 
         $tenant = new User();
@@ -76,7 +81,7 @@ class AddTenantComponent extends Component
         {
             $docName = Carbon::now()->timestamp. '.' .$request->tenant->identification_doc->extension();
             $url = $request->tenant->identification_doc->storeAs('tenant-doc', $docName);
-            $allocation->identification_doc = $url;
+            $tenant->identification_doc = $url;
         }
 
         $tenant->fname = $this->fname;
@@ -93,6 +98,7 @@ class AddTenantComponent extends Component
         $tenant->guarantor_id_no = $this->guarantor_id_no;
         $tenant->guarantor_contact = $this->guarantor_contact;
         $tenant->guarantor_address = $this->guarantor_address;
+        $tenant->entry_id = $this->entry_id;
         $tenant->save();
 
         Password::sendResetLink($request->only('email'));
@@ -102,6 +108,11 @@ class AddTenantComponent extends Component
     }
     public function render()
     {
-        return view('livewire.admin.add-tenant-component')->layout('layouts.admin');
+        $landlords = DB::select('select * from users where role = 2');
+
+        return view('livewire.admin.add-tenant-component',
+        [
+            'landlords' => $landlords
+        ])->layout('layouts.admin');
     }
 }

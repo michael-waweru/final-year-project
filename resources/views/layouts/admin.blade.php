@@ -12,18 +12,20 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 
-        <link rel="stylesheet" href="{{asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}">
-        <link href="{{asset('backend/vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
-        <link href="{{asset('backend/libs/css/style.css') }}" rel="stylesheet">
-        <link href="{{asset('backend/vendor/fonts/fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
-        <link href="{{asset('backend/vendor/datatables/css/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{asset('backend/vendor/datatables/css/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{asset('backend/vendor/datatables/css/select.bootstrap4.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{asset('backend/vendor/datatables/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}">
+        <link href="{{ asset('backend/vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/libs/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/fonts/fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/datatables/css/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/select.bootstrap4.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/vendor/datatables/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css">
 
-        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/plugins/toastr.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/plugins/sweetalerts.min.css') }}" rel="stylesheet" type="text/css">
 
+{{--        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">--}}
+{{--        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">--}}
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"> --}}
 
 
@@ -53,7 +55,7 @@
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="{{ route('admin.dashboard') }}">
-                        <img alt="Logo" src="{{ asset('frontend/images/logo.png') }}" class="h-50px logo" />
+                        <img alt="Logo" src="{{ asset('frontend/images/logo.png') }}" class="h-60px logo" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Aside toggler-->
@@ -263,7 +265,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="apps/invoices/view/invoice-1.html">
+                                        <a class="menu-link" href="{{ route('admin.invoices') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -271,7 +273,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="apps/invoices/create.html">
+                                        <a class="menu-link" href="{{ route('admin.invoices') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -481,7 +483,7 @@
                                         <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column w-250px w-lg-325px" data-kt-menu="true">
                                             <!--begin::Heading-->
-                                            <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('assets/media/misc/pattern-1.jpg')">
+                                            <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('/assets/media/misc/pattern-1.jpg')">
                                                 <!--begin::Title-->
                                                 <h3 class="text-white fw-bold mb-3">Quick Links</h3>
                                                 <!--end::Title-->
@@ -1344,22 +1346,37 @@
         <script src="{{asset('backend/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
         <script src="{{asset('backend/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
         <script src="{{asset('backend/libs/js/main-js.js') }}"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/jszip.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.rowGroup.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.select.min.js') }}"></script>
+        <script src="{{ asset('backend/vendor/datatables-js/dataTables.fixedHeader.min.js') }}"></script>
+
+{{--        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
         <script src="{{asset('backend/vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>--}}
         <script src="{{asset('backend/vendor/datatables/js/buttons.bootstrap4.min.js') }}"></script>
         <script src="{{asset('backend/vendor/datatables/js/data-table.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-        <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>--}}
+{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>--}}
+{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>--}}
+{{--        <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>--}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.js"></script>         --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>
+
+        <script src="{{ asset('backend/plugins/sweetalert2.all.min.js') }}"></script>
+{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>--}}
 
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('backend/plugins/global/plugins.bundle.js') }}"></script>

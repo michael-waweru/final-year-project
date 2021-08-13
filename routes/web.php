@@ -81,6 +81,9 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
     Route::get('payment/show/{payment}',[App\Http\Controllers\Admin\MakePaymentController::class,'show'])->name('admin.payment.show');
     Route::post('payment/refund', [App\Http\Controllers\Admin\RefundController::class, 'store'])->name('admin.refund.store');
+    Route::get('invoices', [App\Http\Controllers\Admin\InvoiceController::class, 'index'])->name('admin.invoices');
+    Route::get('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'add'])->name('admin.invoice.add');
+    Route::post('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'store'])->name('admin.invoice.store');
 });
 
 //Landlord Routes

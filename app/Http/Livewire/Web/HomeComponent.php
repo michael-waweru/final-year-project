@@ -51,6 +51,7 @@ class HomeComponent extends Component
 
     public function render()
     {
+        $randomProperties = Property::inRandomOrder()->get()->take(3);
         $rproperties = Property::orderBy('created_at', 'DESC')->get()->take(6);
         $nakuru = DB::table('locations')->where('id', '=', 1)->get('name');
         $nakuru_all = Property::where('location_id',1)->count();
@@ -59,7 +60,8 @@ class HomeComponent extends Component
         [
             'rproperties' => $rproperties,
             'nakuru' => $nakuru,
-            'nakuru_all' => $nakuru_all
+            'nakuru_all' => $nakuru_all,
+            'randomProperties' => $randomProperties
         ])->layout('layouts.base');
     }
 }
