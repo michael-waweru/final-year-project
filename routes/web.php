@@ -82,8 +82,10 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('payment/show/{payment}',[App\Http\Controllers\Admin\MakePaymentController::class,'show'])->name('admin.payment.show');
     Route::post('payment/refund', [App\Http\Controllers\Admin\RefundController::class, 'store'])->name('admin.refund.store');
     Route::get('invoices', [App\Http\Controllers\Admin\InvoiceController::class, 'index'])->name('admin.invoices');
+    Route::get('all-invoices', [App\Http\Controllers\Admin\InvoiceController::class, 'view'])->name('admin.invoices.view');
     Route::get('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'add'])->name('admin.invoice.add');
     Route::post('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'store'])->name('admin.invoice.store');
+    Route::post('invoices-pay', [App\Http\Controllers\Admin\InvoicePayController::class, 'store'])->name('admin.invoice.pay');
 });
 
 //Landlord Routes
@@ -104,7 +106,6 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('lease/edit/{lease}', [App\Http\Controllers\Landlord\AllocationController::class,'edit'])->name('landlord.lease.edit');
     Route::post('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'update'])->name('landlord.lease.update');
     Route::delete('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'destroy'])->name('landlord.lease.destroy');
-
 });
 
 //Tenant Routes

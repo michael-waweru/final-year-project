@@ -33,28 +33,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Landlord ID</th>
-                                    <th scope="col">Full Names</th>
-                                    <th scope="col">No. of Properties</th>
+{{--                                    <th scope="col">Landlord ID</th>--}}
+                                    <th class="text-center">Full Names</th>
+                                    <th class="text-center">No. of Properties</th>
                                     <th scope="col">Contact Info</th>
-                                    <th scope="col">Details</th>
-                                    <th scope="col">Action</th>
+                                    <th class="text-center">Details</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($landlords as $index => $landlord)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td> {{ $landlord->id }} </td>
-                                    <td> {{ $landlord->fname.' '.$landlord->lname }} </td>
+{{--                                    <td> {{ $landlord->id }} </td>--}}
+                                    <td class="text-center"> {{ $landlord->fname.' '.$landlord->lname }} </td>
                                     {{-- <td> {{ $landlord->landlord }} </td> --}}
-                                    <td>{{  DB::table('properties')->where('landlord', '=', $landlord->id)->count(); }}</td>
+                                    <td class="text-center">{{  DB::table('properties')->where('landlord', '=', $landlord->id)->count() }}</td>
                                     <td> {{ $landlord->contact }} </td>
-                                    <td>
-                                        <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.landlord.show', $landlord->id) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                    <td class="text-center">
+                                        <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
                                     </td>
 
-                                    <td class="text-right">
+                                    <td class="text-center">
                                         <form class="d-inline" action="#" method="POST">
                                             @csrf
                                             @method('DELETE')

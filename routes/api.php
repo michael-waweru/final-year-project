@@ -23,3 +23,5 @@ Route::get('properties', [\App\Http\Controllers\Api\ApiController::class,'proper
 Route::get('allocation-info', [\App\Http\Controllers\Api\ApiController::class,'allocationInfo']);
 Route::get('payment-status', [\App\Http\Controllers\Api\ApiController::class,'paymentMonthStatus']);
 Route::get('payment-info', [\App\Http\Controllers\Api\ApiController::class,'paymentInfo']);
+Route::get('tenant-info', [\App\Http\Controllers\Api\ApiController::class,'tenantInfo']);
+Route::get('invoice-info', [\App\Http\Controllers\Api\ApiController::class,'invoiceInfo']);

@@ -265,7 +265,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="{{ route('admin.invoices') }}">
+                                        <a class="menu-link" href="{{ route('admin.invoices.view') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
@@ -274,6 +274,14 @@
                                     </div>
                                     <div class="menu-item">
                                         <a class="menu-link" href="{{ route('admin.invoices') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                            <span class="menu-title">Update Invoice</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('admin.invoice.add') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>

@@ -1,26 +1,4 @@
 <div>
-    {{-- <div class="toolbar">
-        <div class="container-fluid d-flex flex-stack">
-            <div data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-
-                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Dashboard
-                    <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
-
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">
-                        Hello <strong>{{ Auth::user()->fname.' '.Auth::user()->lname }}</strong>. You are logged in as an Admin
-                    </small>
-                </h1>
-            </div>
-            <div class="d-flex align-items-center py-1">
-                <div class="me-4">
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">
-                        {{ date('l').', '.date('d M, Y') }} | <span id="clock"></span>
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <div class="post d-flex flex-column-fluid">
         <!--begin::Container-->
         <div class="container">

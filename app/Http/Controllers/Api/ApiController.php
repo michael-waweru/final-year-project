@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Allocation;
+use App\Models\Invoice;
 use App\Models\Payments;
 use App\Models\Property;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ApiController extends Controller
         }
     }
 
-    // get agreement information
+    // get allocation information
     public function allocationInfo(Request $request)
     {
         if($request->has('allocation')){
@@ -38,6 +39,8 @@ class ApiController extends Controller
             $data['property'] = $allocation->property->name;
             $data['tenant'] = $allocation->tenant->fname.' '.$allocation->tenant->lname;
             $data['rent'] = $allocation->rent;
+            $data['landlord'] = $allocation->landlord->fname.' '.$allocation->landlord->lname;
+//            $data['landlord'] = $allocation->entry_id;
             $data['increment'] = $allocation->increment;
             $data['start'] = $allocation->created_at->diffForHumans();
             $data['duration'] = $allocation->period;
@@ -49,6 +52,7 @@ class ApiController extends Controller
         }
     }
 
+    //Get payment Information
     public function paymentInfo(Request $request)
     {
         $data = [];
@@ -61,4 +65,23 @@ class ApiController extends Controller
             return response()->json($data);
         }
     }
+
+    // GET INVOICE BALANCE
+    public function invoiceInfo(Request $request)
+    {
+        $data = [];
+
+        $invoice = Invoice::findOrFail($request->invoice);
+        $data['invoiced'] = $invoice->payment_amount;
+        $data['paid'] = $invoice->invoicePay->sum('amount');
+        $data['tenant'] = $invoice->tenant->fname.' '.$invoice->tenant->lname;
+        $data['landlord'] = $invoice->owner->fname.' '.$invoice->owner->lname;
+        $data['balance'] = ($data['invoiced'] - $data['paid']);
+
+        if ($data)
+        {
+            return response()->json($data);
+        }
+    }
+
 }

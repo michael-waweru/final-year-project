@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Allocation;
 use App\Models\Invoice;
+use App\Models\InvoicePay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,18 +14,28 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all();
+        $invoiceupdates = InvoicePay::all();
+        $landlords = DB::select('select * from users where role = 2');
+        $tenants = DB::select('select * from users where role = 3');
 
-
-        return view('livewire.admin.invoices', compact('invoices',));
+        return view('livewire.admin.invoices',
+            compact('invoices','landlords','invoiceupdates','tenants'));
     }
 
     public function add()
     {
         $landlords = DB::select('select * from users where role = 2');
         $tenants = DB::select('select * from users where role = 3');
+        $allocations = Allocation::all();
 
         return view('livewire.admin.add-invoice',
-            compact('landlords','tenants'));
+            compact('landlords','tenants','allocations'));
+    }
+
+    public function view()
+    {
+        $invoices = Invoice::all();
+        return view('livewire.admin.all-created-invoices', compact('invoices',));
     }
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
@@ -48,6 +60,6 @@ class InvoiceController extends Controller
         $invoice->save();
 
         session()->flash('success', 'Operation was Successful. Invoice Stored');
-        return redirect()->route('admin.invoices');
+        return redirect()->route('admin.invoices.view');
     }
 }

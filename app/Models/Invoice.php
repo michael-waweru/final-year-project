@@ -21,14 +21,19 @@ class Invoice extends Model
         }
     }
 
-    public function payments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function invoicePay(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Payments::class);
+        return $this->hasMany(InvoicePay::class);
     }
 
     public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'entry_id');
     }
 
     public function landlord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
