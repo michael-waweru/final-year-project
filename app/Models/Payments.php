@@ -29,13 +29,14 @@ class Payments extends Model
 
     public function entry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, 'entry_id');
+        return $this->belongsTo(User::class);
     }
 
     public function landlord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Allocation::class, 'entry_id');
     }
+
     public function invoice(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Invoice::class);

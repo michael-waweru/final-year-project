@@ -17,7 +17,6 @@
                         <a class="nav-link" href="{{ route('admin.invoice.add') }}"
                             aria-controls="add" aria-selected="false">Add an Invoice</a>
                     </li>
-
                 </ul>
 
                 <div class="tab-content">
@@ -38,12 +37,12 @@
                                     @foreach ($invoices as $key => $invoice)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $invoice->tenant->fname }}</td>
+                                            <td>{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</td>
                                             <td>{{ $invoice->amount }}</td>
                                             <td>{{ $invoice->payment_amount }}</td>
                                             <td class="text-center">
-                                                <a href="#" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
-                                                <button class="btn btn-sm btn-danger" onclick="deleteConfirmation()"><i class="fas fa-trash-alt"></i></button>
+                                                <a href="{{ route('admin.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                                <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $invoice->id }})"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -56,5 +55,45 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('scripts')
+    <script type="text/javascript">
+        function deleteConfirmation(id) {
+            swal.fire({
+                title: "Delete?",
+                icon: 'question',
+                text: "Are you sure you want to delete Invoice?",
+                type: "warning",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                showCancelButton: !0,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('/invoice/delete') }}/" + id,
+                        data: { _token: CSRF_TOKEN },
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    });
+                } else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+        }
+    </script>
 @endsection

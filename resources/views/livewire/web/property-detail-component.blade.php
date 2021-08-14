@@ -79,10 +79,10 @@
                                     <ul class="listing-address">
                                         <li>Address : <span>{{ $property->precise_location }}</span></li>
                                         <li>State/county : <span>{{ $property->location->county }}</span></li>
-                                        <li>Neighborhood : <span>{{ $property->known_neighborhood }}</span></li>
                                         <li>Zip/Postal Code : <span>{{ $property->location->zip }}</span></li>
                                         <li>Country : <span>{{ $property->location->country }}</span></li>
                                         <li>City : <span>{{ $property->location->name }}</span></li>
+                                        <li>Neighborhood : <span>{{ $property->precise_location }}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -128,21 +128,7 @@
                                         <li>Year Built: <span>{{ $new_date }}</span></li>
                                     </ul>
                                 </div>
-                                <div class="mb-40">
-                                    <h4>Amenities</h4>
-                                    <ul class="listing-features">
-                                        <li><i class="fas fa-basketball-ball"></i> basketball court</li>
-                                        <li><i class="fas fa-smoking-ban"></i> No Smoking zone</li>
-                                        <li><i class="fas fa-car-side"></i> Free Parking on premises</li>
-                                        <li><i class="fas fa-fan"></i>Air Conditioned</li>
-                                        <li><i class="fas fa-dumbbell"></i> Gym</li>
-                                        <li><i class="fab fa-accessible-icon"></i> Wheelchair Friendly</li>
-                                        <li><i class="fas fa-swimmer"></i>Swimming Pool </li>
-                                        <li><i class="fas fa-paw"></i>Pet Friendly </li>
-                                        <li><i class="fas fa-dumpster"></i>washer and dryer </li>
-                                        <li><i class="fas fa-tv"></i>Home Theater</li>
-                                    </ul>
-                                </div>
+
                                 <div>
                                     <h4>Property Documents</h4>
                                     <ul class="listing-features pp_docs">
@@ -349,7 +335,7 @@
                                             </ul>
                                             <div class="trending-bottom">
                                                 <div class="trend-left float-left">
-                                                    <p class="list-date"><i class="lnr lnr-calendar-full"></i> {{ $property->created_at->diffForHumans() }}</p>
+                                                    <p class="list-date"><i class="lnr lnr-calendar-full"></i> {{ $sproperty->created_at->diffForHumans() }}</p>
                                                 </div>
                                                 <a class="trend-right float-right">
                                                     <div class="trend-open">

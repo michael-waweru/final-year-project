@@ -154,7 +154,7 @@
                                                 <span class="text-dark fw-bolder text-hover-primary d-block fs-6">{{ $member->contact }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                                <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.tenant.show', $member->id ) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
                                             </td>
                                         </tr>
                                     @endforeach

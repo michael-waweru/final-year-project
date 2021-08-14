@@ -1,6 +1,5 @@
 <?php
 
-// use App\Http\Controllers\DestroyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Web\BlogComponent;
@@ -14,7 +13,6 @@ use App\Http\Livewire\Admin\LandlordComponent;
 use App\Http\Livewire\Admin\LocationComponent;
 use App\Http\Livewire\Admin\AddTenantComponent;
 use App\Http\Livewire\Admin\DashboardComponent;
-use App\Http\Livewire\Admin\AllocationComponent;
 use App\Http\Livewire\Admin\AddLandlordComponent;
 use App\Http\Livewire\Admin\AddLocationComponent;
 use App\Http\Livewire\Admin\AddPropertyComponent;
@@ -22,10 +20,7 @@ use App\Http\Livewire\Admin\AddNewMemberComponent;
 use App\Http\Livewire\Admin\EditLocationComponent;
 use App\Http\Livewire\Admin\EditPropertyComponent;
 use App\Http\Livewire\Admin\PropertyTypeComponent;
-// use App\Http\Livewire\Landlord\AddTenantComponent;
-use App\Http\Livewire\Admin\ShowLandlordComponent;
 use App\Http\Livewire\Web\PropertyDetailComponent;
-use App\Http\Livewire\Admin\AddAllocationComponent;
 use App\Http\Livewire\Admin\AddPropertyTypeComponent;
 use App\Http\Livewire\Tenant\TenantDashboardComponent;
 use App\Http\Livewire\Landlord\LandlordTenantComponent;
@@ -44,15 +39,6 @@ Route::middleware(['middleware'=>'preventBackHistory'])->group(function () {
     Auth::routes();
 });
 
-//post routes
-Route::post('/property/type/delete/{id}', [App\Http\Controllers\DestroyController::class,'deleteType']);
-Route::post('/property/delete/{id}', [App\Http\Controllers\DestroyController::class,'deleteProperty']);
-Route::post('/location/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteLocation']);
-Route::post('/allocation/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteAllocation']);
-Route::post('/', [\App\Http\Controllers\ConsultationController::class, 'storeConsultation'])->name('consultation');
-Route::post('/add-subscriber', [\App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
-Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
-
 //Admin Routes
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('dashboard', DashboardComponent::class)->name('admin.dashboard');
@@ -68,7 +54,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('location/edit/{location_slug}', EditLocationComponent::class)->name('admin.location.edit');
     Route::get('tenants', TenantComponent::class)->name('admin.tenants');
     Route::get('tenant/add', AddTenantComponent::class)->name('admin.tenant.add');
-    Route::get('tenant/show/{payment}',[App\Http\Controllers\Admin\ShowTenantController::class,'show'])->name('admin.tenant.show');
+    Route::get('show/user/{tenant}',[App\Http\Controllers\Admin\ShowTenantController::class,'show'])->name('admin.tenant.show');
     Route::get('landlords', LandlordComponent::class)->name('admin.landlords');
     Route::get('landlord/add', AddLandlordComponent::class)->name('admin.landlord.add');
     Route::get('allocate', [App\Http\Controllers\Admin\AllocationController::class, 'index'])->name('admin.allocation');
@@ -76,7 +62,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::post('allocation/{allocation}', [App\Http\Controllers\Admin\AllocationController::class, 'update'])->name('admin.allocation.update');
     Route::get('allocation/edit/{allocation}', [App\Http\Controllers\Admin\AllocationController::class,'edit'])->name('admin.allocation.edit');
     Route::delete('allocation/{allocation}', [App\Http\Controllers\Admin\AllocationController::class, 'destroy'])->name('admin.allocation.destroy');
-    Route::get('allocation/show/{id}',[App\Http\Controllers\Admin\AllocationController::class,'show'])->name('admin.allocation.show');
+    Route::get('allocation/show/{allocation}',[App\Http\Controllers\Admin\AllocationController::class,'show'])->name('admin.allocation.show');
     Route::get('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'index'])->name('admin.payments');
     Route::post('payments', [App\Http\Controllers\Admin\MakePaymentController::class, 'store'])->name('admin.payment.store');
     Route::get('payment/show/{payment}',[App\Http\Controllers\Admin\MakePaymentController::class,'show'])->name('admin.payment.show');
@@ -85,7 +71,11 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('all-invoices', [App\Http\Controllers\Admin\InvoiceController::class, 'view'])->name('admin.invoices.view');
     Route::get('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'add'])->name('admin.invoice.add');
     Route::post('invoices/add', [App\Http\Controllers\Admin\InvoiceController::class, 'store'])->name('admin.invoice.store');
+    Route::get('invoice/edit/{invoice}', [App\Http\Controllers\Admin\InvoiceController::class,'edit'])->name('admin.invoice.edit');
+    Route::post('invoice/{invoice}', [App\Http\Controllers\Admin\InvoiceController::class, 'update'])->name('admin.invoice.update');
     Route::post('invoices-pay', [App\Http\Controllers\Admin\InvoicePayController::class, 'store'])->name('admin.invoice.pay');
+    Route::get('invoice-pay/edit/{invoice}', [App\Http\Controllers\Admin\InvoicePayController::class, 'edit'])->name('admin.pay.edit');
+
 });
 
 //Landlord Routes
@@ -113,4 +103,14 @@ Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('dashboard', TenantDashboardComponent::class)->name('tenant.dashboard');
 });
 
-//    Route::get('lease/add', \App\Http\Livewire\Landlord\LandlordAddLeaseComponent::class)->name('landlord.lease.add');
+//post routes
+Route::post('/property/type/delete/{id}', [App\Http\Controllers\DestroyController::class,'deleteType']);
+Route::post('/property/delete/{id}', [App\Http\Controllers\DestroyController::class,'deleteProperty']);
+Route::post('/location/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteLocation']);
+Route::post('/allocation/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteAllocation']);
+Route::post('/landlord/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteLandlord']);
+Route::post('/', [App\Http\Controllers\ConsultationController::class, 'storeConsultation'])->name('consultation');
+Route::post('/add-subscriber', [App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
+Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
+Route::post('/invoice/delete/{id}', [App\Http\Controllers\Admin\InvoiceController::class, 'destroy']);
+Route::post('/invoice-pay/delete/{id}', [App\Http\Controllers\Admin\InvoicePayController::class, 'destroy']);

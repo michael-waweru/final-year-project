@@ -98,6 +98,7 @@ class MakePaymentController extends Controller
         $payment->account = $request->account;
         $payment->branch = $request->branch;
         $payment->cheque = $request->cheque;
+
         if ($request->file('attachment')) {
             $payment->attachment = $request->attachment->store('/cheque');
         }

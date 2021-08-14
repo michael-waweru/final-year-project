@@ -35,7 +35,7 @@ class Allocation extends Model
     {
         $allocation = self::find($id);
         $start = $allocation->created_at;
-        $end = $start->addMonths($allocation->period - 1);
+        $end = $start->addMonths($allocation->period);
         return now()->diffInDays($end,false) < 1;
     }
 

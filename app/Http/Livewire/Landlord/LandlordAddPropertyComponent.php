@@ -32,7 +32,6 @@ class LandlordAddPropertyComponent extends Component
     public $school;
     public $medical;
     public $church;
-    public $created_at;
 
     public function generateSlug()
     {
@@ -48,7 +47,7 @@ class LandlordAddPropertyComponent extends Component
             'garage' => 'required',
             'property_type_id' => 'required',
             'status' => 'required',
-            'description' => 'required',           
+            'description' => 'required',
             'year_built' => 'required',
             'bedrooms' => 'required',
             'image' => 'required | mimes:jpeg,png',
@@ -69,7 +68,7 @@ class LandlordAddPropertyComponent extends Component
             'status' => 'required',
             'property_type_id' => 'required',
             'description' => 'required',
-            'year_built' => 'required',            
+            'year_built' => 'required',
             'bedrooms' => 'required',
             'image' => 'required | mimes:jpeg,png',
             'location_id' => 'required',
@@ -102,13 +101,12 @@ class LandlordAddPropertyComponent extends Component
         $property->school = $this->school;
         $property->medical =$this->medical;
         $property->church = $this->church;
-        $property->created_at = $this->created_at;
         $property->save();
 
         session()->flash('success', 'Success! Property has been created successfully.');
         return redirect()->route('landlord.myproperties');
     }
-    
+
     public function render()
     {
         $properties = Property::all();
@@ -120,7 +118,7 @@ class LandlordAddPropertyComponent extends Component
             'properties' => $properties,
             'types' => $types,
             'locations' => $locations
-            
+
         ])->layout('layouts.landlord');
     }
 }

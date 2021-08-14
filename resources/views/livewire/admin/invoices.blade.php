@@ -49,22 +49,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($invoiceupdates as $invoiceupdate)
+                                    @foreach ( $invoiceupdates as $invoiceupdate)
                                         <tr>
-                                            <td scope="row">{{ $invoiceupdate->id }}</td>
+                                            <td scope="row">{{ $invoiceupdate->invoicecounter }}</td>
                                             <td scope="row">{{ $invoiceupdate->tenant->fname.' '.$invoiceupdate->tenant->lname }}</td>
                                             <td scope="row" class="text-success">{{ $invoiceupdate->amount }}</td>
                                             <td scope="row" class="text-danger">{{ $invoiceupdate->balance }}</td>
                                             <td scope="row">{{ $invoiceupdate->invoice->amount}}</td>
                                             <td class="text-center">
-                                                <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                                <form class="d-inline" action="#" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
+                                                <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{ $invoiceupdate->id }} )">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -202,4 +197,42 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        function deleteConfirmation(id) {
+            swal.fire({
+                title: "Delete?",
+                icon: 'question',
+                text: "Are You sure you wanna delete the update?",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('/invoice-pay/delete')}}/" + id,
+                        data: { _token: CSRF_TOKEN },
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    });
+                } else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+        }
+    </script>
 @endsection
+

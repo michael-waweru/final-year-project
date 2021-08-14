@@ -50,8 +50,8 @@
                                         <td>{{$location->name}}</td>
                                         <td>{{ $location->slug }}</td>
                                         <td>{{ $location->created_at->format('d-m-Y') }}</td>
-                                        <td >                                           
-                                            <a href="{{ route('admin.location.edit',['location_slug'=>$location->slug]) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                        <td >
+                                            <a href="{{ route('admin.location.edit',['location_slug'=>$location->slug]) }}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
                                             <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{$location->id}})"><i class="fas fa-trash-alt"></i>
                                         </td>
                                     </tr>
@@ -92,6 +92,7 @@
                         success: function (results) {
                             if (results.success === true) {
                                 swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
                             } else {
                                 swal.fire("Error!", results.message, "error");
                             }

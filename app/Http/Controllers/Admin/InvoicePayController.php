@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\InvoicePay;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InvoicePayController extends Controller
@@ -59,5 +60,29 @@ class InvoicePayController extends Controller
 
         session()->flash('success', 'Invoice has been updated.');
         return redirect()->route('admin.invoices');
+    }
+
+    public function edit(InvoicePay $invoice)
+    {
+        return view('livewire.admin.edit-pay-invoice', compact('invoice'));
+    }
+
+    public function destroy($id)
+    {
+        $delete = InvoicePay::find($id)->delete();
+
+        // check data deleted or not
+        if ($delete == 1) {
+            $success = true;
+            $message = "Record deleted successfully";
+        } else {
+            $success = true;
+            $message = "Record not found!";
+        }
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
     }
 }

@@ -85,7 +85,7 @@
                                                 <div class="property-author-wrap">
                                                     <a href="#" class="property-author">
                                                         <img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
-                                                        <span>{{ $property->landlord }}</span>
+                                                        <span>{{ $property->landlord}}</span>
                                                     </a>
                                                 </div>
                                             </div>

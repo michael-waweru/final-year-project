@@ -15,7 +15,7 @@ class PropertyComponent extends Component
         return view('livewire.web.property-component',
         [
             'properties' => $properties,
-            // 'landlord' => $landlord
+
         ])->layout('layouts.base2');
     }
 }

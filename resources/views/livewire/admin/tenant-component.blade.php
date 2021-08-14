@@ -33,8 +33,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tenant ID</th>
-                                    <th scope="col">T-Full Name</th>
+                                    <th scope="col">Full Name</th>
                                     <th scope="col">Identification No.</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Details</th>
@@ -45,12 +44,11 @@
                                 @foreach ($tenants as $index => $tenant)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td> {{ $tenant->id }} </td>
                                     <td> {{ $tenant->fname.' '.$tenant->lname }} </td>
                                     <td> {{ $tenant->identification_number }} </td>
                                     <td> {{ $tenant->contact }} </td>
                                     <td>
-                                        <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                        <button class="btn badge badge-secondary" onclick="window.open( '{{ route('admin.tenant.show', $tenant->id ) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
                                     </td>
 
                                     <td class="text-right">

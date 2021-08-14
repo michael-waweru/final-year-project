@@ -51,17 +51,11 @@
                                     <td class="text-center">{{  DB::table('properties')->where('landlord', '=', $landlord->id)->count() }}</td>
                                     <td> {{ $landlord->contact }} </td>
                                     <td class="text-center">
-                                        <button class="btn badge badge-secondary" onclick="window.open('#', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                        <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.tenant.show', $landlord->id ) }}', '_blank')"><i class="fas fa-eye"></i> View</button>
                                     </td>
-
-                                    <td class="text-center">
-                                        <form class="d-inline" action="#" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $landlord->id }})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
-
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -72,4 +66,45 @@
         </div>
     </div>
 </div>
+
+@section('scripts')
+    <script type="text/javascript">
+        function deleteConfirmation(id) {
+            swal.fire({
+                title: "Delete?",
+                icon: 'question',
+                text: "Are you sure you want to delete Landlord?",
+                type: "warning",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                showCancelButton: !0,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('/landlord/delete') }}/" + id,
+                        data: { _token: CSRF_TOKEN },
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    });
+                } else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+        }
+    </script>
+@endsection
 

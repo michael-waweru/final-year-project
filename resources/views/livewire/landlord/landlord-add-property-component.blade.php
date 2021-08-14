@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
                                     <!--end::Col-->
-                                    <div class="col-md-6 fv-row">                                        
+                                    <div class="col-md-6 fv-row">
                                         <div class="col-md form-group">
                                             <label class="col-form-label">Property Landlord</label>
                                             <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
@@ -250,11 +250,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md form-group">
-                                <label class="col-form-label">Entry Date</label>
-                                <input class="form-control" type="date" name="created_at" wire:model="created_at" value="<?php echo date('Y-m-d')?>">
-                            </div>
-
                             <div class="col-md form-group">
                                 <label class="col-form-label">Entry By</label>
                                 <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>

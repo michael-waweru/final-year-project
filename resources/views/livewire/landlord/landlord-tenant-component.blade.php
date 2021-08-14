@@ -29,7 +29,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tenant ID</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Property</th>
                                     <th scope="col">Contact</th>
@@ -40,7 +39,6 @@
                                 @foreach ($tenants as $index => $tenant)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td> {{ $tenant->id }} </td>
                                     <td> {{ $tenant->tenant->fname.' '.$tenant->tenant->lname }} </td>
                                     <td> {{ $tenant->property->name }} </td>
                                     <td> {{ $tenant->tenant->contact }} </td>

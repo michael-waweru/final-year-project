@@ -6,6 +6,7 @@ use App\Models\Allocation;
 use App\Models\Location;
 use App\Models\Property;
 use App\Models\PropertyType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DestroyController extends Controller
@@ -27,8 +28,6 @@ class DestroyController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
-
-        return redirect()->route('admin.property.type');
     }
 
     public function deleteProperty($id)
@@ -48,11 +47,28 @@ class DestroyController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
-
-        return redirect()->route('admin.properties');
     }
 
-    public function deleteLocaion($id)
+    public function deleteLandlord($id)
+    {
+        $delete = User::find($id)->delete();
+
+        // check data deleted or not
+        if ($delete == 1) {
+            $success = true;
+            $message = "Landlord deleted successfully";
+        } else {
+            $success = true;
+            $message = "Landlord not found";
+        }
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+
+    public function deleteLocation($id)
     {
         $delete = Location::where('id', $id)->delete();
 
@@ -69,8 +85,6 @@ class DestroyController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
-
-        return redirect()->route('admin.locations');
     }
 
 
@@ -91,7 +105,5 @@ class DestroyController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
-
-        return redirect()->route('admin.allocation');
     }
 }

@@ -3,7 +3,6 @@
 @section('content')
     <div class="col-12">
         <div class="card">
-
             <div class="card-header mt-10">
                 <h3>Detailed Tenant Information</h3>
             </div>

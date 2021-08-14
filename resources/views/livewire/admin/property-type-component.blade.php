@@ -50,17 +50,11 @@
                                     <td>{{$type->name}}</td>
                                     <td>{{ $type->slug }}</td>
                                     <td>{{ $type->created_at->format('d-m-Y') }}</td>
-                                    <td >
-                                        <a href="#" onclick="window.open('#', '_blank')" class="btn btn-sm btn-dark"><i class="fas fa-history"></i></a>
-                                        <a href="{{ route('admin.type.edit',['type_slug'=>$type->slug]) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <td>
+                                        <a href="{{ route('admin.type.edit',['type_slug'=>$type->slug]) }}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
 
-                                        <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{$type->id}})"><i class="fas fa-trash-alt"></i>
-                                        {{-- <form class="d-inline" action="{{}}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form> --}}
+                                        <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{$type->id}} )"><i class="fas fa-trash-alt"></i></button>
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -97,6 +91,7 @@
                         success: function (results) {
                             if (results.success === true) {
                                 swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
                             } else {
                                 swal.fire("Error!", results.message, "error");
                             }

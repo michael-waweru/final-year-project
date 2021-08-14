@@ -50,7 +50,7 @@
                                                 <td>{{ $payment->id }}</td>
                                                 <td>{{ $payment->created_at->format('d-m-y') }}</td>
                                                 <td>
-                                                    <a class="badge badge-light" href="{{ route('admin.tenant.show', $payment->id) }}" target="_blank">
+                                                    <a class="badge badge-light" href="{{ route('admin.tenant.show', $payment->allocation->tenant->id) }}" target="_blank">
                                                         <i class="fas fa-eye mr-2"></i>{{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }}
                                                     </a>
                                                 </td>
@@ -81,7 +81,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Payment No.</th>
+                                        <th scope="col">Refund No.</th>
                                         <th scope="col">Tenant</th>
                                         <th scope="col">Refund For</th>
                                         <th scope="col">Amount</th>

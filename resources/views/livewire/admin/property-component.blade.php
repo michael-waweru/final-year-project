@@ -54,7 +54,7 @@
                                         <td>{{ $property->location->name }}</td>
                                         <td class="{{ $property->allocations->count() ? 'text-success':'text-danger' }}" style="font-weight: bold;">{{ $property->allocations->count() ? 'Occupied':'Vacant' }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.property.edit',['property_slug'=>$property->slug]) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('admin.property.edit',['property_slug'=>$property->slug]) }}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
                                             <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{$property->id}})"><i class="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
@@ -86,7 +86,6 @@
             }).then(function (e) {
                 if (e.value === true) {
                     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
                     $.ajax({
                         type: 'POST',
                         url: "{{ url('/property/delete')}}/" + id,
@@ -95,6 +94,7 @@
                         success: function (results) {
                             if (results.success === true) {
                                 swal.fire("Success!", results.message, "success");
+                                location.reload(), 3000;
                             } else {
                                 swal.fire("Error!", results.message, "error");
                             }

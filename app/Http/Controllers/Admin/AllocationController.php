@@ -82,7 +82,7 @@ class AllocationController extends Controller
             $allocation->status = $request->status;
             $allocation->save();
 
-            session()->flash('success','Status Updated Successfully');
+            session()->flash('success','Status Changed Successfully');
             return redirect(route('admin.allocation'));
         }
 
@@ -110,13 +110,14 @@ class AllocationController extends Controller
         $allocation->save();
 
         # if attachment available
-        if ($request->attachment)
+        if($request->agreement)
         {
-            $url = $request->attachment->store('/agreement');
-            $allocation->attachment = $url;
+            $agreementName = Carbon::now()->timestamp. '.' .$request->agreement->extension();
+            $url = $request->agreement->storeAs('allocation', $agreementName);
+            $allocation->agreement = $url;
         }
 
-        session()->flash('success', 'Status Updated Successfully!');
+        session()->flash('success', 'Allocation Updated Successfully!');
         return redirect(route('admin.allocation'));
     }
 
