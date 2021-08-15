@@ -278,7 +278,7 @@
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                            <span class="menu-title">Update Invoice</span>
+                                            <span class="menu-title">Updated Invoices</span>
                                         </a>
                                     </div>
                                     <div class="menu-item">
@@ -624,7 +624,8 @@
                                                     <!--begin::Username-->
                                                     <div class="d-flex flex-column">
                                                         <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->fname.' '.Auth::user()->lname }}
-                                                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Verified Admin</span></div>
+                                                            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Verified Admin ({{ Auth::user()->id  }})</span>
+                                                        </div>
                                                         <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                                     </div>
                                                     <!--end::Username-->

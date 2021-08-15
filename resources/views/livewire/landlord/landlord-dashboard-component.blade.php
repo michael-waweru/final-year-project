@@ -54,13 +54,12 @@
     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
         <div class="card border-3 border-top border-top-primary">
             <div class="card-body">
-                <h4 class="text-muted text-uppercase">Expenses</h4>
+                <h4 class="text-muted text-uppercase">My Expenses</h4>
                 <h3 class="mb-1 ">
-                     | Total
-                    <span class="float-right text-danger"></span>
+                    {{ $expense }} - Total
+                    <span class="float-right text-danger">Ksh. {{ $expenseSum }}</span>
                 </h3>
-                <div class="text-right"><a href="#">View</a></div>
-
+                <div class="text-right"><a href="{{ route('landlord.expenses') }}">View</a></div>
             </div>
         </div>
     </div>
@@ -69,9 +68,10 @@
         <div class="card border-3 border-top border-top-primary">
             <div class="card-body">
                 <h4 class="text-muted text-uppercase">Cash on hand</h4>
-                <h2 class="mb-1 ">
+                <h2 class="mb-1 ">Total
                     <span class="float-right text-primary">
-                        Ksh {{ $rentPayment - $rentRefund }}</span>
+                        Ksh {{ ($rentPayment) - ($rentRefund + $expenseSum) }}
+                    </span>
                 </h2>
             </div>
         </div>

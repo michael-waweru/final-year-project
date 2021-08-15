@@ -1,10 +1,10 @@
-@extends('layouts.admin2')
+@extends('layouts.landlord2')
 
 @section('content')
     <div>
         <div class="col-12">
             <div class="section-block">
-                <h3 class="section-title">All Invoices</h3>
+                <h3 class="section-title">All My Invoices</h3>
             </div>
 
             <div class="simple-card">
@@ -13,9 +13,9 @@
                         <a class="nav-link border-left-0 active show" id="" data-toggle="tab" href="#list"
                            role="tab" aria-controls="list" aria-selected="true">List</a>
                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.invoice.add') }}"
-                            aria-controls="add" aria-selected="false">Add an Invoice</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('landlord.invoice.add') }}"
+                           aria-controls="add" aria-selected="false">Add an Invoice</a>
                     </li>
                 </ul>
 
@@ -31,7 +31,6 @@
                                         <th scope="col">Rent Amount</th>
                                         <th scope="col">Amount to Pay</th>
                                         <th scope="col">Invoice Description</th>
-                                        <th scope="col">Entry By</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
@@ -43,9 +42,8 @@
                                             <td>{{ $invoice->amount }}</td>
                                             <td>{{ $invoice->payment_amount }}</td>
                                             <td>{{ $invoice->description }}</td>
-                                            <td>{{ $invoice->owner->fname.' '.$invoice->owner->lname }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('landlord.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
                                                 <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $invoice->id }})"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
@@ -86,7 +84,7 @@
                         success: function (results) {
                             if (results.success === true) {
                                 swal.fire("Success!", results.message, "success");
-                                location.reload(), 3000;
+                                location.reload(), 5000;
                             } else {
                                 swal.fire("Error!", results.message, "error");
                             }

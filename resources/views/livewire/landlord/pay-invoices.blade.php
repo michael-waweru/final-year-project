@@ -1,14 +1,14 @@
-@extends('layouts.admin2')
+@extends('layouts.landlord2')
 
 @section('content')
     <div>
         <div class="col-12">
             <div class="section-block">
-                <h3 class="section-title">Invoices</h3>
+                <h3 class="section-title">Updated Invoices</h3>
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <a class="text-white" href="{{ route('admin.invoices.view') }}">
+                        <a class="text-white" href="{{ route('landlord.invoices.view') }}">
                             <button type="button" class="btn btn-primary">Created Invoices</button>
                         </a>
                     </div>
@@ -24,12 +24,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="" href="{{ route('admin.invoice.add') }}"
+                        <a class="nav-link" id="" href="{{ route('landlord.invoice.add') }}"
                            aria-controls="add" aria-selected="false">Add New Invoice</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="" data-toggle="tab" href="#payinvoice" role="tab"
-                            aria-controls="payinvoice" aria-selected="false">Update an Invoice</a>
+                           aria-controls="payinvoice" aria-selected="false">Update an Invoice</a>
                     </li>
                 </ul>
 
@@ -45,19 +45,21 @@
                                         <th scope="col">Paid Amount</th>
                                         <th scope="col">Balance Amount</th>
                                         <th scope="col">Rent Amount</th>
+                                        <th scope="col">Description</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ( $invoiceupdates as $invoiceupdate)
+                                    @foreach ( $payinvoices as $payinvoice)
                                         <tr>
-                                            <td scope="row">{{ $invoiceupdate->invoicecounter }}</td>
-                                            <td scope="row">{{ $invoiceupdate->tenant->fname.' '.$invoiceupdate->tenant->lname }}</td>
-                                            <td scope="row" class="text-success">{{ $invoiceupdate->amount }}</td>
-                                            <td scope="row" class="text-danger">{{ $invoiceupdate->balance }}</td>
-                                            <td scope="row">{{ $invoiceupdate->invoice->amount}}</td>
+                                            <td>{{ $payinvoice->invoicecounter }}</td>
+                                            <td>{{ $payinvoice->tenant->fname.' '.$payinvoice->tenant->lname }}</td>
+                                            <td class="text-success">{{ $payinvoice->amount }}</td>
+                                            <td class="text-danger">{{ $payinvoice->balance }}</td>
+                                            <td>{{ $payinvoice->invoice->amount}}</td>
+                                            <td>{{ $payinvoice->description}}</td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{ $invoiceupdate->id }} )">
+                                                <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{ $payinvoice->id }} )">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </td>
@@ -72,12 +74,11 @@
                     <div class="tab-pane fade" id="payinvoice" role="tabpanel">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin.invoice.pay') }}" method="POST">
+                                <form action="{{ route('landlord.invoice.pay') }}" method="POST">
                                     @csrf
                                     <div class="row">
-
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Invoice No.</label>
+                                            <label for="invoice_id" class="col-form-label">Invoice No.</label>
                                             <select name="invoice_id" id="invoice_id" class="form-select">
                                                 <option value="">Select an Invoice</option>
                                                 @foreach($invoices as $invoice)
@@ -87,56 +88,42 @@
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Total Amount</label>
+                                            <label for="invoiced" class="col-form-label">Total Amount</label>
                                             <input id="invoiced" class="form-control" disabled>
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Paid</label>
+                                            <label for="paid" class="col-form-label">Paid</label>
                                             <input id="paid" class="form-control" disabled>
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Balance</label>
+                                            <label for="balance" class="col-form-label">Balance</label>
                                             <input id="balance" class="form-control" disabled>
                                         </div>
 
                                         <div class="form-group col-md-3">
-                                            <label class="col-form-label">Tenant</label>
-                                            <input id="tenant" class="form-control" disabled>
+                                            <label for="tenant" class="col-form-label">Tenant</label>
+                                            <input id="tenant" name="user_id" class="form-control" disabled>
                                         </div>
 
-                                        <div class="form-group col-md-3">
-                                            <label class="col-form-label">Landlord</label>
-                                            <input id="landlord" class="form-control" disabled>
-                                        </div>
-
-
-                                        <div class="form-group col-md-3">
-                                            <label class="col-form-label">Pay Invoice</label>
-                                            <input name="amount" type="number" class="form-control" placeholder="Enter Amount to pay"
-                                                   onkeyup="word3.innerHTML=toWord(this.value)" autocomplete required>
+                                        <div class="form-group col-md-4">
+                                            <label class="col-form-label">Pay Invoice
+                                                <input name="amount" type="number" class="form-control" placeholder="Enter Amount to pay"
+                                                       onkeyup="word3.innerHTML=toWord(this.value)" autocomplete required>
+                                            </label>
                                             <div class="border-bottom bg-light p-2">In Word: <span class="text-danger" id="word3"></span></div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
-                                            <label class="col-form-label">Tenant</label>
-                                            <select name="user_id" class="form-select">
-                                                <option value="">Select Tenant</option>
-                                                @foreach($tenants as $tenant)
-                                                    <option value="{{ $tenant->id }}">{{ $tenant->fname.' '.$tenant->lname }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-md-3">
-                                            <label class="col-form-label">Landlord</label>
-                                            <select name="entry_id" class="form-select">
-                                                <option value="">Landlord</option>
-                                                @foreach($landlords as $landlord)
-                                                    <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="form-group col-md-4">
+                                            <label class="col-form-label">Tenant
+                                                <select name="user_id" class="form-select">
+                                                    <option value="">Select Tenant</option>
+                                                    @foreach($tenants as $tenant)
+                                                        <option value="{{ $tenant->id }}">{{ $tenant->fname.' '.$tenant->lname }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
                                         </div>
 
                                         <div class="form-group col-md-12">
@@ -146,7 +133,9 @@
 
                                         <div class="form-group col-md-4">
                                             <label class="col-form-label">Entry Date</label>
-                                            <input name="created_at" type="date" class="form-control" value="{{date('Y-m-d')}}" required>
+                                            <label>
+                                                <input name="created_at" type="date" class="form-control" value="{{date('Y-m-d')}}" required>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="form-group text-right mt-4">
@@ -184,7 +173,7 @@
                     Swal.fire({
                         position: 'top-end',
                         icon: 'warning',
-                        title: 'Oooops... No Invoice data found',
+                        title: 'Oops... No Invoice data found',
                         timer: 2500
                     });
                     $('#invoiced').val('0');

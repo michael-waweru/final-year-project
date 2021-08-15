@@ -52,9 +52,7 @@
                                     <td>{{ $type->created_at->format('d-m-Y') }}</td>
                                     <td>
                                         <a href="{{ route('admin.type.edit',['type_slug'=>$type->slug]) }}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
-
                                         <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{$type->id}} )"><i class="fas fa-trash-alt"></i></button>
-
                                     </td>
                                 </tr>
                                 @endforeach
@@ -97,11 +95,9 @@
                             }
                         }
                     });
-
                 } else {
                     e.dismiss;
                 }
-
             }, function (dismiss) {
                 return false;
             })

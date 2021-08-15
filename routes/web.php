@@ -74,8 +74,6 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('invoice/edit/{invoice}', [App\Http\Controllers\Admin\InvoiceController::class,'edit'])->name('admin.invoice.edit');
     Route::post('invoice/{invoice}', [App\Http\Controllers\Admin\InvoiceController::class, 'update'])->name('admin.invoice.update');
     Route::post('invoices-pay', [App\Http\Controllers\Admin\InvoicePayController::class, 'store'])->name('admin.invoice.pay');
-    Route::get('invoice-pay/edit/{invoice}', [App\Http\Controllers\Admin\InvoicePayController::class, 'edit'])->name('admin.pay.edit');
-
 });
 
 //Landlord Routes
@@ -96,6 +94,17 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('lease/edit/{lease}', [App\Http\Controllers\Landlord\AllocationController::class,'edit'])->name('landlord.lease.edit');
     Route::post('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'update'])->name('landlord.lease.update');
     Route::delete('lease/{lease}', [App\Http\Controllers\Landlord\AllocationController::class, 'destroy'])->name('landlord.lease.destroy');
+    Route::get('my-invoices/all', [App\Http\Controllers\Landlord\InvoiceController::class, 'view'])->name('landlord.invoices.view');
+    Route::get('invoice/add', [App\Http\Controllers\Landlord\InvoiceController::class, 'add'])->name('landlord.invoice.add');
+    Route::post('invoices/add', [App\Http\Controllers\Landlord\InvoiceController::class, 'store'])->name('landlord.invoice.store');
+    Route::get('invoice/edit/{invoice}', [App\Http\Controllers\Landlord\InvoiceController::class,'edit'])->name('landlord.invoice.edit');
+    Route::post('invoice/{invoice}', [App\Http\Controllers\Landlord\InvoiceController::class, 'update'])->name('landlord.invoice.update');
+    Route::get('pay-invoices', [App\Http\Controllers\Landlord\PayInvoiceController::class, 'index'])->name('landlord.pay.invoices');
+    Route::post('pay-invoices', [App\Http\Controllers\Landlord\PayInvoiceController::class, 'store'])->name('landlord.invoice.pay');
+    Route::get('expenses', [App\Http\Controllers\Landlord\ExpenseController::class, 'index'])->name('landlord.expenses');
+    Route::post('expense', [App\Http\Controllers\Landlord\ExpenseController::class, 'store'])->name('landlord.expense.store');
+    Route::get('expense/edit/{expense}', [App\Http\Controllers\Landlord\ExpenseController::class,'edit'])->name('landlord.expense.edit');
+    Route::post('expense/{expense}', [App\Http\Controllers\Landlord\ExpenseController::class, 'update'])->name('landlord.expense.update');
 });
 
 //Tenant Routes
@@ -111,6 +120,10 @@ Route::post('/allocation/delete/{id}', [App\Http\Controllers\DestroyController::
 Route::post('/landlord/delete/{id}', [App\Http\Controllers\DestroyController::class, 'deleteLandlord']);
 Route::post('/', [App\Http\Controllers\ConsultationController::class, 'storeConsultation'])->name('consultation');
 Route::post('/add-subscriber', [App\Http\Controllers\SubscriberController::class, 'StoreSubscribers'])->name('subscribe');
-Route::post('/landlord/property/delete/{id}', [\App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
+Route::post('/landlord/property/delete/{id}', [App\Http\Controllers\Landlord\LandlordController::class, 'delete']);
 Route::post('/invoice/delete/{id}', [App\Http\Controllers\Admin\InvoiceController::class, 'destroy']);
 Route::post('/invoice-pay/delete/{id}', [App\Http\Controllers\Admin\InvoicePayController::class, 'destroy']);
+Route::post('/expense/delete/{id}', [App\Http\Controllers\Landlord\ExpenseController::class, 'destroy']);
+
+
+//Route::get('invoice-pay/edit/{invoice}', [App\Http\Controllers\Admin\InvoicePayController::class, 'edit'])->name('admin.pay.edit');
