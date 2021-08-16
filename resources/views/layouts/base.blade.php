@@ -10,7 +10,6 @@
         <!-- Links -->
         <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
         <!-- google fonts-->
-        {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"> --}}
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
         <!-- Plugins CSS -->
         <link href="{{ asset('frontend/css/plugin.css') }}" rel="stylesheet" />
@@ -89,11 +88,11 @@
                             <div class="footer-content nav">
                                 <h2 class="title">Popular Searches</h2>
                                 <ul class="list res-list">
-                                    <li><a class="link-hov style2" href="javascript:void()">Property for Rent</a></li>
-                                    <li><a class="link-hov style2" href="javascript:void()">Property for Sale</a></li>
-                                    <li><a class="link-hov style2" href="javascript:void()">Condominium for Sale</a></li>
-                                    <li><a class="link-hov style2" href="javascript:void()">Resale Properties</a></li>
-                                    <li><a class="link-hov style2" href="javascript:void()">Recent Properties</a></li>
+                                    <li><a class="link-hov style2" href="javascript:void(0)">Property for Rent</a></li>
+                                    <li><a class="link-hov style2" href="javascript:void(0)">Property for Sale</a></li>
+                                    <li><a class="link-hov style2" href="javascript:void(0)">Condominium for Sale</a></li>
+                                    <li><a class="link-hov style2" href="javascript:void(0)">Resale Properties</a></li>
+                                    <li><a class="link-hov style2" href="javascript:void(0)">Recent Properties</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -114,9 +113,12 @@
                                 <div class="value-input-wrap newsletter">
                                     <form action="{{ route('subscribe') }}" method="POST">
                                         @csrf
-                                        <input class="mr-5" type="email" id="email" placeholder="Your mail address ..." name="s_email" required>
-                                        <button type="submit">Subscribe</button>
-                                        @error('s_email') <p class="text-danger">{{ $message }}</p> @enderror
+                                        <label for="email">Email Address
+                                            <input class="mr-5" type="email" id="email" placeholder="Your mail address ..." name="s_email" required>
+
+                                            <button class="btn btn-dark" style="margin-left: 5px;" type="submit">Subscribe</button>
+                                            @error('s_email') <p class="text-danger">{{ $message }}</p> @enderror
+                                        </label>
                                     </form>
                                 </div>
                             </div>

@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\Location;
 use App\Models\Property;
-use Illuminate\Http\this;
 use Illuminate\Support\Str;
 use App\Models\PropertyType;
 use Livewire\WithFileUploads;
@@ -38,7 +36,7 @@ class AddPropertyComponent extends Component
 
     public function generateSlug()
     {
-        $this->slug = Str::slug($this->name,'-');
+        $this->slug = Str::slug($this->name);
     }
 
     public function updated($fields)

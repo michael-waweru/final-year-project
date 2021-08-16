@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-// use App\Models\Tenant;
 use App\Models\User;
-use App\Models\Tenant;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;

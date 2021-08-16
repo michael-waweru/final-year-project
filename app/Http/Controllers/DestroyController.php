@@ -7,20 +7,19 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Models\PropertyType;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class DestroyController extends Controller
 {
     public function deleteType($id)
     {
-        $delete = PropertyType::where('id', $id)->delete();
+         //$delete = PropertyType::where('id', $id)->delete();
+        $delete = PropertyType::find($id)->delete();
 
         // check data deleted or not
+        $success = true;
         if ($delete == 1) {
-            $success = true;
             $message = "Type deleted successfully";
         } else {
-            $success = true;
             $message = "Type not found";
         }
         //  Return response
@@ -35,11 +34,10 @@ class DestroyController extends Controller
         $delete = Property::find($id)->delete();
 
         // check data deleted or not
+        $success = true;
         if ($delete == 1) {
-            $success = true;
             $message = "Property deleted successfully";
         } else {
-            $success = true;
             $message = "Property not found!";
         }
         //  Return response
@@ -54,11 +52,10 @@ class DestroyController extends Controller
         $delete = User::find($id)->delete();
 
         // check data deleted or not
+        $success = true;
         if ($delete == 1) {
-            $success = true;
             $message = "Landlord deleted successfully";
         } else {
-            $success = true;
             $message = "Landlord not found";
         }
         //  Return response
@@ -73,11 +70,10 @@ class DestroyController extends Controller
         $delete = Location::where('id', $id)->delete();
 
         // check data deleted or not
+        $success = true;
         if ($delete == 1) {
-            $success = true;
             $message = "Location deleted successfully";
         } else {
-            $success = true;
             $message = "Location not found!";
         }
         //  Return response
@@ -93,11 +89,10 @@ class DestroyController extends Controller
         $delete = Allocation::where('id', $id)->delete();
 
         // check data deleted or not
+        $success = true;
         if ($delete == 1) {
-            $success = true;
             $message = "Entry deleted successfully";
         } else {
-            $success = true;
             $message = "Entry not found!";
         }
         //  Return response

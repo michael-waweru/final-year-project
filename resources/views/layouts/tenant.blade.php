@@ -414,7 +414,6 @@
                 </div>
                 <!--end::Page-->
             </div>
-        </div>
 
         <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
             <span class="svg-icon">

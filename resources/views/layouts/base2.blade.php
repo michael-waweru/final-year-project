@@ -19,6 +19,7 @@
         <link href="{{ asset('frontend/css/plugin.css') }}" rel="stylesheet" />
 
         <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
     </head>
 

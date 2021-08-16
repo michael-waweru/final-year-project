@@ -10,7 +10,6 @@
         <!-- Links -->
         <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
         <!-- google fonts-->
-        {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"> --}}
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
         <!-- Plugins CSS -->
         <link href="{{ asset('frontend/css/plugin.css') }}" rel="stylesheet" />
@@ -18,6 +17,8 @@
         <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" />
         <!-- Document Title -->
         <title>{{ config('app.name'), 'Westpoint' }} | @yield('title')</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
         @livewireStyles
     </head>
 
@@ -111,8 +112,10 @@
                                 <h4 class="title">Subscribe</h4>
                                 <div class="value-input-wrap newsletter">
                                     <form action="#">
-                                        <input type="text" placeholder="Your mail address .." required>
-                                        <button type="submit">Subscribe</button>
+                                        <label>
+                                            <input type="text" placeholder="Your mail address .." required>
+                                            <button type="submit">Subscribe</button>
+                                        </label>
                                     </form>
                                 </div>
                             </div>
@@ -125,7 +128,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-8 offset-md-2">
                             <p>
-                                ©westpoint 2021. All rights reserved. </p>
+                                © westpoint 2021. All rights reserved. </p>
                         </div>
                     </div>
                 </div>

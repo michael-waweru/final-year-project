@@ -422,7 +422,6 @@
 
     <script src="{{ asset('backend/plugins/sweetalert2.all.min.js') }}"></script>
 
-
     <!--begin::Global Javascript Bundle(used by all pages)-->
     <script src="{{ asset('backend/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('backend/plugins/icons/bootstrap-icons.js') }}"></script>

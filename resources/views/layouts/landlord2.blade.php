@@ -59,7 +59,7 @@
                     <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
                         <!--begin::Svg Icon | path: icons/duotone/Navigation/Angle-double-left.svg-->
                         <span class="svg-icon svg-icon-1 rotate-180">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24" />
                                     <path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" fill="#000000" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)" />
@@ -585,7 +585,7 @@
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<!--begin::Svg Icon | path: icons/duotone/Navigation/Up-2.svg-->
 			<span class="svg-icon">
-				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 						<polygon points="0 0 24 0 24 24 0 24" />
 						<rect fill="#000000" opacity="0.5" x="11" y="10" width="2" height="10" rx="1" />
@@ -621,22 +621,9 @@
 
         <script src="{{ asset('backend/plugins/sweetalert2.all.min.js') }}"></script>
 
-{{--        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>--}}
         <script src="{{asset('backend/vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>--}}
         <script src="{{asset('backend/vendor/datatables/js/buttons.bootstrap4.min.js') }}"></script>
         <script src="{{asset('backend/vendor/datatables/js/data-table.js') }}"></script>
-{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>--}}
-{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>--}}
-{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>--}}
-{{--        <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>--}}
-        {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.js"></script>         --}}
-{{--        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>--}}
 
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('backend/plugins/global/plugins.bundle.js') }}"></script>
@@ -663,8 +650,7 @@
         <script>
             window.onload = displayClock();
             function displayClock(){
-                var display = new Date().toLocaleTimeString();
-                document.querySelector('#clock').innerHTML = display;
+                document.querySelector('#clock').innerHTML = new Date().toLocaleTimeString();
                 setTimeout(displayClock, 1000);
             }
         </script>

@@ -75,7 +75,7 @@ class AddNewMemberComponent extends Component
         {
             $docName = Carbon::now()->timestamp. '.' .$request->member->identification_doc->extension();
             $url = $request->member->identification_doc->storeAs('member-doc', $docName);
-            $allocation->identification_doc = $url;
+            $member->identification_doc = $url;
         }
 
         $member->fname = $this->fname;
