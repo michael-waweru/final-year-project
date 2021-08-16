@@ -260,7 +260,7 @@
                                     </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="{{ route('admin.payments') }}">
+                                        <a class="menu-link" href="{{ route('landlord.payments') }}">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -405,8 +405,8 @@
                         <!--end::Aside mobile toggle-->
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                            <a href="index.html" class="d-lg-none">
-                                <img alt="Logo" src="{{ asset('backend/media/logos/logo-compact.svg') }}" class="h-15px" />
+                            <a href="{{ route('landlord.dashboard') }}" class="d-lg-none">
+                                <img alt="Logo" src="{{ asset('frontend/images/logo.png') }}" class="h-15px" />
                             </a>
                         </div>
                         <!--end::Mobile logo-->

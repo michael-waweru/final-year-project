@@ -10,7 +10,6 @@ class Allocation extends Model
 {
     use HasFactory;
 
-
     public function property()
     {
         return $this->belongsTo(Property::class);

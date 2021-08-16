@@ -134,7 +134,7 @@
                                         <div class="form-group col-md-4">
                                             <label class="col-form-label">Entry Date</label>
                                             <label>
-                                                <input name="created_at" type="date" class="form-control" value="{{date('Y-m-d')}}" required>
+                                                <input name="created_at" type="date" class="form-control" value="{{ date('Y-m-d') }}" required>
                                             </label>
                                         </div>
                                     </div>

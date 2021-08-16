@@ -17,7 +17,7 @@ class LandlordDashboardComponent extends Component
         $refund = PaymentRefund::where('landlord_id', '=', auth()->user()->id)->count();
         $expense = Expense::where('entry_id', '=', auth()->user()->id)->count();
         $rentPayment = Payments::where('entry_id', '=', auth()->user()->id)
-            ->whereType('rent')->sum('amount');
+                ->sum('amount');
 
             //$rentPayment =DB::table('payments')
             //             ->whereType('rent')->sum('amount')

@@ -1,4 +1,4 @@
-@extends('layouts.admin2')
+@extends('layouts.landlord2')
 
 @section('content')
     <div class="col-12">
@@ -15,14 +15,14 @@
                     <a class="nav-link" id="" data-toggle="tab" href="#refund_list" role="tab" aria-controls="pay"
                        aria-selected="false">Refund List</a>
                 </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="" data-toggle="tab" href="#pay" role="tab" aria-controls="pay"
-                           aria-selected="false">Payment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="" data-toggle="tab" href="#refund" role="tab" aria-controls="refund"
-                           aria-selected="false">Refund</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="" data-toggle="tab" href="#pay" role="tab" aria-controls="pay"
+                       aria-selected="false">Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="" data-toggle="tab" href="#refund" role="tab" aria-controls="refund"
+                       aria-selected="false">Refund</a>
+                </li>
             </ul>
             <div class="tab-content">
                 {{-- List of payments  --}}
@@ -45,26 +45,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($payments as $payment)
-                                            <tr>
-                                                <td>{{ $payment->id }}</td>
-                                                <td>{{ $payment->created_at->format('d-m-y') }}</td>
-                                                <td>
-                                                    <a class="badge badge-light" href="{{ route('admin.tenant.show', $payment->allocation->tenant->id) }}" target="_blank">
-                                                        <i class="fas fa-eye mr-2"></i>{{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }}
-                                                    </a>
-                                                </td>
-                                                <td>{{ $payment->allocation->property->name }}</td>
-                                                <td>{{ $payment->type }}</td>
-                                                <td class="text-success"><strong>{{ $payment->amount }}</strong> </td>
-                                                <td>{{ $payment->payment_means }}</td>
-                                                <td>{{ $payment->transaction_id }}</td>
+                                    @foreach ($payments as $payment)
+                                        <tr>
+                                            <td>{{ $payment->id }}</td>
+                                            <td>{{ $payment->created_at->format('d-m-y') }}</td>
+                                            <td>{{ $payment->allocation->tenant->fname.' '.$payment->allocation->tenant->lname }} </td>
+                                            <td>{{ $payment->allocation->property->name }}</td>
+                                            <td>{{ $payment->type }}</td>
+                                            <td class="text-success"><strong>{{ $payment->amount }}</strong> </td>
+                                            <td>{{ $payment->payment_means }}</td>
+                                            <td>{{ $payment->transaction_id }}</td>
 
-                                                <td>
-                                                    <button class="btn badge badge-secondary" onclick="window.open('{{ route('admin.payment.show',$payment->id)}}', '_blank')"><i class="fas fa-eye"></i> View</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                            <td>
+                                                <button class="btn badge badge-secondary" onclick="window.open('{{ route('landlord.payment.show',$payment->id)}}', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -89,18 +85,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($refunds as $refund)
-                                            <tr>
-                                                <td>{{ $refund->created_at->format('d-m-y') }}</td>
-                                                <td>{{ $refund->payment_id }}</td>
-                                                <td>{{ $refund->payment->allocation->tenant->fname ?? 'deleted' }}
-                                                    {{ $refund->payment->allocation->tenant->lname ?? ''}}
-                                                </td>
-                                                <td>{{ $refund->payment->type }}</td>
-                                                <td class="text-danger"><strong> {{ $refund->amount }} </strong> </td>
-                                                <td>{{ $refund->description }}</td>
-                                            </tr>
-                                        @endforeach
+                                    @foreach ($refunds as $refund)
+                                        <tr>
+                                            <td>{{ $refund->created_at->format('d-m-y') }}</td>
+                                            <td>{{ $refund->payment_id }}</td>
+                                            <td>{{ $refund->payment->allocation->tenant->fname ?? 'deleted' }}
+                                                {{ $refund->payment->allocation->tenant->lname ?? ''}}
+                                            </td>
+                                            <td>{{ $refund->payment->type }}</td>
+                                            <td class="text-danger"><strong> {{ $refund->amount }} </strong> </td>
+                                            <td>{{ $refund->description }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -111,13 +107,14 @@
                 {{-- Payment --}}
                 <div class="tab-pane fade" id="pay" role="tabpanel" aria-labelledby="pay">
                     <div class="card-body">
-                        <form action="{{ route('admin.payment.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('landlord.payment.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 {{-- serial no--}}
                                 <div class="form-group col-md">
-                                    <label class="col-form-label">Serial No. </label>
-                                    <input type="number" name="serial" value="{{ $id = App\Models\Payments::nextId() }}" class="form-control" {{ $id ? 'disabled':'' }}>
+                                    <label class="col-form-label">Serial No.
+                                        <input type="number" name="serial" value="{{ $id = App\Models\Payments::nextId() }}" class="form-control" {{ $id ? 'disabled':'' }}>
+                                    </label>
                                 </div>
                                 {{-- Allocation--}}
                                 <div class="col-md form-group">
@@ -131,112 +128,133 @@
                                 </div>
                             </div>
 
-                            {{-- Agreement information--}}
+                            {{-- Get Allocation information from the DB--}}
                             <div class="row" id="allocation-info">
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Type</label>
-                                    <input id="type" type="text" class="form-control" disabled>
+                                    <label class="col-form-label">Type
+                                        <input id="type" type="text" class="form-control" disabled>
+                                    </label>
                                 </div>
 
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Property</label>
-                                    <input id="property" type="text" class="form-control" disabled>
+                                    <label class="col-form-label">Property
+                                        <input id="property" type="text" class="form-control" disabled>
+                                    </label>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Tenant</label>
-                                    <input id="tenant" type="text" class="form-control" disabled>
+                                    <label class="col-form-label">Tenant
+                                        <input id="tenant" type="text" class="form-control" disabled>
+                                    </label>
                                 </div>
                                 <div class="form-group col-3">
-                                    <label class="col-form-label">Rent</label>
-                                    <input id="rent" type="text" class="form-control" disabled>
+                                    <label class="col-form-label">Rent
+                                        <input id="rent" type="text" class="form-control" disabled>
+                                    </label>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label"> Increment Rate
+                                        <input id="increment" type="text" class="form-control" disabled>
+                                    </label>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Period to Increment
+                                        <input id="duration" type="text" class="form-control" disabled>
+                                    </label>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="col-form-label">Allocation Time
+                                        <input id="start" type="text" class="form-control" disabled>
+                                    </label>
                                 </div>
 
                                 <div class="form-group col-3">
-                                    <label class="col-form-label"> Increment Rate</label>
-                                    <input id="increment" type="text" class="form-control" disabled>
-                                </div>
-                                <div class="form-group col-3">
-                                    <label class="col-form-label">Period to Increment</label>
-                                    <input id="duration" type="text" class="form-control" disabled>
-                                </div>
-                                <div class="form-group col-3">
-                                    <label class="col-form-label">Allocation Time</label>
-                                    <input id="start" type="text" class="form-control" disabled>
-                                </div>
-
-                                <div class="form-group col-3">
-                                    <label class="col-form-label">Allocated Period Left</label>
-                                    <input id="left" type="text" class="form-control" disabled>
+                                    <label class="col-form-label">Allocated Period Left
+                                        <input id="left" type="text" class="form-control" disabled>
+                                    </label>
                                 </div>
                             </div>
 
                             <div class="alert alert-danger text-danger" id="incr-alert">
-                                This Agreement period almost over, The rent will be increase <span id="incr2"></span>% when this period is over.
+                                This Agreement period almost over, The rent will be increase by <span id="incr2"></span>% when this allocation period is over.
                             </div>
 
                             <div class="row">
                                 {{-- Pay for--}}
                                 <div class="col-md form-group" id="pay-for">
-                                    <label class="col-form-label">Payment For</label>
-                                    <select class="form-select" name="type" id="pay-type" required>
-                                        <option value="">Select</option>
-                                        <option value="Rent">Rent</option>
-                                        <option value="Modification">Room Modification, damages or paint</option>
-                                        <option value="Water">Water Bill</option>
-                                        <option value="Deposit">Security Deposit</option>
-                                    </select>
+                                    <label class="col-form-label">Payment For
+                                        <select class="form-select" name="type" id="pay-type" required>
+                                            <option value="">Select</option>
+                                            <option value="Rent">Rent</option>
+                                            <option value="Modification">Room Modification, damages or paint</option>
+                                            <option value="Water">Water Bill</option>
+                                            <option value="Deposit">Security Deposit</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </div>
 
                             {{-- montly payment--}}
                             <div class="row" id="rent-row">
                                 <div class="form-group col-md-2">
-                                    <label class="col-form-label">Year</label>
-                                    <select name="year" class="form-select">
-                                        @foreach (range(2019, strftime("%Y", time())+5) as $year)
-                                            <option value="{{ $year }}">{{ $year }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="col-form-label">Year
+                                        <select name="year" class="form-select">
+                                            @foreach (range(2019, strftime("%Y", time())+5) as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
                                 </div>
 
                                 {{-- month list--}}
                                 <div class="form-group col-md">
                                     <label class="col-form-label">Month</label>
                                     <ul class="ks-cboxtags">
-                                        <li><input name="month[]" type="checkbox" id="jan" value="1">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="jan" value="1">
                                             <label for="jan">January</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="feb" value="2">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="feb" value="2">
                                             <label for="feb">February</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="mar" value="3">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="mar" value="3">
                                             <label for="mar">March</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="apr" value="4">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="apr" value="4">
                                             <label for="apr">April</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="may" value="5">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="may" value="5">
                                             <label for="may">May</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="jun" value="6">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="jun" value="6">
                                             <label for="jun">June</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="jul" value="7">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="jul" value="7">
                                             <label for="jul">July</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="aug" value="8">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="aug" value="8">
                                             <label for="aug">Aug</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="sep" value="9">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="sep" value="9">
                                             <label for="sep">September</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="oct" value="10">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="oct" value="10">
                                             <label for="oct">October</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="nov" value="11">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="nov" value="11">
                                             <label for="nov">November</label>
                                         </li>
-                                        <li><input name="month[]" type="checkbox" id="dec" value="12">
+                                        <li>
+                                            <input name="month[]" type="checkbox" id="dec" value="12">
                                             <label for="dec">December</label>
                                         </li>
                                     </ul>
@@ -308,25 +326,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md form-group">
-                                    <label class="col-form-label">Payment Date</label>
-                                    <input id="created_at" name="created_at" type="date" value="{{ date('Y-m-d') }}" class="form-control">
+                                <div class="col-md form-group col-md-6">
+                                    <label for="created_at" class="col-form-label">Payment Date</label>
+                                    <input name="created_at" type="date" value="{{ date('Y-m-d') }}" class="form-control">
                                 </div>
 
-                                <div class="form-group col-md">
-                                    <label class="col-form-label">Landlord</label>
-                                    <select class="form-select" name="entry_id" id="entry_id" required>
-                                        <option value="">Select Landlord</option>
-                                        @foreach($landlords as $landlord)
-                                            <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label">Entry by</label>
+                                    <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
                                 </div>
-
-{{--                                <div class="col-md form-group">--}}
-{{--                                    <label class="col-form-label">Entry by</label>--}}
-{{--                                    <input value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" class="form-control" disabled>--}}
-{{--                                </div>--}}
                             </div>
                             <div class="form-group text-right mt-4">
                                 <button type="submit" class="btn btn-primary">Make Payment Now</button>
@@ -428,22 +436,15 @@
 
                                 <div class="form-group col-md-4">
                                     <label class="col-form-label">Date</label>
-                                    <input name="created_at" type="date" class="form-control" value="{{date('Y-m-d')}}" required>
+                                    <input name="created_at" type="date" class="form-control" value="{{ date('Y-m-d') }}" required>
                                 </div>
-                                <div class="form-group col-md">
-                                    <label class="col-form-label">Landlord</label>
-                                    <select class="form-select" name="landlord_id" id="landlord_id" required>
-                                        <option value="">Select Landlord</option>
-                                        @foreach($landlords as $landlord)
-                                            <option value="{{ $landlord->id }}">{{ $landlord->fname.' '.$landlord->lname }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
                                 <div class="form-group  col-md-4">
                                     <label class="col-form-label">Entry by</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
                                 </div>
                             </div>
+
                             <div class="form-group text-right mt-4">
                                 <button type="submit" class="btn btn-primary rounded">Refund</button>
                             </div>
@@ -489,7 +490,7 @@
                     $('#amount').val(data.rent);
 
                     $('#increment').val(data.increment +'%');
-                    $('#incr2').html(data.incr);
+                    $('#incr2').html(data.increment);
                     $('#start').val(data.start);
                     $('#duration').val(data.duration +' months');
                     $('#left').val(data.left === 0 ? 'Some days':data.left  +' months');
@@ -504,7 +505,7 @@
         // type for rent show month list
         $('#pay-type').on('change', function() {
             var type = $(this).val();
-            if ( type == 'Rent') {
+            if ( type === 'Rent') {
                 $('#rent-row').slideDown();
             }else{
                 $('#rent-row').slideUp();

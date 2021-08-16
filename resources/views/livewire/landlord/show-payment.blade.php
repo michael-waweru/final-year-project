@@ -1,10 +1,8 @@
-@extends('layouts.admin2')
+@extends('layouts.landlord2')
 
 @section('content')
-
     <div class="col-12">
         <div class="card">
-
             <div class="card-header mt-10">
                 <h3>Detailed Payment Information</h3>
             </div>
@@ -22,7 +20,7 @@
                             </tr>
                             <tr>
                                 <td>Tenant Name</td>
-                                <td>: <a class="badge badge-light" href="{{ route('admin.tenant.show', $payment->allocation->tenant->id ) }}" target="_blank">{{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }}</a></td>
+                                <td>: {{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }} </td>
                             </tr>
                             <tr>
                                 <td>Payment For</td>

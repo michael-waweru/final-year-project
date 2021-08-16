@@ -393,7 +393,7 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link" href="javascript:void()">
+                                        <a class="menu-link" href="#">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -430,8 +430,8 @@
                         <!--end::Aside mobile toggle-->
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                            <a href="index.html" class="d-lg-none">
-                                <img alt="Logo" src="{{ asset('backend/media/logos/logo-compact.svg') }}" class="h-15px" />
+                            <a href="{{ route('admin.dashboard') }}" class="d-lg-none">
+                                <img alt="Logo" src="{{ asset('frontend/images/logo.png') }}" class="h-15px" />
                             </a>
                         </div>
                         <!--end::Mobile logo-->
@@ -456,15 +456,14 @@
                                             </span>
                                             <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="javascript:void()" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                                    <a class="menu-link py-3" href="# title=" Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                                         <span class="menu-icon">
                                                             <i class="bi bi-grid fs-3"></i>
                                                         </span>
                                                         <span class="menu-title">Components</span>
-                                                    </a>
                                                 </div>
                                                 <div class="menu-item">
-                                                    <a class="menu-link py-3" href="javascript:void()" title="Coming up with a structure to store notes" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                                    <a class="menu-link py-3" href="#" title="Coming up with a structure to store notes" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                                         <span class="menu-icon">
                                                             <i class="bi bi-box fs-3"></i>
                                                         </span>

@@ -101,6 +101,9 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::post('invoice/{invoice}', [App\Http\Controllers\Landlord\InvoiceController::class, 'update'])->name('landlord.invoice.update');
     Route::get('pay-invoices', [App\Http\Controllers\Landlord\PayInvoiceController::class, 'index'])->name('landlord.pay.invoices');
     Route::post('pay-invoices', [App\Http\Controllers\Landlord\PayInvoiceController::class, 'store'])->name('landlord.invoice.pay');
+    Route::get('my-payments', [App\Http\Controllers\Landlord\MakePaymentController::class, 'index'])->name('landlord.payments');
+    Route::post('payments', [App\Http\Controllers\Landlord\MakePaymentController::class, 'store'])->name('landlord.payment.store');
+    Route::get('payment/show/{payment}',[App\Http\Controllers\Landlord\MakePaymentController::class,'show'])->name('landlord.payment.show');
     Route::get('expenses', [App\Http\Controllers\Landlord\ExpenseController::class, 'index'])->name('landlord.expenses');
     Route::post('expense', [App\Http\Controllers\Landlord\ExpenseController::class, 'store'])->name('landlord.expense.store');
     Route::get('expense/edit/{expense}', [App\Http\Controllers\Landlord\ExpenseController::class,'edit'])->name('landlord.expense.edit');
@@ -110,6 +113,12 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
 //Tenant Routes
 Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('dashboard', TenantDashboardComponent::class)->name('tenant.dashboard');
+    Route::get('my-lease', App\Http\Livewire\Tenant\AllocationComponent::class)->name('tenant.lease');
+    Route::get('my-lease/show/{allocation}', [App\Http\Controllers\ShowController::class, 'show'])->name('tenant.lease.show');
+    Route::get('my-invoices', App\Http\Livewire\Tenant\InvoiceComponent::class)->name('tenant.invoices');
+    Route::get('account/overview', App\Http\Livewire\Tenant\SettingsComponent::class)->name('tenant.settings');
+    Route::get('account/settings/change-password', \App\Http\Livewire\Tenant\ChangePasswordComponentComponent::class )->name('tenant.change-password');
+    Route::get('calendar', \App\Http\Livewire\Tenant\CalendarComponent::class)->name('tenant.calendar');
 });
 
 //post routes
@@ -124,6 +133,3 @@ Route::post('/landlord/property/delete/{id}', [App\Http\Controllers\Landlord\Lan
 Route::post('/invoice/delete/{id}', [App\Http\Controllers\Admin\InvoiceController::class, 'destroy']);
 Route::post('/invoice-pay/delete/{id}', [App\Http\Controllers\Admin\InvoicePayController::class, 'destroy']);
 Route::post('/expense/delete/{id}', [App\Http\Controllers\Landlord\ExpenseController::class, 'destroy']);
-
-
-//Route::get('invoice-pay/edit/{invoice}', [App\Http\Controllers\Admin\InvoicePayController::class, 'edit'])->name('admin.pay.edit');

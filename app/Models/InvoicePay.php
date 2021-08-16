@@ -32,6 +32,11 @@ class InvoicePay extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function landlord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'entry_id');
+    }
+
     public function entry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'entry_id');

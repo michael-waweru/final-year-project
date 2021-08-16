@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Allocation;
 
 class ShowController extends Controller
 {
-    public function landlords(User $user)
+    public function show(Allocation $allocation)
     {
-        return view('livewire.admin.landlordshow', compact('user'));
+        return view('livewire.tenant.show-lease', compact('allocation'));
     }
 }
