@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html dir="ltr" lang="en">
 
     <head>
         <!-- Metas -->
@@ -35,7 +35,7 @@
             @include('partials.nav-full')
             <!--Header ends-->
 
-            {{ $slot }}
+        {{ $slot }}
 
             <!-- Scroll to top starts-->
             <span class="scrolltotop"><i class="lnr lnr-arrow-up"></i></span>
@@ -110,15 +110,12 @@
                         <div class="col-lg-3 col-md-12">
                             <div class="footer-content">
                                 <h4 class="title">Subscribe</h4>
-                                <div class="value-input-wrap newsletter">
+                                <div >
                                     <form action="{{ route('subscribe') }}" method="POST">
                                         @csrf
-                                        <label for="email">Email Address
-                                            <input class="mr-5" type="email" id="email" placeholder="Your mail address ..." name="s_email" required>
-
-                                            <button class="btn btn-dark" style="margin-left: 5px;" type="submit">Subscribe</button>
+                                            <input type="email" placeholder="Your mail address ..." name="s_email" required>
+                                            <button class="btn btn-dark mt-2"  type="submit">Subscribe</button>
                                             @error('s_email') <p class="text-danger">{{ $message }}</p> @enderror
-                                        </label>
                                     </form>
                                 </div>
                             </div>
@@ -131,16 +128,18 @@
                     <div class="row align-items-center">
                         <div class="col-md-8 offset-md-2">
                             <p>
-                                ©westpoint 2021. All rights reserved. </p>
+                                © westpoint 2021. All rights reserved. </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        @yield('scripts')
-
         @include('partials.sweetalerts')
+
+        @livewireScripts
+
+        @yield('scripts')
 
         <!--plugin js-->
         <script src="{{ asset('frontend/js/plugin.js') }}"></script>
@@ -150,6 +149,6 @@
         <!--Main js-->
         <script src="{{ asset('frontend/js/main.js') }}"></script>
         <!--Scripts ends-->
-        @livewireScripts
+
     </body>
 </html>

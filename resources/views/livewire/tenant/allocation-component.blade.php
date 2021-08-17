@@ -14,19 +14,19 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Name</th>
-                                        <th class="text-center">Property</th>
-                                        <th class="text-center">Rent</th>
-                                        <th class="text-center">Landlord</th>
+                                        <th class="text-center">Property Allocated</th>
+                                        <th class="text-center">Monthly Rent</th>
+                                        <th class="text-center">My Landlord</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">View</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ( $leases as $lease )
+                                    @foreach ( $leases as $key => $lease )
                                         <tr>
-                                            <td class="text-center">{{ $lease->id }}</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
                                             <td class="text-center">{{$lease->tenant->fname." ".$lease->tenant->lname }}</td>
-                                            <td class="text-center">{{ $lease->property->name ?? 'Deleted'}}</td>
+                                            <td class="text-center">{{ $lease->name ?? 'Deleted'}}</td>
                                             <td class="text-center">{{ $lease->rent ?? 'Deleted' }}</td>
                                             <td class="text-center"> {{ $lease->landlord->fname." ".$lease->landlord->lname }} </td>
                                             <td class="text-center">

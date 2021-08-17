@@ -34,7 +34,7 @@
                                 @else
                                     <ul class="user-btn">
                                         <li>
-                                            <a href="{{ route('user.dashboard') }}">
+                                            <a href="{{ route('tenant.dashboard') }}">
                                                 <i class="lnr lnr-user"></i>
                                             </a>
                                         </li>
@@ -80,9 +80,6 @@
                                     <li>
                                         <a href="{{ route('contact') }}">Contact</a>
                                     </li>
-                                    <li>
-                                        <a href="#" disabled>News</a>
-                                    </li>
                                     <li class="d-lg-none">
                                         @if (Route::has('login'))
                                             @auth
@@ -95,7 +92,7 @@
                                                         <i class="lnr lnr-home"></i>Dashboard
                                                     </a>
                                                 @else
-                                                    <a class="btn v3" href="{{ route('user.dashboard') }}">
+                                                    <a class="btn v3" href="{{ route('tenant.dashboard') }}">
                                                         <i class="lnr lnr-home"></i>Dashboard
                                                     </a>
                                                 @endif
@@ -139,7 +136,7 @@
                                                 <i class="lnr lnr-home"></i>Dashboard
                                             </a>
                                         @else
-                                            <a class="btn v3" href="{{ route('user.dashboard') }}">
+                                            <a class="btn v3" href="{{ route('tenant.dashboard') }}">
                                                 <i class="lnr lnr-home"></i>Dashboard
                                             </a>
                                         @endif

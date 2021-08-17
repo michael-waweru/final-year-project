@@ -63,11 +63,6 @@
                             <option>Sort by Price(Low to High)</option>
                         </select>
                     </div>
-                    <div class="col-lg-5 col-sm-12">
-                        <div class="item-element res-box  text-right sm-left">
-                            <p>Showing <span>1-15 of 69</span> Listings</p>
-                        </div>
-                    </div>
                 </div>
                 <div class="item-wrapper pt-40   ">
                     <div class="tab-content" id="myTabContent">
@@ -77,7 +72,8 @@
                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                         <div class="single-property-box">
                                             <div class="property-item">
-                                                <a class="property-img" href="{{ route('property.detail',['slug'=>$property->slug]) }}"><img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
+                                                <a class="property-img" href="{{ route('property.detail',['slug'=>$property->slug]) }}">
+                                                    <img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
                                                 </a>
                                                 <ul class="feature_text">
                                                     <li class="feature_or"><span>For {{ $property->status }}</span></li>
@@ -125,7 +121,8 @@
                                     <div class="row">
                                         <div class="col-xl-5 col-lg-4 col-md-12">
                                             <div class="property-item">
-                                                <a class="property-img" href="single-listing-two.html"><img src="{{ asset('frontend/images/property') }}/{{ $property->image }}" alt="{{ $property->name }}">
+                                                <a class="property-img" href="{{ route('property.detail',['slug'=>$property->slug]) }}">
+                                                    <img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
                                                 </a>
                                                 <ul class="feature_text">
                                                     <li class="feature_or"><span>For {{ $property->status }}</span></li>
@@ -140,7 +137,7 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-5 col-md-12">
                                             <div class="property-title-box">
-                                                <h4><a href="single-listing-one.html">{{ $property->name }}</a></h4>
+                                                <h4><a href="{{ route('property.detail',['slug'=>$property->slug]) }}">{{ $property->name }}</a></h4>
                                                 <div class="property-location">
                                                     <i class="fa fa-map-marker-alt"></i>
                                                     <p>{{ $property->location->name }}</p>
@@ -175,25 +172,7 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
-                        <!--pagination starts-->
-                        <div class="post-nav nav-res pt-50  ">
-                            <div class="row">
-                                <div class="col-md-8 offset-md-2  col-xs-12 ">
-                                    <div class="page-num text-center">
-                                        <ul>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#"><i class="lnr lnr-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--pagination ends-->
                     </div>
                 </div>
             </div>

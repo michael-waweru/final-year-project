@@ -50,7 +50,7 @@
 
                                 <div class="form-label col-6">
                                     <label class="form-label fs-5 fw-bold mb-2">Role</label>
-                                    <select class="form-control form-control-solid @error('role') is-invalid @enderror" wire:model="role" disabled> 
+                                    <select class="form-control form-control-solid @error('role') is-invalid @enderror" wire:model="role" disabled>
                                         <option value="3">Tenant</option>
                                     </select>
                                     @error('role') <p class="text-danger">{{ $message }}</p> @enderror
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <h2 class="mt-5 mb-0">Guarantor information</h2>
+                            <h2 class="mt-5 mb-0">Emergency information</h2>
 
                             <div class="row mt-4">
                                 <div class="form-group col-6">
@@ -129,9 +129,9 @@
                                 <button type="submit" class="btn btn-primary">Save Tentant</button>
                             </div>
                         </form>
-                    </div>                    
-                </div>                
-            </div>           
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

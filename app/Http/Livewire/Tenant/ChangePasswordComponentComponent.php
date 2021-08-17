@@ -53,12 +53,12 @@ class ChangePasswordComponentComponent extends Component
             $user = User::findOrFail(Auth::user()->id);
             $user->password = Hash::make($this->password);
             $user->save();
-            session()->flash('success', 'Your password has been changed');
+            session()->flash('success', 'Your authentication password has been updated');
         }
 
         else
         {
-            session()->flash('error', 'Error! Your passwords do not match');
+            session()->flash('error', 'Please Enter Your Current Password then new passwords');
         }
     }
 

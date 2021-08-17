@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //ajax routes
 Route::get('properties', [\App\Http\Controllers\Api\ApiController::class,'properties']);
+Route::get('property-info', [\App\Http\Controllers\Api\ApiController::class,'propertyInfo']);
 Route::get('allocation-info', [\App\Http\Controllers\Api\ApiController::class,'allocationInfo']);
 Route::get('payment-status', [\App\Http\Controllers\Api\ApiController::class,'paymentMonthStatus']);
 Route::get('payment-info', [\App\Http\Controllers\Api\ApiController::class,'paymentInfo']);

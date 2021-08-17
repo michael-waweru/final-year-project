@@ -7,8 +7,8 @@
         <div class="container">
             <div class="card col-12">
                 <div class="section-block p-10">
-                    <h3 class="section-title text-capitalize">Allocation Property
-                        <a href="#" class="btn btn-sm btn-success float-end">All Allocations</a>
+                    <h3 class="section-title text-capitalize">Allocate Property
+                        <a href="{{ route('landlord.myleases') }}" class="btn btn-sm btn-success float-end">All Allocations</a>
                     </h3>
                 </div>
                 <!--begin::Body-->
@@ -27,8 +27,8 @@
                                 <div class="col-md form-group">
                                     <label class="col-form-label">Property</label>
 {{--                                      <select id="properties" class="form-select" name="property_id"></select>--}}
-                                        <select class="form-select @error('property_id') is-invalid @enderror" name="property_id">
-                                            <option value="">Select Property</option>
+                                        <select class="form-select @error('property_id') is-invalid @enderror" name="property_id" id="property_id">
+                                            <option>Select Property</option>
                                             @foreach (App\Models\Property::where('landlord', '=', auth()->user()->id)->get() as $property)
                                                 <option value="{{ $property->id }}">{{ $property->name }}</option>
                                             @endforeach
@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label class="col-form-label">Rent</label>
-                                    <input name="rent" type="number" class="form-control @error('rent')is-invalid @enderror"
+                                    <input name="rent" id="rent" type="number" class="form-control @error('rent')is-invalid @enderror"
                                         onkeyup="word2.innerHTML=toWord(this.value)" autocomplete>
                                         @error('rent') <p class="text-danger">{{ $message }}</p> @enderror
                                     <div class="border-bottom p-2">In Word: <span class="text-danger" id="word2"></span>
@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="form-group text-right mt-4">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save Lease</button>
                             </div>
                         </form>
                     </div>
@@ -158,27 +158,28 @@
 
 @section('scripts')
     <script>
-        // Get properties by type
-        $('#types').on('change', function() {
-            var type = $('#types').val();
-            var url = '{{ url('api/properties') }}?type=' + type;
+        // Get and show property information
+        $('#property_id').on('change', function() {
+            var id = $('#property_id').val();
+            var url = '{{ url('api/property-info') }}?property=' + id;
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: 'json',
                 success: function (data,status) {
-                    if (!data.length) {
-                        toastr.info('No property found');
-                    }
-
-                    $('#properties').html('');
-
-                    data.forEach(element => {
-                            $('#properties').append('<option value="'+element.id+'">'+element.name+'</option>')
+                    $('#rent').val(data.rent);
+                },
+                error: function () {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Oops... No Property data found',
+                        timer: 2500
                     });
+                    $('#rent').val('0');
                 }
             });
         });
-
     </script>
 @endsection
+

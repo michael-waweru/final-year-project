@@ -353,7 +353,7 @@
                                     <label class="col-form-label">Payment #</label>
                                     <select name="payment_id" id="payment_id" class="form-select" required>
                                         <option value="">Select</option>
-                                        @foreach ( App\Models\Payments::all() as $payment )
+                                        @foreach ( App\Models\Payments::where('entry_id', '=', auth()->user()->id) as $payment )
                                             <option value="{{ $payment->id }}">{{ $payment->id }}</option>
                                         @endforeach
                                     </select>
@@ -446,7 +446,7 @@
                             </div>
 
                             <div class="form-group text-right mt-4">
-                                <button type="submit" class="btn btn-primary rounded">Refund</button>
+                                <button type="submit" class="btn btn-primary rounded">Make Refund</button>
                             </div>
                         </form>
                     </div>

@@ -42,6 +42,8 @@ Route::middleware(['middleware'=>'preventBackHistory'])->group(function () {
 //Admin Routes
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
     Route::get('dashboard', DashboardComponent::class)->name('admin.dashboard');
+    Route::get('account/overview', App\Http\Livewire\Admin\SettingsComponent::class)->name('admin.account');
+    Route::get('account/settings/change-password', \App\Http\Livewire\Admin\ChangePasswordComponent::class )->name('admin.change-password');
     Route::get('member/add', AddNewMemberComponent::class)->name('admin.member.add');
     Route::get('properties', \App\Http\Livewire\Admin\PropertyComponent::class)->name('admin.properties');
     Route::get('property/add', AddPropertyComponent::class)->name('admin.property.add');
@@ -79,6 +81,8 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function () {
 //Landlord Routes
 Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('dashboard', LandlordDashboardComponent::class)->name('landlord.dashboard');
+    Route::get('account/overview', App\Http\Livewire\Landlord\SettingsComponent::class)->name('landlord.account');
+    Route::get('account/settings/change-password', \App\Http\Livewire\Landlord\ChangePasswordComponent::class )->name('landlord.change-password');
     Route::get('all-tenants', LandlordTenantComponent::class)->name('landlord.tenants');
     Route::get('tenant/add', \App\Http\Livewire\Landlord\AddTenantComponent::class)->name('landlord.tenant.add');
     Route::get('allocation/show/{tenant}',[App\Http\Controllers\Landlord\LandlordController::class,'show'])->name('landlord.tenant.show');
@@ -116,6 +120,8 @@ Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('my-lease', App\Http\Livewire\Tenant\AllocationComponent::class)->name('tenant.lease');
     Route::get('my-lease/show/{allocation}', [App\Http\Controllers\ShowController::class, 'show'])->name('tenant.lease.show');
     Route::get('my-invoices', App\Http\Livewire\Tenant\InvoiceComponent::class)->name('tenant.invoices');
+    Route::get('my-invoices/show/{invoice}', [App\Http\Controllers\ShowController::class, 'view'])->name('tenant.invoice.show');
+    Route::get('my-payments', App\Http\Livewire\Tenant\PaymentComponent::class)->name('tenant.payments');
     Route::get('account/overview', App\Http\Livewire\Tenant\SettingsComponent::class)->name('tenant.settings');
     Route::get('account/settings/change-password', \App\Http\Livewire\Tenant\ChangePasswordComponentComponent::class )->name('tenant.change-password');
     Route::get('calendar', \App\Http\Livewire\Tenant\CalendarComponent::class)->name('tenant.calendar');

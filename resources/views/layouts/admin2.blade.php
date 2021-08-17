@@ -636,12 +636,12 @@
                                             <!--end::Menu separator-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-5">
-                                                <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                                                <a href="{{ route('admin.account') }}" class="menu-link px-5">My Profile</a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-5">
-                                                <a href="pages/projects/list.html" class="menu-link px-5">
+                                                <a href="#" class="menu-link px-5">
                                                     <span class="menu-text">Administration</span>
                                                 </a>
                                             </div>
@@ -661,7 +661,7 @@
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-5 my-1">
-                                                <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
+                                                <a href="{{ route('admin.change-password') }}" class="menu-link px-5">Account Settings</a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->

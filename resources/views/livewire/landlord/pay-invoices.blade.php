@@ -154,7 +154,7 @@
 
 @section('scripts')
     <script>
-        // Get and show Loan information
+        // Get and show invoice information
         $('#invoice_id').on('change', function() {
             var id = $('#invoice_id').val();
             var url = '{{ url('api/invoice-info') }}?invoice=' + id;

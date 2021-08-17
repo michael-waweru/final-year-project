@@ -13,22 +13,27 @@ class Property extends Model
 
     public $primaryKey = 'id';
 
-    public function property_type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function property_type()
     {
         return $this->belongsTo(PropertyType::class);
     }
 
-    public function allocations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function allocations()
     {
         return $this->hasMany(Allocation::class);
     }
 
-    public function location(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function location()
     {
         return $this->belongsTo(Location::class,'location_id');
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function invocies()
     {
         return $this->hasMany(User::class);
     }

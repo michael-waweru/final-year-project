@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>{{ config('app.name' , 'Dashboard') }} | Dashboard </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="{{ asset('fontend/images/favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->

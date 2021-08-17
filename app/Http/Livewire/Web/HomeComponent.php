@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Web;
 
 use App\Models\Consultation;
-use App\Models\Location;
+use App\Models\Evaluation;
 use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -15,6 +15,7 @@ class HomeComponent extends Component
     public $phone;
     public $location;
     public $need;
+    public $valuate;
 
     public function updated($fields)
     {
@@ -23,8 +24,21 @@ class HomeComponent extends Component
             'email' => 'required | email',
             'phone' => 'required | numeric',
             'location' => 'required',
-            'need' => 'required'
+            'need' => 'required',
+            'valuate' => 'required | email'
         ]);
+    }
+
+    public function valuateProperty()
+    {
+        $this->validate([
+            'valuate' => 'required | email'
+        ]);
+
+        $valuation = new Evaluation();
+        $valuation->valuae = $this->valuate;
+        $valuation->save();
+        session()->flash('success', 'Your Request has been received. We will get back to you shortly.');
     }
 
     public function storeConsultation()

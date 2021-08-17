@@ -28,7 +28,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Tenant Name</td>
+                                <td>Tenant's Name</td>
                                 <td>: {{ $allocation->tenant->fname.' '.$allocation->tenant->lname }}</td>
                             </tr>
 
@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>Allocated Property</td>
-                                <td>: {{ $allocation->property->name }}</td>
+                                <td>: {{ $allocation->name }}</td>
                             </tr>
                             <tr>
                                 <td>Property Type</td>
@@ -49,12 +49,12 @@
                                 <td>: {{ $allocation->deposit }}</td>
                             </tr>
                             <tr>
-                                <td>Increment %</td>
-                                <td>: {{ $allocation->increment }}</td>
+                                <td>Increment</td>
+                                <td>: {{ $allocation->increment }}% after {{ $allocation->period }} months</td>
                             </tr>
                             <tr>
-                                <td>Attachment</td>
-                                <td>: <a class="badge badge-secondary" href="{{ url('files/assets/allocation/'.$allocation->attachment) }}" target="_blank">View</a></td>
+                                <td>Agreement</td>
+                                <td>: <a class="badge badge-secondary" href="{{ asset('files/assets/allocation/'.$allocation->attachment) }}" target="_blank">View</a></td>
                             </tr>
                             <tr>
                                 <td>Started</td>

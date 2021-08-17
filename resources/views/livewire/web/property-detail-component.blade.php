@@ -70,9 +70,6 @@
                                     <p class="mb-10">
                                         {{ $property->description }}
                                     </p>
-                                    <p class="mb-10">
-                                       {{ $property->description }}
-                                    </p>
                                 </div>
                                 <div class="mt-40">
                                     <h4 class="list-subtitle">Location</h4>
@@ -126,13 +123,6 @@
                                             $new_date = date("d-m-Y", $timestamp);
                                         @endphp
                                         <li>Year Built: <span>{{ $new_date }}</span></li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4>Property Documents</h4>
-                                    <ul class="listing-features pp_docs">
-                                        <li><a target="_blank" href="images/property-file/demo.docx"><i class="lnr lnr-file-empty"></i>Sample Property Document </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -263,30 +253,6 @@
                                 <div class="slider-btn v3 single-featured-next"><i class="lnr lnr-arrow-right"></i></div>
                                 <div class="slider-btn v3 single-featured-prev"><i class="lnr lnr-arrow-left"></i></div>
                             </div>
-                        </div>
-                        <div class="widget mortgage-widget">
-                            <h3 class="widget-title">Property Mortgage</h3>
-                            <form action="#" method="GET" enctype="multipart/form-data">
-                                <div class="mortgage-group">
-                                    <span class="mortgage-icon">$</span>
-                                    <input class="mortgage-field" type="text" name="amount-one" id="amount-one" placeholder="Total Amount">
-                                </div>
-                                <div class="mortgage-group">
-                                    <span class="mortgage-icon">$</span>
-                                    <input class="mortgage-field" type="text" name="amount-two" id="amount-two" placeholder="Down Payment">
-                                </div>
-                                <div class="mortgage-group">
-                                    <span class="mortgage-icon">$</span>
-                                    <input class="mortgage-field" type="text" name="amount-three" id="amount-three" placeholder="Loan Terms(Years)">
-                                </div>
-                                <div class="mortgage-group">
-                                    <span class="mortgage-icon">%</span>
-                                    <input class="mortgage-field" type="text" name="amount-four" id="amount-four" placeholder="Total Amount">
-                                </div>
-                                <div class="mortgage-btn">
-                                    <button type="submit" data-toggle="modal" data-target="#mortgage_result">Calculate</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

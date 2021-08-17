@@ -5,7 +5,7 @@
             <!--begin::Invoice 2 main-->
             <div class="card col-12">
                 <div class="section-block p-10">
-                    <h3 class="section-title text-capitalize">Add New Member 
+                    <h3 class="section-title text-capitalize">Add New Member</h3>
                 </div>
 
                 <!--begin::Body-->
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <h2 class="mt-5 mb-0">Guarantor information</h2>
+                            <h2 class="mt-5 mb-0">Emergency information</h2>
 
                             <div class="row mt-4">
                                 <div class="form-group col-6">
@@ -129,9 +129,9 @@
                                 <button type="submit" class="btn btn-primary">Save Tentant</button>
                             </div>
                         </form>
-                    </div>                    
-                </div>               
-            </div>            
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

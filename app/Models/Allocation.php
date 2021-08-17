@@ -30,6 +30,11 @@ class Allocation extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function invoicePay()
+    {
+        return $this->hasMany(InvoicePay::class);
+    }
+
     public static function isExpired($id): bool
     {
         $allocation = self::find($id);

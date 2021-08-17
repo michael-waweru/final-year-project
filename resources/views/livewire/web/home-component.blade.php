@@ -17,71 +17,7 @@
     </div>
     <!--Listing filter ends-->
 </div>
-<!--Hero section ends-->
-<!--Popular City starts-->
-<div class="container pt-130">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="section-title v1">
-                <p>Browse popular properties</p>
-                <h2>Find Properties in popular towns</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="property-place pb-60 hideme" style="background-image: url(/frontend/images/bg/map-bg-1.png)">
-    <div class="container">
-        <div class="row">
-            <div class="swiper-container popular-place-wrap v1">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide single-place-wrap">
-                        <div class="single-place-image">
-                            <a href="location-left-sidebar.html"><img src="{{ asset('frontend/images/places/place_5.jpg') }}" alt="place-image"></a>
-                            <a class="single-place-title" href="location-left-sidebar.html">Nakuru</a>
-                        </div>
-                        <div class="single-place-content">
-                            <h3><span>{{ $nakuru_all }}</span>Apartment Listing</h3>
-                            <a href="grid-fullwidth-map.html">See all Listings <i class="lnr lnr-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide single-place-wrap">
-                        <div class="single-place-image">
-                            <a href="location-left-sidebar.html"><img src="{{ asset('frontend/images/places/place_1.jpg') }}" alt="place-image"></a>
-                            <a class="single-place-title" href="location-left-sidebar.html">Dubai</a>
-                        </div>
-                        <div class="single-place-content">
-                            <h3><span>{{ \App\Models\Property::where('location_id',3)->count() }}</span>Property Listings</h3>
-                            <a href="grid-fullwidth-map.html">See all Listings <i class="lnr lnr-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide single-place-wrap">
-                        <div class="single-place-image">
-                            <a href="location-left-sidebar.html"><img src="{{ asset('frontend/images/places/place_4.jpg') }}" alt="place-image"></a>
-                            <a class="single-place-title" href="location-left-sidebar.html">New york</a>
-                        </div>
-                        <div class="single-place-content">
-                            <h3><span>{{ \App\Models\Property::where('location_id',4)->count() }}</span>Luxury Apartment</h3>
-                            <a href="grid-fullwidth-map.html">See all Listings <i class="lnr lnr-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide single-place-wrap">
-                        <div class="single-place-image">
-                            <a href="location-left-sidebar.html"><img src="{{ asset('frontend/images/places/place_16.jpg') }}" alt="place-image"></a>
-                            <a class="single-place-title" href="location-left-sidebar.html">Prague</a>
-                        </div>
-                        <div class="single-place-content">
-                            <h3><span>{{ \App\Models\Property::where('location_id',5)->count() }}</span>Luxury Apartment</h3>
-                            <a href="grid-fullwidth-map.html">See all Listings <i class="lnr lnr-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-btn v2 popular-next"><i class="lnr lnr-arrow-right"></i></div>
-                <div class="slider-btn v2 popular-prev"><i class="lnr lnr-arrow-left"></i></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Popular City ends-->
+
 
 <div class="trending-places pb-130 mt-50">
     <div class="container">
@@ -105,7 +41,6 @@
                                     <div class="property-author-wrap">
                                         <a href="#" class="property-author">
                                             <img src="{{ asset('files/assets/real') }}/{{ $rproperty->image }}" alt="{{ $rproperty->name }}">
-                                            <span>Admin</span>
                                         </a>
                                     </div>
                                 </div>
@@ -125,7 +60,7 @@
                                     </ul>
                                     <div class="trending-bottom">
                                         <div class="trend-left float-left">
-                                           <i class="lnr lnr-calendar-full"></i> {{ $rproperty->created_at->diffForHumans() }}</i>
+                                           <i class="lnr lnr-calendar-full"> {{ $rproperty->created_at->diffForHumans() }}</i>
                                         </div>
                                         <a class="trend-right float-right">
                                             <div class="trend-open">
@@ -142,6 +77,9 @@
             <div class="trending-pagination"></div>
         </div>
     </div>
+</div>
+<div class="property-place pb-60 hideme" style="background-image: url(/frontend/images/bg/map-bg-1.png)">
+
 </div>
 
 <!--Trending events starts-->
@@ -181,7 +119,6 @@
                                         <div class="property-author-wrap">
                                             <a href="#" class="property-author">
                                                 <img src="{{ asset('files/assets/real') }}/{{ $randonP->image }}" alt="{{ $randonP->name }}">
-                                                <span>Admin</span>
                                             </a>
                                         </div>
                                     </div>
@@ -201,7 +138,7 @@
                                         </ul>
                                         <div class="trending-bottom">
                                             <div class="trend-left float-left">
-                                                <i class="lnr lnr-calendar-full"></i> {{ $randonP->created_at->diffForHumans() }}</i>
+                                                <i class="lnr lnr-calendar-full"> {{ $randonP->created_at->diffForHumans() }}</i>
                                             </div>
                                             <a class="trend-right float-right">
                                                 <div class="trend-open">
@@ -240,10 +177,14 @@
                     </div>
                     <div class="value-content">
                         <p>The first step in selling your property is to get a valuation from local experts. They will inspect your home and take into account its unique features, the area and market conditions before providing you with the most accurate valuation.</p>
-                        <div class="value-input-wrap">
-                            <form action="#">
-                                <input type="text" placeholder="Enter Your Property Address...">
-                                <button type="submit">Price My Property</button>
+                        <div>
+                            <form wire:submit.prevent="valuateProperty">
+                                <label>
+                                    <input type="email" name="email" class="form-control @error('valuate') is-invalid @enderror"
+                                           placeholder="Enter Your Email Address..." wire:model="valuate" required>
+                                </label>
+                                @error('valuate') <p class="text-danger">{{ $message }}</p> @enderror
+                                <button class="btn btn-dark" type="submit">Send Request</button>
                             </form>
                         </div>
                     </div>

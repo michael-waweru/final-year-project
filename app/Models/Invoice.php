@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
@@ -21,22 +23,27 @@ class Invoice extends Model
         }
     }
 
-    public function invoicePay(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function invoicePay(): HasMany
     {
         return $this->hasMany(InvoicePay::class);
     }
 
-    public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function owner(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'entry_id');
     }
 
-    public function landlord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function landlord(): BelongsTo
     {
         return $this->belongsTo(Allocation::class,'entry_id');
     }

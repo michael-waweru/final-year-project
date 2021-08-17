@@ -13,9 +13,10 @@
                             <th class="text-center">Tenant</th>
                             <th class="text-center">Paid</th>
                             <th class="text-center">Balance</th>
-                            <th class="text-center">Status</th>
                             <th class="text-center">Rent Amount</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Description</th>
+                            <th class="text-center">View</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,9 +26,20 @@
                                 <td class="text-center">{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</td>
                                 <td class="text-success text-center">{{ $invoice->amount }}</td>
                                 <td class="text-danger text-center">{{ $invoice->balance }}</td>
-                                <td class="text-center">{{ $invoice->landlord->fname.' '.$invoice->landlord->lname }} </td>
                                 <td class="text-center">{{ $invoice->invoice->amount}}</td>
+                                <td class="text-center">
+                                    @if($invoice->amount === 0)
+                                        <p class="badge badge-light-danger me-2">Unpaid</p>
+                                        @elseif(($invoice->balance != 0) && ($invoice->balance < $invoice->invoice->amount))
+                                        <p class="badge badge-light-warning me-2">Partially Paid</p>
+                                        @elseif($invoice->balance === 0)
+                                        <p class="badge badge-light-success me-2">Paid</p>
+                                    @endif
+                                </td>
                                 <td> {{ $invoice->description}}</td>
+                                <td class="text-center">
+                                    <button class="btn badge badge-secondary" onclick="window.open('{{ route('tenant.invoice.show',$invoice->id)}}', '_blank')"><i class="fas fa-eye"></i> View</button>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

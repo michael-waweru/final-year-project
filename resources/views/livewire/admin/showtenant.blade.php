@@ -35,14 +35,14 @@
                     <div class="col-md-6">
                         <table>
                             <tr>
-                                <th class="h5">Guarantor</th>
+                                <th class="h5">Emergency Contact</th>
                             </tr>
                             <tr>
-                                <td>Guarantor Name</td>
+                                <td>Contact's Name</td>
                                 <td>: {{ $tenant->guarantor_fname }} {{ $tenant->guarantor_lname }}</td>
                             </tr>
                             <tr>
-                                <td>Guarantor ID No.</td>
+                                <td>Contact's ID No.</td>
                                 <td>: {{ $tenant->guarantor_id_no }}</td>
                             </tr>
                             <tr>

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Types\Parent_;
 
 class InvoicePay extends Model
 {
@@ -22,23 +22,28 @@ class InvoicePay extends Model
         }
     }
 
-    public function invoice(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function invoice()
     {
         return $this->belongsTo(Invoice::class);
     }
 
-    public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function tenant()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function landlord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function landlord()
     {
         return $this->belongsTo(User::class, 'entry_id');
     }
 
-    public function entry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function allocation()
     {
-        return $this->belongsTo(User::class, 'entry_id');
+        return $this->belongsTo(Allocation::class);
     }
+
+//    public function entry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+//    {
+//        return $this->belongsTo(User::class, 'entry_id');
+//    }
 }

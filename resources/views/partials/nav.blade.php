@@ -23,9 +23,6 @@
                                     <li>
                                         <a href="{{ route('contact') }}">Contact</a>
                                     </li>
-                                    <li disabled>
-                                        <a href="#">News</a>
-                                    </li>
                                 </ul>
                             </div>
                         </nav>
@@ -58,7 +55,7 @@
                                             <i class="lnr lnr-home"></i>Dashboard
                                         </a>
                                     @else
-                                        <a class="btn v3" href="{{ route('user.dashboard') }}">
+                                        <a class="btn v3" href="{{ route('tenant.dashboard') }}">
                                             <i class="lnr lnr-home"></i>Dashboard
                                         </a>
                                     @endif

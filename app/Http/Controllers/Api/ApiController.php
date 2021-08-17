@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
+    //Get Property Information
+    public function propertyInfo(Request $request)
+    {
+        $data = [];
+        $property = Property::find($request->property);
+        $data['rent'] = $property->price;
+
+        if($data){
+            return response()->json($data);
+        }
+    }
+
     //get property by type
     public function properties(Request $request)
     {

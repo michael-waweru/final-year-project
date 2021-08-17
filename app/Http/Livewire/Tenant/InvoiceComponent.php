@@ -9,7 +9,7 @@ class InvoiceComponent extends Component
 {
     public function render()
     {
-        $invoices = InvoicePay::where('user_id', '=',auth()->user()->id)->get();
+        $invoices = InvoicePay::where('user_id', '=', auth()->user()->id)->get();
 
         return view('livewire.tenant.invocie-component',
         [
