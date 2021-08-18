@@ -157,16 +157,17 @@
                             </div>
                             <div id="book_tour" class="list-details-section">
                                 <h4 class="list-details-title">Schedule a Tour</h4>
-                                <form class="tour-form">
+                                <form class="tour-form" action="{{ route('tour') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div id="datepicker-from" class="input-group date" data-date-format="dd-mm-yyyy">
-                                                <input class="form-control" type="text" placeholder="Tour Date">
+                                            <div id="datepicker-from" class="input-group date">
+                                                <input class="form-control" name="date" type="text" placeholder="Tour Date">
                                                 <span class="input-group-addon"><i class="lnr lnr-calendar-full"></i></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="listing-input hero__form-input  form-control custom-select">
+                                            <select class="listing-input hero__form-input form-control custom-select" name=time>
                                                 <option>Tour Time</option>
                                                 <option>9.00 am</option>
                                                 <option>10.00 am</option>
@@ -177,16 +178,17 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control filter-input" placeholder="Your name" required>
+                                            <input type="text" class="form-control filter-input" placeholder="Your name" name="name" required>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control filter-input" placeholder="Your Phone" required>
+                                            <input type="number" class="form-control filter-input" placeholder="Your Phone" name="phone" required>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control filter-input" placeholder="Your email" required>
+                                            <input type="email" class="form-control filter-input" placeholder="Your email" name="email" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <textarea class="contact-form__textarea mb-25" name="comment" id="comment" placeholder="Your Message" required></textarea>
+                                            <textarea class="contact-form__textarea mb-25" name="message" id="comment" placeholder="Your Message" required>
+                                            </textarea>
                                             <input class="btn v3" type="submit" name="submit-contact" id="submit_contact" value="Submit">
                                         </div>
                                     </div>
@@ -274,7 +276,9 @@
                                 <div class="swiper-slide">
                                     <div class="single-property-box">
                                         <div class="property-item">
-                                            <a class="property-img" href="single-listing-two.html"><img src="{{ asset('files/assets/real') }}/{{ $sproperty->image }}" alt="#"> </a>
+                                            <a class="property-img" href="{{ route('property.detail', ['slug'=>$sproperty->slug]) }}">
+                                                <img src="{{ asset('files/assets/real') }}/{{ $sproperty->image }}" alt="{{ $sproperty->name }}">
+                                            </a>
                                             <ul class="feature_text">
                                                 <li class="feature_or"><span>For {{ $sproperty->status }}</span></li>
                                             </ul>

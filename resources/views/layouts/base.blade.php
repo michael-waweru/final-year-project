@@ -9,14 +9,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Links -->
         <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
+        <!-- Document Title -->
+        <title>{{ config('app.name'), 'Westpoint' }} | @yield('title')</title>
         <!-- google fonts-->
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
         <!-- Plugins CSS -->
         <link href="{{ asset('frontend/css/plugin.css') }}" rel="stylesheet" />
         <!-- style CSS -->
         <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" />
-        <!-- Document Title -->
-        <title>{{ config('app.name'), 'Westpoint' }} | @yield('title')</title>
 
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
         @livewireStyles
@@ -35,7 +35,7 @@
             @include('partials.nav-full')
             <!--Header ends-->
 
-        {{ $slot }}
+            {{ $slot }}
 
             <!-- Scroll to top starts-->
             <span class="scrolltotop"><i class="lnr lnr-arrow-up"></i></span>
@@ -137,9 +137,9 @@
 
         @include('partials.sweetalerts')
 
-        @livewireScripts
-
         @yield('scripts')
+
+        @livewireScripts
 
         <!--plugin js-->
         <script src="{{ asset('frontend/js/plugin.js') }}"></script>

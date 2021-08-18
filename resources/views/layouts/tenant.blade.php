@@ -20,17 +20,13 @@
         <link href="{{ asset('backend/vendor/datatables/css/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('backend/vendor/datatables/css/select.bootstrap4.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('backend/vendor/datatables/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css">
-
         <link href="{{ asset('backend/plugins/toastr.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('backend/plugins/sweetalerts.min.css') }}" rel="stylesheet" type="text/css">
-
         <link href="{{ asset('backend/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
-        <!--end::Page Vendor Stylesheets-->
-        <!--begin::Global Stylesheets Bundle(used by all pages)-->
+
         <link href="{{ asset('backend/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('backend/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ asset('backend/plugins/icons/bootstrap-icons.css') }}">
-        <!--end::Global Stylesheets Bundle-->
 
         @livewireStyles
     </head>
@@ -288,7 +284,7 @@
                                                         <!--begin::Username-->
                                                         <div class="d-flex flex-column">
                                                             <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->fname.' '.Auth::user()->lname }}
-                                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Verified Admin ({{ Auth::user()->id  }})</span>
+                                                                <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Verified tenant ({{ Auth::user()->id  }})</span>
                                                             </div>
                                                             <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                                         </div>
@@ -403,6 +399,9 @@
                                     <li class="menu-item">
                                         <a href="{{ route('contact') }}" target="_blank" class="menu-link px-2">Support</a>
                                     </li>
+                                    <li class="menu-item">
+                                        <a class="menu-link px-2 text-danger" href="#" data-toggle="modal" data-target="#notice">IMPORTANT</a>
+                                    </li>
                                 </ul>
                                 <!--end::Menu-->
                             </div>
@@ -414,6 +413,31 @@
                 </div>
                 <!--end::Page-->
             </div>
+
+        <div class="modal fade" id="notice" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalHeader">IMPORTANT NOTICE</h5>
+                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>Please update your password.</li>
+                            <ol>
+                                <li>Navigate to the top right hand corner and click on the avatar</li>
+                                <li>Click on Account Settings and scroll down to the change password section</li>
+                                <li>Input your current password then update with a new strong password that you can remember</li>
+                            </ol>
+                            <li> Don't share your passwords with anyone else.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer"> <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a> </div>
+                </div>
+            </div>
+        </div>
 
         <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
             <span class="svg-icon">

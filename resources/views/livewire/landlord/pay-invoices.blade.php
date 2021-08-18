@@ -56,7 +56,7 @@
                                             <td>{{ $payinvoice->tenant->fname.' '.$payinvoice->tenant->lname }}</td>
                                             <td class="text-success">{{ $payinvoice->amount }}</td>
                                             <td class="text-danger">{{ $payinvoice->balance }}</td>
-                                            <td>{{ $payinvoice->invoice->amount}}</td>
+                                            <td>{{ $payinvoice->invoice->payment_amount}}</td>
                                             <td>{{ $payinvoice->description}}</td>
                                             <td class="text-center">
                                                 <button class="btn btn-sm btn-danger" onclick="deleteConfirmation( {{ $payinvoice->id }} )">
@@ -128,7 +128,7 @@
 
                                         <div class="form-group col-md-12">
                                             <label class="col-form-label">Description</label>
-                                            <textarea name="description" class="form-control" placeholder="Enter Description" cols="15" rows="5"></textarea>
+                                            <textarea id="description" name="description" class="form-control" placeholder="Enter Description" cols="15" rows="5"></textarea>
                                         </div>
 
                                         <div class="form-group col-md-4">
@@ -168,6 +168,7 @@
                     $('#balance').val(data.balance);
                     $('#tenant').val(data.tenant);
                     $('#landlord').val(data.landlord);
+                    $('#description').val(data.description);
                 },
                 error: function () {
                     Swal.fire({

@@ -16,4 +16,9 @@ class ShowController extends Controller
     {
         return view('livewire.tenant.show-invoice', compact('invoice'));
     }
+
+    public function receipt(InvoicePay $invoice)
+    {
+        return view('livewire.tenant.show-receipt', compact('invoice'));
+    }
 }

@@ -89,6 +89,7 @@ class ApiController extends Controller
         $data['tenant'] = $invoice->tenant->fname.' '.$invoice->tenant->lname;
         $data['landlord'] = $invoice->owner->fname.' '.$invoice->owner->lname;
         $data['balance'] = ($data['invoiced'] - $data['paid']);
+        $data['description'] = $invoice->description;
 
         if ($data)
         {

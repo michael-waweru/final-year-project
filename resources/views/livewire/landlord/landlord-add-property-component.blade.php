@@ -249,8 +249,8 @@
                             <!--end::Scroll-->
                         </div>
 
-                        <div class="row">
-                            <div class="col-md form-group">
+                        <div class="row ml-10">
+                            <div class="col-md-4 form-group">
                                 <label class="col-form-label">Entry By</label>
                                 <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
                             </div>

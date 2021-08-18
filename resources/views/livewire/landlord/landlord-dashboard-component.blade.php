@@ -20,7 +20,7 @@
                     {{ $refund}} | Total <span
                         class="float-right text-danger">Ksh. {{ $rentRefund }}</span>
                 </h3>
-                <div class="text-right"><a href="#">View</a></div>
+                <div class="text-right"><a href="{{ route('landlord.payments') }}">View</a></div>
             </div>
         </div>
     </div>

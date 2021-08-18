@@ -39,7 +39,7 @@
                                             <div class="fw-bold fs-7 text-gray-600 mb-1">Issue Date:</div>
                                             <!--end::Label-->
                                             <!--end::Col-->
-                                            <div class="fw-bolder fs-6 text-gray-800">{{ $invoice->created_at->format('Y-m-d') }}</div>
+                                            <div class="fw-bolder fs-6 text-gray-800">{{ $invoice->created_at->format('d-m-y') }}</div>
                                             <!--end::Col-->
                                         </div>
                                         <!--end::Col-->
@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--end::Info-->
                                             <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center flex-wrap">
-                                                <span class="pe-2">{{ $invoice->invoice->payment_date->format('Y-m-d') }}</span>
+                                                <span class="pe-2">{{ $invoice->invoice->payment_date->format('d-m-y') }}</span>
                                                 <span class="fs-7 text-danger d-flex align-items-center">
                                                 <span class="bullet bullet-dot bg-danger me-2"></span>
                                                     Due in {{ ($invoice->invoice->payment_date->diffInDays()) - ($invoice->created_at->diffInDays(now())) }} days
@@ -66,7 +66,7 @@
                                         <!--end::Col-->
                                         <div class="col-sm-6">
                                             <!--end::Label-->
-                                            <div class="fw-bold fs-7 text-gray-600 mb-1">Issue To:</div>
+                                            <div class="fw-bold fs-7 text-gray-600 mb-1">Issued To:</div>
                                             <!--end::Label-->
                                             <!--end::Text-->
                                             <div class="fw-bolder fs-6 text-gray-800">{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</div>
@@ -94,16 +94,20 @@
                                                 <tr class="border-bottom fs-6 fw-bolder text-gray-400">
                                                     <th class="min-w-175px pb-2">Issued For</th>
                                                     <th class="min-w-70px text-end pb-2">Paid</th>
-                                                    <th class="min-w-80px text-end pb-2">Balance</th>
                                                     <th class="min-w-100px text-end pb-2">Rent Amount</th>
+                                                    <th class="min-w-80px text-end pb-2">Balance</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr class="fw-bolder text-gray-700 fs-5 text-end">
                                                     <td class="d-flex align-items-center pt-6"> {{ $invoice->invoice->type }}</td>
                                                     <td class="pt-6">Ksh {{ $invoice->amount }}</td>
-                                                    <td class="pt-6">Ksh {{ $invoice->balance }}</td>
-                                                    <td class="pt-6 text-dark fw-boldest">Ksh {{ $invoice->invoice->amount }}</td>
+                                                    <td class="pt-6">Ksh {{ $invoice->invoice->amount }}</td>
+                                                    @if($invoice->balance != 0)
+                                                        <td class="pt-6 text-danger fw-boldest">Ksh {{ $invoice->balance }}</td>
+                                                        @else
+                                                        <td class="pt-6 text-success fw-boldest">Ksh {{ $invoice->balance }}</td>
+                                                    @endif
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -169,10 +173,44 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="my-1 me-5">
-                                        <!-- begin::Pint-->
-                                        <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print Invoice</button>
-                                        <!-- end::Pint-->
+                                    <div class="d-flex flex-stack flex-wrap mt-lg-20 pt-13">
+                                        <!-- begin::Actions-->
+                                        <div class="my-1 me-5">
+                                            <!-- begin::Pint-->
+                                            <button type="button" class="btn btn-success my-1 me-12" onclick="window.print();">Print Invoice</button>
+                                            <!-- end::Pint-->
+
+                                            @if($invoice->balance != 0)
+                                                <a class="menu-link px-2 text-danger" href="#" data-toggle="modal" data-target="#notice">
+                                                    <button type="button" class="btn btn-success my-1">Receipt</button>
+                                                </a>
+                                                @elseif($invoice->balance === 0)
+                                                <a href="{{ route('tenant.receipt.show', $invoice->id) }}">
+                                                    <button type="button" class="btn btn-success my-1">Receipt</button>
+                                                </a>
+                                            @endif
+                                            <div class="modal fade" id="notice" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalHeader">Hey {{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</h5>
+                                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="text-monospace">
+                                                                Receipt is only generated upon rent competion. You still have a balance of Ksh.{{ $invoice->balance }}
+                                                            </p>
+                                                            <p>By Your Landlord {{ $invoice->landlord->fname.' '.$invoice->landlord->lname }}</p>
+                                                        </div>
+                                                        <div class="modal-footer"> <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end::Receipt-->
+                                        </div>
+                                        <!-- end::Actions-->
                                     </div>
                                     <!-- end::Actions-->
                                 </div>
@@ -184,10 +222,10 @@
                     <!--end::Layout-->
                 </div>
                 <!--end::Body-->
+                <p class="text-center">NOTE : This is computer generated invoice and does not require physical signature.</p>
             </div>
             <!--end::Invoice 2 main-->
-            </div>
         </div>
-        <!--end::Container-->
     </div>
+    <!--end::Container-->
 @endsection

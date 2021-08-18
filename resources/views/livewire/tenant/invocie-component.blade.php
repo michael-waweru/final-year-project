@@ -9,11 +9,10 @@
                     <table id="example" class="table table-striped table-bordered second" style="width:100%">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
                             <th class="text-center">Tenant</th>
                             <th class="text-center">Paid</th>
                             <th class="text-center">Balance</th>
-                            <th class="text-center">Rent Amount</th>
+                            <th class="text-center">Total Payment</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Description</th>
                             <th class="text-center">View</th>
@@ -22,11 +21,10 @@
                         <tbody>
                         @foreach ( $invoices as $invoice)
                             <tr>
-                                <td class="text-center">{{ $invoice->invoicecounter }}</td>
                                 <td class="text-center">{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</td>
                                 <td class="text-success text-center">{{ $invoice->amount }}</td>
                                 <td class="text-danger text-center">{{ $invoice->balance }}</td>
-                                <td class="text-center">{{ $invoice->invoice->amount}}</td>
+                                <td class="text-center">{{ $invoice->invoice->payment_amount}}</td>
                                 <td class="text-center">
                                     @if($invoice->amount === 0)
                                         <p class="badge badge-light-danger me-2">Unpaid</p>

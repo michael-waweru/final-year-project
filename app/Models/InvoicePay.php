@@ -42,6 +42,11 @@ class InvoicePay extends Model
         return $this->belongsTo(Allocation::class);
     }
 
+    public function payment()
+    {
+        return $this->belongsTo(Payments::class);
+    }
+
 //    public function entry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
 //    {
 //        return $this->belongsTo(User::class, 'entry_id');

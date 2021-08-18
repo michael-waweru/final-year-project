@@ -346,14 +346,14 @@
                 {{-- REFUNDS!!!!!!!!!!!!!!!!! sumbua mbaya--}}
                 <div class="tab-pane fade" id="refund" role="tabpanel" aria-labelledby="refund">
                     <div class="card-body">
-                        <form action="{{ route('admin.refund.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('landlord.refund.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label class="col-form-label">Payment #</label>
                                     <select name="payment_id" id="payment_id" class="form-select" required>
                                         <option value="">Select</option>
-                                        @foreach ( App\Models\Payments::where('entry_id', '=', auth()->user()->id) as $payment )
+                                        @foreach ($payments as $payment)
                                             <option value="{{ $payment->id }}">{{ $payment->id }}</option>
                                         @endforeach
                                     </select>
