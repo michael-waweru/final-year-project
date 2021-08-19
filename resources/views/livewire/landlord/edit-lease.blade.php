@@ -12,26 +12,13 @@
                         <label class="col-form-label">Lease Name</label>
                         <input name="name" type="text" class="form-control" value="{{$lease->name}}" required>
                     </div>
-                    <div class="col-md form-group">
-                        <label class="col-form-label">Property Type</label>
-                        <select id="types" class="form-select" required>
-                            <option>Select type</option>
-                            @foreach (App\Models\PropertyType::getProperties() as $type)
-                                <option value="{{ $type->id }}" {{ $lease->type_id = $type->id ? 'selected':'' }}>
-                                    {{ $type->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="col-md form-group">
                         <label class="col-form-label">Property Name</label>
-{{--                        <select id="properties" class="form-control" name="property_id" required>--}}
-{{--                        </select>--}}
                         <select class="form-select @error('property_id') is-invalid @enderror" name="property_id">
                             <option value="">Select Property</option>
                             @foreach (App\Models\Property::where('landlord', '=', auth()->user()->id)->get() as $property)
-                                <option value="{{ $property->id }}" {{ $lease->property_id = $property->id ? 'selected' :'' }}>
+                                <option value="{{ $property->id }}" {{ $lease->property_id == $property->id ? 'selected' :'' }}>
                                     {{ $property->name }}
                                 </option>
                             @endforeach
@@ -111,34 +98,4 @@
 
     </div>
 
-@endsection
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            getProperties();
-        });
-        $('#types').on('change', getProperties);
-
-        function getProperties() {
-            var type = $('#types').val();
-            var url = '{{ url('api/properties') }}?type=' + type;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: 'json',
-                success: function (data,status) {
-                    if (!data.length) {
-                        toastr.info('No property found');
-                    }
-
-                    $('#properties').html('');
-
-                    data.forEach(element => {
-                        $('#properties').append('<option value="'+element.id+'">'+element.name+'</option>')
-                    });
-                }
-            });
-        }
-    </script>
 @endsection

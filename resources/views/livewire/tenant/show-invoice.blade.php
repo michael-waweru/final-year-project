@@ -29,7 +29,7 @@
                                 <!--begin::Wrapper-->
                                 <div class="m-0">
                                     <!--begin::Label-->
-                                    <div class="fw-bolder fs-3 text-gray-800 mb-8">Invoice #{{ $invoice->invoice_id }}</div>
+                                    <div class="fw-bolder fs-3 text-gray-800 mb-8">Invoice #{{ $invoice->id }}</div>
                                     <!--end::Label-->
                                     <!--begin::Row-->
                                     <div class="row g-5 mb-11">
@@ -138,7 +138,7 @@
 
                                 <!--end::Labels-->
                                 <!--begin::Title-->
-                                <h6 class="mb-8 fw-boldest text-gray-800 text-hover-primary mt-5" style="font-size: 2em;">PAYMENT DETAILS</h6>
+                                <h6 class="mb-8 fw-boldest text-gray-800 text-hover-primary mt-5" style="font-size: 2em;">PAYMENT OPTIONS</h6>
                                 <!--end::Title-->
                                 <!--begin::Item-->
                                 <div class="mb-6">
@@ -154,26 +154,32 @@
                                     <div class="fw-bolder text-gray-800 fs-6">{{ $invoice->landlord->fname.' '.$invoice->landlord->lname }} </div>
                                 </div>
                                 <!--end::Item-->
-                                <!--begin::Item-->
-                                <div class="mb-15">
-                                    <div class="fw-bold text-gray-600 fs-7">Payment Term:</div>
-                                    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
-                                        {{ ($invoice->invoice->payment_date->diffInWeeks()) - ($invoice->invoice->created_at->diffInWeeks()) }} Weeks
-                                        <span class="fs-7 text-danger d-flex align-items-center">
-                                        <span class="bullet bullet-dot bg-danger mx-2"></span>
-                                            Due in {{ ($invoice->invoice->payment_date->diffInDays()) - ($invoice->created_at->diffInDays(now())) }} days
-                                        </span>
-                                    </div>
-                                </div>
-                                <!--end::Item-->
                                 <div class="mb-6">
                                     <div class="fw-bold text-gray-600 fs-7">M-PESA:</div>
-                                    <div class="fw-bolder text-gray-800 fs-6">0713 672 772 <br>
+                                    <div class="fw-bolder text-gray-800 fs-6">PAYBILL No. : 4482 1482 <br>
                                         <div class="fw-bolder text-gray-800 fs-6">Confirmation Name: {{ $invoice->landlord->fname.' '.$invoice->landlord->lname }}
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="d-flex flex-stack flex-wrap mt-lg-20 pt-13">
+                                <div class="mb-6">
+                                    <div class="fw-bold text-gray-600 fs-7">CASH:</div>
+                                    <div class="fw-bolder text-gray-800 fs-6">Pay your invoiced amount directly to<br>
+                                        <div class="fw-bolder text-gray-800 fs-6">{{ $invoice->landlord->fname.' '.$invoice->landlord->lname }}</div>
+                                    </div>
+                                </div>
+                                <!--begin::Item-->
+                                <div class="mb-2">
+                                    <div class="fw-bold text-gray-600 fs-7">Payment Term:</div>
+                                    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
+                                        {{ ($invoice->invoice->payment_date->diffInWeeks()) - ($invoice->invoice->created_at->diffInWeeks()) }} Weeks
+                                        <span class="fs-7 text-danger d-flex align-items-center">
+                                    <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                        Due in {{ ($invoice->invoice->payment_date->diffInDays()) - ($invoice->created_at->diffInDays(now())) }} days
+                                    </span>
+                                    </div>
+                                </div>
+                                <!--end::Item-->
+                                    <div class="d-flex flex-stack flex-wrap mt-lg-20">
                                         <!-- begin::Actions-->
                                         <div class="my-1 me-5">
                                             <!-- begin::Pint-->
@@ -227,5 +233,5 @@
             <!--end::Invoice 2 main-->
         </div>
     </div>
-    <!--end::Container-->
+
 @endsection

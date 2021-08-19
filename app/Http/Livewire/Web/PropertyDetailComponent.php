@@ -22,12 +22,16 @@ class PropertyDetailComponent extends Component
         $sproperties = Property::where('status', '=', 'Rent')->get()->take(5);
         $rproperties = Property::orderBy('created_at', 'DESC')->get()->take(3);
         $fproperties = Property::inRandomOrder()->limit(3)->get();
+        $agent = DB::table('users')
+            ->rightJoin('properties','landlord', '=', 'users.id')->first();
+
         return view('livewire.web.property-detail-component',
         [
             'property' => $property,
             'sproperties' => $sproperties,
             'rproperties' => $rproperties,
-            'fproperties' => $fproperties
+            'fproperties' => $fproperties,
+            'agent' => $agent
         ])->layout('layouts.base3');
     }
 }

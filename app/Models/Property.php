@@ -23,9 +23,19 @@ class Property extends Model
         return $this->hasMany(Allocation::class);
     }
 
+    public function communications()
+    {
+        return $this->hasMany(Communication::class);
+    }
+
     public function location()
     {
         return $this->belongsTo(Location::class,'location_id');
+    }
+
+    public function landlord()
+    {
+        return $this->belongsTo(User::class,'entry_id');
     }
 
     public function users()

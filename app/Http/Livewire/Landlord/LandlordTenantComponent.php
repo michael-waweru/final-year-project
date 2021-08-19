@@ -26,6 +26,7 @@ class LandlordTenantComponent extends Component
         return view('livewire.landlord.landlord-tenant-component',
         [
             'tenants' => $tenants
+
         ])->layout('layouts.landlord');
     }
 }

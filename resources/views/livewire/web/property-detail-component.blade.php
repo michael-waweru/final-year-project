@@ -160,23 +160,6 @@
                                 <form class="tour-form" action="{{ route('tour') }}" method="post">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div id="datepicker-from" class="input-group date">
-                                                <input class="form-control" name="date" type="text" placeholder="Tour Date">
-                                                <span class="input-group-addon"><i class="lnr lnr-calendar-full"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="listing-input hero__form-input form-control custom-select" name=time>
-                                                <option>Tour Time</option>
-                                                <option>9.00 am</option>
-                                                <option>10.00 am</option>
-                                                <option>12.00 pm</option>
-                                                <option>2.00 pm</option>
-                                                <option>4.15 pm</option>
-                                                <option>5.30 pm</option>
-                                            </select>
-                                        </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control filter-input" placeholder="Your name" name="name" required>
                                         </div>
@@ -186,10 +169,15 @@
                                         <div class="col-md-4">
                                             <input type="email" class="form-control filter-input" placeholder="Your email" name="email" required>
                                         </div>
-                                        <div class="col-md-12">
-                                            <textarea class="contact-form__textarea mb-25" name="message" id="comment" placeholder="Your Message" required>
+                                        <div class="col-md-6">
+                                            <textarea class="contact-form__textarea mb-25" name="comment" id="comment" placeholder="Your Message" required>
                                             </textarea>
                                             <input class="btn v3" type="submit" name="submit-contact" id="submit_contact" value="Submit">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group date">
+                                                <input class="form-control" name="date" type="date" placeholder="Tour Date">
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -337,34 +325,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <img class="agency-chat-img" src="{{ asset('frontend/images/agents/agent_min_1.jpg') }}" alt="...">
+                    <img class="agency-chat-img" src="{{ asset('backend/media/avatars/avatar.svg') }}" alt="...">
                 </div>
                 <div class="col-8 pl-0">
                     <ul class="agent-chat-info">
-                        <li><i class="fas fa-user"></i>Tony Stark</li>
-                        <li><i class="fas fa-phone-alt"></i>+440 3456 345</li>
-                        <li><a href="single-agent.html">View Listings</a></li>
+                        <li><i class="fas fa-user"></i>{{ $agent->fname.' '.$agent->lname }}</li>
+                        <li><i class="fas fa-phone-alt"></i>{{ $agent->contact }}</li>
                     </ul>
                     <span class="chat-close"><i class="lnr lnr-cross"></i></span>
                 </div>
             </div>
             <div class="row mt-1">
                 <div class="col-md-12">
-                    <form action="#" method="POST">
+                    <form action="{{ route('tour') }}" method="POST">
+                       @csrf
                         <div class="chat-group mt-1">
-                            <input class="chat-field" type="text" name="chat-name" id="chat-name" placeholder="Your name">
+                            <input class="chat-field" type="text" name="name" id="chat-name" placeholder="Your name">
                         </div>
                         <div class="chat-group mt-1">
-                            <input class="chat-field" type="text" name="chat-phone" id="chat-phone" placeholder="Phone">
+                            <input class="chat-field" type="number" name="phone" id="chat-phone" placeholder="Phone">
                         </div>
                         <div class="chat-group mt-1">
-                            <input class="chat-field" type="text" name="chat-email" id="chat-email" placeholder="Email">
+                            <input class="chat-field" type="email" name="email" id="chat-email" placeholder="Email">
                         </div>
                         <div class="chat-group mt-1">
-                            <textarea class="form-control chat-msg" name="message" rows="4" placeholder="Description">Hello, I am interested in [Luxury apartment bay view]</textarea>
+                            <textarea class="form-control ml-0" name="comment" rows="4">
+                                Hello, I am interested in {{ $property->name }}
+                            </textarea>
                         </div>
                         <div class="chat-button mt-3">
-                            <a class="chat-btn" data-toggle="modal" data-target="#mortgage_result">Send Message</a>
+                            <button type="submit" class="chat-btn">Send Message</button>
                         </div>
                     </form>
                 </div>

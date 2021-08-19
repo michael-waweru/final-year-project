@@ -47,12 +47,17 @@ class AllocationController extends Controller
 
         $lease = new Allocation();
 
-        if($request->agreement)
+        //if agreement is requested
+        if ($request->file('agreement'))
         {
-            $agreementName = Carbon::now()->timestamp. '.' .$request->agreement->extension();
-            $url = $request->agreement->storeAs('allocation', $agreementName);
-            $lease->agreement = $url;
+            $lease->agreement = $request->agreement->store('/allocation-agreement');
         }
+//        if($request->agreement)
+//        {
+//            $agreementName = Carbon::now()->timestamp. '.' .$request->agreement->extension();
+//            $url = $request->agreement->storeAs('allocation', $agreementName);
+//            $lease->agreement = $url;
+//        }
 
         $lease->property_id = $request->property_id;
         $lease->user_id = $request->user_id;
@@ -107,10 +112,10 @@ class AllocationController extends Controller
         $lease->save();
 
         # if attachment available
-        if ($request->attachment)
+        if ($request->agreement)
         {
-            $url = $request->attachment->store('/agreement');
-            $lease->attachment = $url;
+            $url = $request->agreement->store('/allocation-agreement');
+            $lease->agreement = $url;
         }
 
         session()->flash('success', 'Lease Updated Successfully!');

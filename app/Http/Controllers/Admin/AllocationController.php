@@ -109,13 +109,16 @@ class AllocationController extends Controller
         $allocation->created_at = $request->created_at;
         $allocation->save();
 
-        # if attachment available
-        if($request->agreement)
-        {
-            $agreementName = Carbon::now()->timestamp. '.' .$request->agreement->extension();
-            $url = $request->agreement->storeAs('allocation', $agreementName);
-            $allocation->agreement = $url;
+        //if attachment available
+        if ($request->file('agreement')) {
+            $allocation->agreement = $request->agreement->store('/agreement');
         }
+//        if($request->agreement)
+//        {
+//            $agreementName = Carbon::now()->timestamp. '.' .$request->agreement->extension();
+//            $url = $request->agreement->storeAs('allocation', $agreementName);
+//            $allocation->agreement = $url;
+//        }
 
         session()->flash('success', 'Allocation Updated Successfully!');
         return redirect(route('admin.allocation'));

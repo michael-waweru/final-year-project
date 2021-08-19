@@ -13,9 +13,7 @@ class TourController extends Controller
             'name' => 'required | string',
             'email' => 'required | email',
             'phone' => 'required | numeric',
-            'message' => 'required',
-            'date' => 'required',
-            'time' => 'required'
+            'comment' => 'required',
         ]);
 
         $tour = new ScheduleTour();
@@ -23,8 +21,7 @@ class TourController extends Controller
         $tour->email = $request->email;
         $tour->phone = $request->phone;
         $tour->date = $request->date;
-        $tour->time = $request->time;
-        $tour->message = $request->message;
+        $tour->comment = $request->comment;
         $tour->save();
 
         session()->flash('success', 'Request Received, We will get back to you shortly.');

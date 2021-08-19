@@ -113,6 +113,10 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::post('expense', [App\Http\Controllers\Landlord\ExpenseController::class, 'store'])->name('landlord.expense.store');
     Route::get('expense/edit/{expense}', [App\Http\Controllers\Landlord\ExpenseController::class,'edit'])->name('landlord.expense.edit');
     Route::post('expense/{expense}', [App\Http\Controllers\Landlord\ExpenseController::class, 'update'])->name('landlord.expense.update');
+    Route::get('communications', App\Http\Livewire\Landlord\CommunicationComponent::class)->name('landlord.communications');
+    Route::get('communication/add', App\Http\Livewire\Landlord\AddCommunicationComponent::class)->name('landlord.communication.add');
+    Route::get('communication/edit/{memo}', [App\Http\Controllers\Landlord\CommunicationController::class,'edit'])->name('landlord.communication.edit');
+    Route::post('communication/{memo}', [App\Http\Controllers\Landlord\CommunicationController::class, 'update'])->name('landlord.communication.update');
 });
 
 //Tenant Routes
@@ -126,6 +130,8 @@ Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('my-payments', App\Http\Livewire\Tenant\PaymentComponent::class)->name('tenant.payments');
     Route::get('account/overview', App\Http\Livewire\Tenant\SettingsComponent::class)->name('tenant.settings');
     Route::get('account/settings/change-password', \App\Http\Livewire\Tenant\ChangePasswordComponentComponent::class )->name('tenant.change-password');
+    Route::get('communications', [App\Http\Controllers\Tenant\CommunicationController::class,'index'])->name('tenant.communications');
+    Route::get('communication/show/{memo}',[App\Http\Controllers\Tenant\CommunicationController::class,'show'])->name('tenant.communication.show');
     Route::get('calendar', \App\Http\Livewire\Tenant\CalendarComponent::class)->name('tenant.calendar');
 });
 
@@ -142,3 +148,4 @@ Route::post('/landlord/property/delete/{id}', [App\Http\Controllers\Landlord\Lan
 Route::post('/invoice/delete/{id}', [App\Http\Controllers\Admin\InvoiceController::class, 'destroy']);
 Route::post('/invoice-pay/delete/{id}', [App\Http\Controllers\Admin\InvoicePayController::class, 'destroy']);
 Route::post('/expense/delete/{id}', [App\Http\Controllers\Landlord\ExpenseController::class, 'destroy']);
+Route::post('/landlord/memo/delete/{id}', [App\Http\Controllers\Landlord\CommunicationController::class, 'destroy']);

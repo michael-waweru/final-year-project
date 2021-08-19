@@ -15,12 +15,12 @@ class CreateScheduleToursTable extends Migration
     {
         Schema::create('schedule_tours', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('time'  );
+            $table->date('date')->nullable();
+//            $table->time('time');
             $table->string('name');
             $table->integer('phone');
             $table->string('email');
-            $table->text('message');
+            $table->text('comment');
             $table->timestamps();
         });
     }

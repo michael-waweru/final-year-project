@@ -67,13 +67,16 @@ class LandlordAddLeaseComponent extends Component
 
         $lease = new Allocation();
 
-
-        if($request->agreement)
-        {
-            $agreementName = Carbon::now()->timestamp. '.' . $this->agreement->extension();
-            $url = $request->agreement->storeAs('allocation', $agreementName);
-            $lease->agreement = $url;
+        if ($request->file('agreement')) {
+            $lease->agreement = $request->agreement->store('/allocation-agreement');
         }
+
+//        if($request->agreement)
+//        {
+//            $agreementName = Carbon::now()->timestamp. '.' . $this->agreement->extension();
+//            $url = $request->agreement->storeAs('allocation', $agreementName);
+//            $lease->agreement = $url;
+//        }
 
         // if(isset($request->agreement))
         // {

@@ -29,7 +29,7 @@
 {{--                                      <select id="properties" class="form-select" name="property_id"></select>--}}
                                         <select class="form-select @error('property_id') is-invalid @enderror" name="property_id" id="property_id">
                                             <option>Select Property</option>
-                                            @foreach (App\Models\Property::where('landlord', '=', auth()->user()->id)->get() as $property)
+                                            @foreach ( App\Models\Property::where('landlord', '=', auth()->user()->id)->get() as $property)
                                                 <option value="{{ $property->id }}">{{ $property->name }}</option>
                                             @endforeach
                                         </select>

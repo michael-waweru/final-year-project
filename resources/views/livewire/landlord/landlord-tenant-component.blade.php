@@ -32,7 +32,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Full Name</th>
-                                    <th scope="col">Property</th>
+                                    <th scope="col">Allocated Property</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -42,10 +42,10 @@
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
                                     <td> {{ $tenant->tenant->fname.' '.$tenant->tenant->lname }} </td>
-                                    <td> {{ $tenant->property->name }} </td>
+                                    <td> {{ $tenant->property->name ?? 'Not yet allocated' }} </td>
                                     <td> {{ $tenant->tenant->contact }} </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" onclick="confirm('Are you sure you want to delete this user? This action cannot be undone') || event.stopImmediatePropagation()"wire:click.prevent="deleteUser({{ $tenant->id }})"><i class="fas fa-trash-alt"></i>
+                                        <button class="btn btn-sm btn-danger" onclick="confirm('Are you sure you want to delete this user? This action cannot be undone') || event.stopImmediatePropagation()"wire:click.prevent="deleteUser({{ $tenant->id }})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach

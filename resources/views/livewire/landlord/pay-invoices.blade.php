@@ -78,11 +78,11 @@
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-md-3">
-                                            <label for="invoice_id" class="col-form-label">Invoice No.</label>
+                                            <label for="invoice_id" class="col-form-label">Invoiced To.</label>
                                             <select name="invoice_id" id="invoice_id" class="form-select">
-                                                <option value="">Select an Invoice</option>
+                                                <option value="">Select</option>
                                                 @foreach($invoices as $invoice)
-                                                    <option value="{{ $invoice->id }}">{{ $invoice->id }}</option>
+                                                    <option value="{{ $invoice->id }}">{{ $invoice->tenant->fname.' '.$invoice->tenant->lname}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

@@ -129,8 +129,8 @@
                                                 </ul>
                                                 <div class="property-author-wrap">
                                                     <a href="#" class="property-author">
-                                                        <img src="{{ asset('frontend/images/property') }}/{{ $property->image }}" alt="{{ $property->name }}">
-                                                        <span>Admin</span>
+                                                        <img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
+                                                        <span>{{ $property->landlord }}</span>
                                                     </a>
                                                 </div>
                                             </div>
