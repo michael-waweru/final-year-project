@@ -54,7 +54,7 @@
                             </tr>
                             <tr>
                                 <td>Agreement</td>
-                                <td>: <a class="badge badge-secondary" href="{{ asset('files/assets/allocation/'.$allocation->attachment) }}" target="_blank">View</a></td>
+                                <td>: <a class="badge badge-secondary" href="{{ url('files/assets/allocation/'.$allocation->attachment) }}" target="_blank">View</a></td>
                             </tr>
                             <tr>
                                 <td>Started</td>

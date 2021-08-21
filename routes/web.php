@@ -117,6 +117,7 @@ Route::prefix('landlord')->middleware('auth','isLandlord')->group(function () {
     Route::get('communication/add', App\Http\Livewire\Landlord\AddCommunicationComponent::class)->name('landlord.communication.add');
     Route::get('communication/edit/{memo}', [App\Http\Controllers\Landlord\CommunicationController::class,'edit'])->name('landlord.communication.edit');
     Route::post('communication/{memo}', [App\Http\Controllers\Landlord\CommunicationController::class, 'update'])->name('landlord.communication.update');
+    Route::get('reports', [App\Http\Controllers\Landlord\ReportsController::class, 'index'])->name('landlord.reports');
 });
 
 //Tenant Routes

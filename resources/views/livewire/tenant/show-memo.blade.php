@@ -1,4 +1,4 @@
-@extends('layouts.landlord2')
+@extends('layouts.tenant2')
 
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -33,7 +33,7 @@
                                 <div class="m-0">
                                     <div class="row g-5 mb-12">
                                         <div class="col-md-12 pl-0 text-monospace">
-                                            <h6 class="mb-5 fw-boldest text-center text-uppercase text-decoration-underline text-hover-primary mt-5" style="font-size: 2em;">
+                                            <h6 class="mb-5 fw-boldest text-center text-uppercase text-decoration-underline mt-5" style="font-size: 2em;">
                                                 {{ $memo->title }}
                                             </h6>
                                             {{ $memo->description }}

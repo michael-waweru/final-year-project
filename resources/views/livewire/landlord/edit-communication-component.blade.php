@@ -84,7 +84,7 @@
                                     <div class="col-6">
                                         <label class="col-form-label">Memo Body</label>
                                         <textarea class="form-control @error('description') is-invalid @enderror" cols="15" rows="5"
-                                          value="{{ $memo->description }}" name="description">
+                                          value="{{ $memo->description }}" name="description"> {{ $memo->description }}
                                         </textarea>
                                         @error('description')<p class="text-danger">{{ $message }}</p> @enderror
                                     </div>

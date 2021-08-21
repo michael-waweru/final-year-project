@@ -280,12 +280,37 @@
                             </div>
 
                             <div class="menu-item">
-                                <a class="menu-link" href="{{ route('tenant.lease') }}">
+                                <a class="menu-link" href="{{ route('landlord.communications') }}">
                                         <span class="menu-icon">
                                             <i class="bi-chat-left fs-3"></i>
                                         </span>
                                     <span class="menu-title">Communications</span>
                                 </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <div class="menu-content pt-8 pb-2">
+                                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Additional Pages</span>
+                                </div>
+                            </div>
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="bi bi-printer fs-3"></i>
+                                        </span>
+                                        <span class="menu-title">Reports</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('landlord.reports') }}">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                            <span class="menu-title">View Reports</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="menu-item">
@@ -358,14 +383,6 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="apps/calendar.html">
-                                    <span class="menu-icon">
-                                        <i class="bi bi-calendar3-event fs-3"></i>
-                                    </span>
-                                    <span class="menu-title">Calendar</span>
-                                </a>
                             </div>
 
                             <div class="menu-item">

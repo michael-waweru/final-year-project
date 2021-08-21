@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label class="col-form-label">Property</label>
-                                    <select class="form-select form-select-solid @error('property_id') is-invalid @enderror" id="allocations" wire:model="property_id" >
+                                    <select class="form-select form-select-solid @error('property_id') is-invalid @enderror" wire:model="property_id" >
                                         <option value="default">Select Property</option>
                                         @foreach ($properties as $property)
                                             <option value="{{ $property->id }}">{{ $property->name }}</option>
@@ -50,30 +50,6 @@
                                         @endforeach
                                     </select>
                                     @error('user_id') <p class="text-danger">{{ $message }}</p>@enderror
-                                </div>
-                            </div>
-
-                            <div id="allocation-info">
-                                <div class="row gx-10 mb-5">
-                                    <!--begin::Col-->
-                                    <div class="col-lg-6">
-                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Property</label>
-                                        <div class="mb-5">
-                                            <div class="mb-5">
-                                                <input type="text" id="property" class="form-control form-control-solid" disabled/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end::Col-->
-
-                                    <div class="col-lg-6">
-                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Allocated Tenant</label>
-                                        <div class="mb-5">
-                                            <div class="mb-5">
-                                                <input id="tenant" type="text" class="form-control form-control-solid" disabled/>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -102,28 +78,4 @@
         </div>
     </div>
 </div>
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#allocation-info').slideUp();
-        })
-
-        // Get and show allocation information - payment
-        $('#allocations').on('change', function() {
-            var id = $(this).val();
-            var url = '{{ url('api/allocation-info') }}?allocation=' + id;
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: 'json',
-                success: function (data,status) {
-                    $('#allocation-info').slideDown();
-                    $('#property').val(data.property);
-                    $('#tenant').val(data.tenant);
-                }
-            });
-        });
-    </script>
-@endsection
 
