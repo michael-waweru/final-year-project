@@ -104,6 +104,15 @@
                                 </div>
 
                                 <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('tenant.payments') }}">
+                                        <span class="menu-icon">
+                                            <i class="bi bi-credit-card fs-3"></i>
+                                        </span>
+                                        <span class="menu-title">My Payments</span>
+                                    </a>
+                                </div>
+
+                                <div class="menu-item">
                                     <a class="menu-link" href="{{ route('tenant.communications') }}">
                                         <span class="menu-icon">
                                             <i class="bi-chat-left fs-3"></i>

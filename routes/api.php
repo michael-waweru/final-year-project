@@ -26,3 +26,4 @@ Route::get('payment-status', [\App\Http\Controllers\Api\ApiController::class,'pa
 Route::get('payment-info', [\App\Http\Controllers\Api\ApiController::class,'paymentInfo']);
 Route::get('tenant-info', [\App\Http\Controllers\Api\ApiController::class,'tenantInfo']);
 Route::get('invoice-info', [\App\Http\Controllers\Api\ApiController::class,'invoiceInfo']);
+Route::get('tenant-info', [\App\Http\Controllers\Api\ApiController::class,'tenantInfo']);

@@ -134,6 +134,8 @@ Route::prefix('tenant')->middleware('auth','isTenant')->group(function () {
     Route::get('communications', [App\Http\Controllers\Tenant\CommunicationController::class,'index'])->name('tenant.communications');
     Route::get('communication/show/{memo}',[App\Http\Controllers\Tenant\CommunicationController::class,'show'])->name('tenant.communication.show');
     Route::get('calendar', \App\Http\Livewire\Tenant\CalendarComponent::class)->name('tenant.calendar');
+    Route::get('my-payments', [App\Http\Controllers\Tenant\MakePaymentController::class, 'index'])->name('tenant.payments');
+    Route::post('payments', [App\Http\Controllers\Tenant\MakePaymentController::class, 'store'])->name('tenant.payment.store');
 });
 
 //post routes

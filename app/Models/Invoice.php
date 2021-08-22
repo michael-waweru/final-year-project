@@ -33,17 +33,17 @@ class Invoice extends Model
         return $this->belongsTo(Property::class);
     }
 
-    public function tenant(): BelongsTo
+    public function tenant()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function owner(): BelongsTo
+    public function owner()
     {
         return $this->belongsTo(User::class, 'entry_id');
     }
 
-    public function landlord(): BelongsTo
+    public function landlord()
     {
         return $this->belongsTo(Allocation::class,'entry_id');
     }

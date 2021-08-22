@@ -102,9 +102,18 @@
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('tenant.invoices') }}">
                                         <span class="menu-icon">
-                                            <i class="bi bi-credit-card fs-3"></i>
+                                            <i class="bi bi-book fs-3"></i>
                                         </span>
                                         <span class="menu-title">My Invoices</span>
+                                    </a>
+                                </div>
+
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('tenant.payments') }}">
+                                        <span class="menu-icon">
+                                            <i class="bi bi-credit-card fs-3"></i>
+                                        </span>
+                                        <span class="menu-title">My Payments</span>
                                     </a>
                                 </div>
 

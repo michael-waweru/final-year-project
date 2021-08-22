@@ -20,41 +20,28 @@ class ReportsController extends Controller
         $data = new Collection();
 
         $expenses = Expense::where('entry_id', '=', auth()->user()->id)->get()
-            ->each(function ($data)
-        {
-            $data->type = 'Expense';
-        });
+            ->each(function ($data) {
+                $data->type = 'Expense';
+            });
 //        $expenses = Expense::all()->each(function ($data)
 //        {
 //            $data->type = 'Expense';
 //        });
 
         $payments = Payments::where('entry_id', '=', auth()->user()->id)->get()
-            ->each(function ($data)
-        {
-            $data->type = 'Payment';
-            $data->state = true;
-        });
+            ->each(function ($data) {
+                $data->type = 'Payment';
+                $data->state = true;
+            });
 //        $payments = Payments::all()->each(function ($data)
 //        {
 //            $data->type = 'Payment';
 //        });
 
-//        $invoices = Invoice::all()->each(function ($data) {
-//            $data->type = 'Invoice';
-//        });
-//
-//        $invoicePay = InvoicePay::all()->each(function ($data) {
-//            $data->type = 'Invoice Pay';
-//            $data->state = true;
-//        });
-
         $paymentRefunds = PaymentRefund::where('entry_id', '=', auth()->user()->id)->get()
-            ->each(function ($data)
-        {
-            $data->type = 'Payment Refund';
-
-        });
+            ->each(function ($data) {
+                $data->type = 'Payment Refund';
+            });
 //        $paymentRefunds = PaymentRefund::all()->each(function ($data)
 //        {
 //            $data->type = 'Payment Refund';
@@ -72,14 +59,6 @@ class ReportsController extends Controller
         if($request->refund) {
             $data = $data->mergeRecursive($paymentRefunds);
         }
-
-//        if($request->invoice) {
-//            $data = $data->mergeRecursive($invoices);
-//        }
-//
-//        if($request->invoicePay) {
-//            $data = $data->mergeRecursive($invoicePay);
-//        }
 
 //        if ($request->filled('user_id')) {
 //            $data = $data->where('user_id', $request->user_id);

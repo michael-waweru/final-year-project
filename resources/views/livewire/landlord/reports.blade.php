@@ -1,7 +1,7 @@
 @extends('layouts.landlord2')
 
 @section('content')
-    <div class="row">
+    <div class="row ml-3 mr-3">
         <div class="card col-12">
             <div>
                 <h2 class="card-header mt-8">{{ Auth::user()->fname.' '.Auth::user()->lname }}'s Revenue Report
@@ -15,13 +15,7 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label for="user">Report For</label>
-                            <select name="user_id" id="" class="form-select">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ request()->user_id == $user->id ?'selected':'' }}>
-                                        {{ $user->fname.' '.$user->lname }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" value="{{ Auth::user()->fname.' '.Auth::user()->lname }}" disabled>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">Date from</label>
@@ -31,7 +25,7 @@
                             <label for="">Date to</label>
                             <input name="to" type="date" class="form-control" value="{{ request()->to }}">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <input type="submit" class="btn btn-primary mt-8" value="Go">
                             <a href="{{ route('landlord.reports') }}" class="btn btn-dark mt-8">Reset</a>
                         </div>

@@ -36,25 +36,24 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
+                                        <th class="text-center">Name</th>
                                         <th scope="col">Type</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($properties as $key => $property)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $property->name }}</td>
+                                        <td class="text-center">{{ $property->name }}</td>
                                         <td>{{ $property->property_type->name ?? 'Deleted' }}</td>
                                         <td>{{ $property->price }}</td>
                                         <td>{{ $property->location->name }}</td>
                                         <td class="{{ $property->allocations->count() ? 'text-success':'text-danger' }}" style="font-weight: bold;">{{ $property->allocations->count() ? 'Occupied':'Vacant' }}</td>
-                                        <td class="text-right">
-                                            {{-- <a href="#" onclick="window.open('#', '_blank')" class="btn btn-sm btn-dark"><i class="fas fa-history"></i></a> --}}
+                                        <td class="text-center">
                                             <a href="{{ route('landlord.property.edit',['property_slug'=>$property->slug]) }}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
                                             <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $property->id }})"><i class="fas fa-trash-alt"></i></button>
                                         </td>

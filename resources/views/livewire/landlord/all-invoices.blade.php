@@ -4,7 +4,7 @@
     <div>
         <div class="col-12">
             <div class="section-block">
-                <h3 class="section-title">All My Invoices</h3>
+                <h3 class="section-title ml-3">All My Invoices</h3>
             </div>
 
             <div class="simple-card">
@@ -26,11 +26,11 @@
                                 <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th>#</th>
                                         <th scope="col">Tenant</th>
                                         <th scope="col">Rent Amount</th>
                                         <th scope="col">Amount to Pay</th>
-                                        <th scope="col">Invoice Description</th>
+                                        <th class="text-center">Invoice Description</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
@@ -42,8 +42,8 @@
                                             <td>{{ $invoice->amount }}</td>
                                             <td>{{ $invoice->payment_amount }}</td>
                                             <td>{{ $invoice->description }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ route('landlord.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                            <td>
+                                                <a href="{{ route('landlord.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
                                                 <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $invoice->id }})"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>

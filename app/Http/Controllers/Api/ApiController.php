@@ -44,19 +44,19 @@ class ApiController extends Controller
     public function allocationInfo(Request $request)
     {
         if($request->has('allocation')){
-            $allocation = Allocation::find($request->allocation);
+            $invoice = Allocation::find($request->allocation);
 
             $data = [];
-            $data['type'] = $allocation->property->property_type->name ?? 'Deleted';
-            $data['property'] = $allocation->property->name;
-            $data['tenant'] = $allocation->tenant->fname.' '.$allocation->tenant->lname;
-            $data['rent'] = $allocation->rent;
-            $data['landlord'] = $allocation->landlord->fname.' '.$allocation->landlord->lname;
-//            $data['landlord'] = $allocation->entry_id;
-            $data['increment'] = $allocation->increment;
-            $data['start'] = $allocation->created_at->diffForHumans();
-            $data['duration'] = $allocation->period;
-            $data['left'] = $allocation->period - $allocation->created_at->diffInMonths(now());
+            $data['type'] = $invoice->property->property_type->name ?? 'Deleted';
+            $data['property'] = $invoice->property->name;
+            $data['tenant'] = $invoice->tenant->fname.' '.$invoice->tenant->lname;
+            $data['rent'] = $invoice->rent;
+            $data['landlord'] = $invoice->landlord->fname.' '.$invoice->landlord->lname;
+//            $data['landlord'] = $invoice->entry_id;
+            $data['increment'] = $invoice->increment;
+            $data['start'] = $invoice->created_at->diffForHumans();
+            $data['duration'] = $invoice->period;
+            $data['left'] = $invoice->period - $invoice->created_at->diffInMonths(now());
 
             if($data){
                 return response()->json($data);
@@ -94,6 +94,26 @@ class ApiController extends Controller
         if ($data)
         {
             return response()->json($data);
+        }
+    }
+
+    // get invoice information
+    public function tenantInfo(Request $request)
+    {
+        if($request->has('invoice')){
+            $invoice = Invoice::find($request->invoice);
+
+            $data = [];
+            $data['number'] = $invoice->id;
+            $data['tenant'] = $invoice->tenant->fname.' '.$invoice->tenant->lname;
+            $data['landlord'] = $invoice->landlord->fname.' '.$invoice->landlord->lname;
+            $data['payment_amount'] = $invoice->payment_amount;
+            $data['due'] = $invoice->payment_date->format('d-m-Y');
+            $data['left'] = $invoice->payment_date->diffInDays() - $invoice->created_at->diffInDays(now());
+
+            if($data){
+                return response()->json($data);
+            }
         }
     }
 }
