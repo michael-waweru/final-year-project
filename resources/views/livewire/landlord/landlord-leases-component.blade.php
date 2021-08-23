@@ -56,9 +56,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($leases as $lease)
+                                        @foreach ($leases as $key => $lease)
                                         <tr>
-                                            <td>{{ $lease->id }}</td>
+                                            <td>{{ $key + 1 }}</td>
                                             <td>{{ $lease->name }}</td>
                                             <td>{{ $lease->property->name ?? 'Deleted'}}</td>
                                             <td>{{ $lease->rent ?? 'Deleted' }}</td>

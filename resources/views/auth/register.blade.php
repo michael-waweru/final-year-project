@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
+        <link href="{{ asset('frontend/images/favicon.ico') }}" rel="icon" type="image/png"/>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset('backend/logins/css/bootstrap.min.css') }}">
         <!-- Fontawesome CSS -->
@@ -16,7 +16,7 @@
         <!-- Flaticon CSS -->
         <link rel="stylesheet" href="{{ asset('backend/logins/font/flaticon.css') }}">
         <!-- Google Web Fonts -->
-        <link href="../../../../fonts.googleapis.com/css89ea.css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css89ea.css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('backend/logins/style.css') }}">
     </head>
@@ -43,22 +43,19 @@
                         </div>
                     </div>
                     <div class="fxt-form mt-5">
-                        @if (Session::get('error'))
-                            <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
-                        @endif
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-1">
-                                <input type="text" id="fname" class="form-control @error('fname') is-invalid @enderror" name="fname" placeholder="First Name" value="{{ old('fname') }}" autocomplete="name">
+                                <input type="text" id="fname" class="form-control @error('firstName') is-invalid @enderror" name="fname" placeholder="First Name" value="{{ old('fname') }}" autocomplete="name">
                                 <i class="flaticon-user"></i>
-                                @error('fname') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
+                                @error('firstName') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
 
                             </div>
 
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-1">
-                                <input type="text" id="lname" class="form-control @error('lname') is-invalid @enderror" name="lname" placeholder="Last Name" value="{{ old('lname') }}" autocomplete="name">
+                                <input type="text" id="lname" class="form-control @error('lastName') is-invalid @enderror" name="lname" placeholder="Last Name" value="{{ old('lname') }}" autocomplete="name">
                                 <i class="flaticon-user"></i>
-                                @error('lname') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
+                                @error('lastName') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
                             </div>
 
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-2">
@@ -87,10 +84,10 @@
                     </div>
                     <div class="fxt-footer">
                         <ul class="fxt-socials">
-                            <li class="fxt-facebook fxt-transformY-50 fxt-transition-delay-5"><a href="javascript:void()" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li class="fxt-twitter fxt-transformY-50 fxt-transition-delay-6"><a href="javascript:void()" title="twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li class="fxt-google fxt-transformY-50 fxt-transition-delay-7"><a href="javascript:void()" title="google"><i class="fab fa-google-plus-g"></i></a></li>
-                            <li class="fxt-linkedin fxt-transformY-50 fxt-transition-delay-8"><a href="javascript:void()" title="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li class="fxt-facebook fxt-transformY-50 fxt-transition-delay-5"><a href="javascript:void(0)" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="fxt-twitter fxt-transformY-50 fxt-transition-delay-6"><a href="javascript:void(0)" title="twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li class="fxt-google fxt-transformY-50 fxt-transition-delay-7"><a href="javascript:void(0)" title="google"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li class="fxt-linkedin fxt-transformY-50 fxt-transition-delay-8"><a href="javascript:void(0)" title="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
                 </div>

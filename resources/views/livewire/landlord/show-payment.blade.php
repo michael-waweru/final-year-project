@@ -11,15 +11,15 @@
                     <div class="col-md-12">
                         <table>
                             <tr>
-                                <td>Serial No.</td>
-                                <td>: # {{ $payment->id }}</td>
+                                <td>Transaction ID</td>
+                                <td>: {{ $payment->transaction_id }}</td>
                             </tr>
                             <tr>
                                 <td>Allocation</td>
                                 <td>: {{ $payment->allocation->name }}</td>
                             </tr>
                             <tr>
-                                <td>Tenant Name</td>
+                                <td>Tenant's Name</td>
                                 <td>: {{ $payment->allocation->tenant->fname." ".$payment->allocation->tenant->lname }} </td>
                             </tr>
                             <tr>
@@ -35,16 +35,19 @@
                                 <td>: {{ $payment->payment_means }}</td>
                             </tr>
                             <tr>
+                                <td>M-PESA Transacction Code</td>
+                                <td>: {{ $payment->transaction_code ?? 'other payment method used' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Cheque/Slip Code</td>
+                                <td>: {{ $payment->cheque ?? 'other payment method used' }}</td>
+                            </tr>
+                            <tr>
                                 <td>Amount</td>
                                 <td>:Ksh. {{ $payment->amount }}</td>
                             </tr>
                             <tr>
-                                <td>Transaction ID</td>
-                                <td>: {{ $payment->transaction_id }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>Created at</td>
+                                <td>Paid On</td>
                                 <td>: {{ $payment->created_at->format('d-m-y') }}</td>
                             </tr>
                         </table>

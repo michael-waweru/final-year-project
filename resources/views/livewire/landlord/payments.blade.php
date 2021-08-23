@@ -292,28 +292,28 @@
                                 <div class="row">
                                     <div class="form-group col-md">
                                         <label class="col-form-label">Bank Name</label>
-                                        <input name="bank" type="text" class="form-control">
+                                        <input name="bank" value="Co-operative Bank" type="text" class="form-control" disabled>
                                     </div>
 
                                     <div class="form-group col-md">
                                         <label class="col-form-label">Bank A/C</label>
-                                        <input name="account" type="number" class="form-control">
+                                        <input name="account" value="01116753035800" type="number" class="form-control" disabled>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md">
                                         <label class="col-form-label">Branch</label>
-                                        <input name="branch" type="text" class="form-control">
+                                        <input name="branch" value="Nakuru" type="text" class="form-control" disabled>
                                     </div>
 
                                     <div class="form-group col-md">
-                                        <label class="col-form-label">Cheque No</label>
+                                        <label class="col-form-label">Cheque/Slip No</label>
                                         <input name="cheque" type="text" class="form-control">
                                     </div>
 
                                     <div class="form-group col-md">
-                                        <label class="col-form-label">Cheque scan copy</label>
+                                        <label class="col-form-label">Cheque/Slip scan copy</label>
                                         <input name="attachment" type="file" class="form-control">
                                     </div>
                                 </div>

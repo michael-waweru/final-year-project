@@ -16,7 +16,7 @@
                                     <p><i class="fa fa-map-marker-alt"></i> {{ $property->location->name }}</p>
                                     <a href="#" class="property-author">
                                         <img src="{{ asset('files/assets/real') }}/{{ $property->image }}" alt="{{ $property->name }}">
-                                        <span>Admin</span>
+                                        <span>{{ $property->landlord }}</span>
                                     </a>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@
                                             <div class="property-author-wrap">
                                                 <a href="#" class="property-author">
                                                     <img src="{{ asset('files/assets/real') }}/{{ $sproperty->image }}" alt="{{ $sproperty->name }}">
-                                                    <span>Admin</span>
+                                                    <span>{{ $sproperty->landlord }}</span>
                                                 </a>
                                             </div>
                                         </div>

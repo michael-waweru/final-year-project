@@ -81,7 +81,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.ico') }}" />
+        <link href="{{ asset('frontend/images/favicon.ico') }}" rel="icon" type="image/png"/>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset('backend/logins/css/bootstrap.min.css') }}">
         <!-- Fontawesome CSS -->
@@ -152,10 +152,10 @@
                     </div>
                     <div class="fxt-footer">
                         <ul class="fxt-socials">
-                            <li class="fxt-facebook fxt-transformY-50 fxt-transition-delay-5"><a href="javascript:void()" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li class="fxt-twitter fxt-transformY-50 fxt-transition-delay-6"><a href="javascript:void()" title="twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li class="fxt-google fxt-transformY-50 fxt-transition-delay-7"><a href="javascript:void()" title="google"><i class="fab fa-google-plus-g"></i></a></li>
-                            <li class="fxt-linkedin fxt-transformY-50 fxt-transition-delay-8"><a href="javascript:void()" title="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li class="fxt-facebook fxt-transformY-50 fxt-transition-delay-5"><a href="javascript:void(0)" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="fxt-twitter fxt-transformY-50 fxt-transition-delay-6"><a href="javascript:void(0)" title="twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li class="fxt-google fxt-transformY-50 fxt-transition-delay-7"><a href="javascript:void(0)" title="google"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li class="fxt-linkedin fxt-transformY-50 fxt-transition-delay-8"><a href="javascript:void(0)" title="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
                 </div>

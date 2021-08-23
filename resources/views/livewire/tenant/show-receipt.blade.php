@@ -29,7 +29,7 @@
                                 <!--begin::Wrapper-->
                                 <div class="m-0">
                                     <!--begin::Label-->
-                                    <div class="fw-bolder fs-3 text-gray-800 mb-8">Invoice #{{ $invoice->invoice_id }}</div>
+                                    <div class="fw-bolder fs-3 text-gray-800 mb-8">Invoice #{{ $invoice->id }}</div>
                                     <!--end::Label-->
                                     <!--begin::Row-->
                                     <div class="row g-5 mb-11">
@@ -93,7 +93,7 @@
                                                 <thead>
                                                 <tr class="border-bottom fs-6 fw-bolder text-gray-400">
                                                     <th class="min-w-175px pb-2">Issued For</th>
-                                                    <th class="min-w-70px text-end pb-2">Paid</th>
+                                                    <th class="min-w-70px text-end pb-2">Paid Amount</th>
                                                     <th class="min-w-100px text-end pb-2">Rent Amount</th>
                                                     <th class="min-w-80px text-end pb-2">Balance</th>
                                                 </tr>
