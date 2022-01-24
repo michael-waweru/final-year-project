@@ -20,7 +20,7 @@
                             </tr>
                             <tr>
                                 <td>ID Attachment</td>
-                                <td> : <a class="badge badge-success" href="{{ url('public/files/'.$tenant->identification_doc) }}" target="_blank">View</a></td>
+                                <td> : <a class="badge badge-success" href="{{ $tenant->identification_doc }}" target="_blank">View</a></td>
                             </tr>
                             <tr>
                                 <td>Address</td>
