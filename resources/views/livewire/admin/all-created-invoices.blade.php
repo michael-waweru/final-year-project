@@ -26,7 +26,7 @@
                                 <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th class="ml-2">#</th>
                                         <th scope="col">Tenant</th>
                                         <th scope="col">Rent Amount</th>
                                         <th scope="col">Amount to Pay</th>
@@ -38,14 +38,14 @@
                                     <tbody>
                                     @foreach ($invoices as $key => $invoice)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
+                                            <td class="ml-2">{{ $key + 1 }}</td>
                                             <td>{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</td>
                                             <td>{{ $invoice->amount }}</td>
                                             <td>{{ $invoice->payment_amount }}</td>
                                             <td>{{ $invoice->description }}</td>
                                             <td>{{ $invoice->owner->fname.' '.$invoice->owner->lname }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('admin.invoice.edit', $invoice->id)}}" class="btn btn-sm btn-dark"><i class="fas fa-edit"></i></a>
                                                 <button class="btn btn-sm btn-danger" onclick="deleteConfirmation({{ $invoice->id }})"><i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>

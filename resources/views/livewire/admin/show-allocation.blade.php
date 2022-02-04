@@ -66,7 +66,7 @@
                             </tr>
                             <tr>
                                 <td>Agreement Attachment</td>
-                                <td>: <a class="badge badge-secondary" href="{{ asset('files/assets/allocation/'.$allocation->attachment) }}" target="_blank">View</a></td>
+                                <td>: <a class="badge badge-secondary" href="{{ $allocation->attachment }}" target="_blank">View</a></td>
                             </tr>
                             <tr>
                                 <td>Date Allocated</td>
