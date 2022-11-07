@@ -46,16 +46,16 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-1">
-                                <input type="text" id="fname" class="form-control @error('firstName') is-invalid @enderror" name="fname" placeholder="First Name" value="{{ old('fname') }}" autocomplete="name">
+                                <input type="text" id="fname" class="form-control @error('fname') is-invalid @enderror" name="fname" placeholder="First Name" value="{{ old('fname') }}" autocomplete="name">
                                 <i class="flaticon-user"></i>
-                                @error('firstName') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
+                                @error('fname') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
 
                             </div>
 
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-1">
-                                <input type="text" id="lname" class="form-control @error('lastName') is-invalid @enderror" name="lname" placeholder="Last Name" value="{{ old('lname') }}" autocomplete="name">
+                                <input type="text" id="lname" class="form-control @error('lname') is-invalid @enderror" name="lname" placeholder="Last Name" value="{{ old('lname') }}" autocomplete="name">
                                 <i class="flaticon-user"></i>
-                                @error('lastName') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
+                                @error('lname') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
                             </div>
 
                             <div class="form-group fxt-transformY-50 fxt-transition-delay-2">
