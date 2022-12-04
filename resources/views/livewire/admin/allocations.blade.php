@@ -23,18 +23,17 @@
                         <div class="card-body">
 
                             @foreach (App\Models\Allocation::getExpired() as $allocation)
-                            <div class="alert alert-danger">
-                                <span class="text-danger" style="font-weight: bolder"> ACTION NEEDED: </span>
-                                <a href="{{ route('admin.allocation.show', $allocation->id) }}" target="_blank">#{{ $allocation->id }}</a> Allocation's period is over and rent
-                                has been incremented by <span class="text-danger">{{ $allocation->increment }}%</span>.
-                                <a href="#" onclick="form{{ $allocation->id }}.submit()" class="text-success" style="font-weight: bolder">Renew Now!</a>
+                                <div class="alert alert-danger">
+                                    <span class="text-danger" style="font-weight: bolder"> ACTION NEEDED: </span>
+                                    <a href="{{ route('admin.allocation.show', $allocation->id) }}" target="_blank">#{{ $allocation->id }}</a> Allocation's period is over and rent
+                                    has been incremented by <span class="text-danger">{{ $allocation->increment }}%</span>.
+                                    <a href="#" onclick="form{{ $allocation->id }}.submit()" class="text-success" style="font-weight: bolder">Renew Now!</a>
 
-                                <form id="form{{ $allocation->id }}" action="{{ route('admin.allocation.update', ['allocation'=>$allocation->id]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="expired" value="true">
-                                </form>
-
-                            </div>
+                                    <form id="form{{ $allocation->id }}" action="{{ route('admin.allocation.update', ['allocation'=>$allocation->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="expired" value="true">
+                                    </form>
+                                </div>
                             @endforeach
 
                             <div class="table-responsive ">

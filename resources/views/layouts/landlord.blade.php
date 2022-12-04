@@ -562,7 +562,7 @@
                     <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
-                            <span class="text-muted fw-bold me-1">©2021</span>
+                            <span class="text-muted fw-bold me-1"> &copy; 2021 - <script>document.write(new Date().getFullYear());</script> </span>
                             <a href="{{ route('homepage') }}" target="_blank" class="text-gray-800 text-hover-primary">Westpoint Properties</a>
                         </div>
                         <!--end::Copyright-->
@@ -586,7 +586,6 @@
         <!--end::Page-->
         </div>
     </div>
-
 
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
