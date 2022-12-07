@@ -24,8 +24,8 @@
                                 <td class="text-center">{{ $invoice->tenant->fname.' '.$invoice->tenant->lname }}</td>
                                 <td class="text-success text-center">{{ $invoice->amount }}</td>
                                 <td class="text-danger text-center">{{ $invoice->balance }}</td>
-                                <td class="text-center">{{ $invoice->invoice->payment_amount}}</td>
-                                <td class="text-center">
+                                <td class="text-center">{{ $invoice->payment_amount}}</td>
+                                {{-- <td class="text-center">
                                     @if($invoice->amount === 0)
                                         <p class="badge badge-light-danger me-2">Unpaid</p>
                                         @elseif(($invoice->balance != 0) && ($invoice->balance < $invoice->invoice->amount))
@@ -33,7 +33,7 @@
                                         @elseif($invoice->balance === 0)
                                         <p class="badge badge-light-success me-2">Paid</p>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td> {{ $invoice->description}}</td>
                                 <td class="text-center">
                                     <button class="btn badge badge-secondary" onclick="window.open('{{ route('tenant.invoice.show',$invoice->id)}}', '_blank')"><i class="fas fa-eye"></i> View</button>
